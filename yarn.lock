@@ -1626,6 +1626,16 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"joao.codes@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "joao.codes@workspace:."
+  dependencies:
+    next: 10.2.0
+    react: 17.0.2
+    react-dom: 17.0.2
+  languageName: unknown
+  linkType: soft
+
 "js-tokens@npm:^3.0.0 || ^4.0.0, js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -1889,16 +1899,6 @@ fsevents@~2.3.1:
   checksum: 6e721e648a544154d5de4c114b32f573d8027ca8ec505cf6c1105e505986d6ac46934a1256735aa0eece8eb2f5b2a1230503b2dddd3b100f9f016fd8a4f15f33
   languageName: node
   linkType: hard
-
-"my-app@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "my-app@workspace:."
-  dependencies:
-    next: 10.2.0
-    react: 17.0.2
-    react-dom: 17.0.2
-  languageName: unknown
-  linkType: soft
 
 "nanoid@npm:^3.1.22":
   version: 3.1.23
