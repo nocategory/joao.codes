@@ -7,7 +7,7 @@ const Home = () => (
       <meta name="description" content="TODO" />
       <link rel="icon" href="/favicon.ico" />
     </Head>
-    <p>Hi!</p>
+    <p class="text-4xl text-blue-700">Hello!!</p>
   </div>
 )
 
