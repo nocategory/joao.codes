@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import PolyworkWarn from '@components/PolyworkWarn'
 import Layout from '@components/Layout'
 
 const IndexPage = (): JSX.Element => (
@@ -10,6 +11,7 @@ const IndexPage = (): JSX.Element => (
       <meta name="description" content="TODO" />
       <link rel="icon" href="/favicon.ico" />
     </Head>
+    <PolyworkWarn />
   </Layout>
 )
 
