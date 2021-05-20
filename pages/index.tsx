@@ -12,6 +12,7 @@ const IndexPage = (): JSX.Element => (
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <PolyworkWarn />
+    <h1 className="text-7xl lg:text-8xl font-bold leading-[1em] mb-10">Hey!</h1>
   </Layout>
 )
 
