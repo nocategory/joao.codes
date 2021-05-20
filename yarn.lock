@@ -2689,6 +2689,7 @@ fsevents@~2.3.1:
     eslint-plugin-react: ^7.23.2
     eslint-plugin-react-hooks: ^4.2.0
     next: 10.2.0
+    next-themes: ^0.0.14
     postcss: latest
     prettier: ^2.3.0
     react: 17.0.2
@@ -3118,6 +3119,17 @@ fsevents@~2.3.1:
   version: 1.4.0
   resolution: "natural-compare@npm:1.4.0"
   checksum: 2daf93d9bb516eddb06e2e80657a605af2e494d47c65d090ba43691aaffbc41f520840f1c9d3b7b641977af950217a4ab6ffb85bafcd5dfa8ba6fe4e68c43b53
+  languageName: node
+  linkType: hard
+
+"next-themes@npm:^0.0.14":
+  version: 0.0.14
+  resolution: "next-themes@npm:0.0.14"
+  peerDependencies:
+    next: "*"
+    react: "*"
+    react-dom: "*"
+  checksum: 34b8933ccd9bdac0dfa570e3522c5f9ab6c47e5e17c90628dfa01b4f4f5ea40d561a66c275aaef4e39547a0baca7a6b5bc789d564098f82cd8346eac5860d574
   languageName: node
   linkType: hard
 
