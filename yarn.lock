@@ -123,6 +123,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@headlessui/react@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@headlessui/react@npm:1.2.0"
+  peerDependencies:
+    react: ">=16"
+  checksum: 575b27e4aa0203c3b2ddd6564e76e7761b3d8d0df388306c6752444c866f222dd2cab7fbf7064c4d577797cb79b189d903085fb937a7fcb0cea96375b7fa6c03
+  languageName: node
+  linkType: hard
+
 "@next/env@npm:10.2.0":
   version: 10.2.0
   resolution: "@next/env@npm:10.2.0"
@@ -2677,6 +2686,7 @@ fsevents@~2.3.1:
   version: 0.0.0-use.local
   resolution: "joao.codes@workspace:."
   dependencies:
+    "@headlessui/react": ^1.2.0
     "@types/node": ^15.3.0
     "@types/react": ^17.0.5
     "@typescript-eslint/eslint-plugin": ^4.23.0
