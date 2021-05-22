@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Menu } from '@headlessui/react'
+import { Menu, Transition } from '@headlessui/react'
 import { useTheme } from 'next-themes'
 import SunIcon from '@components/icons/SunIcon'
 import MoonIcon from '@components/icons/MoonIcon'
@@ -38,18 +38,27 @@ const ModeDropdown = (): JSX.Element => {
         <span>{getCurrentThemeIconComponent(theme)}</span>
         <DropdownIcon />
       </Menu.Button>
-      <Menu.Items className="flex-col items-center flex w-full bg-[#dadada47] mt-4 rounded-md">
-        {modes.map(mode => (
-          <Menu.Item key={mode}>
-            <button
-              className={`hover:bg-[#a0a0a047] py-2 px-4 rounded-md w-full flex justify-center`}
-              onClick={() => setTheme(mode)}
-            >
-              <span>{getCurrentThemeIconComponent(mode)}</span>
-            </button>
-          </Menu.Item>
-        ))}
-      </Menu.Items>
+      <Transition
+        enter="transition duration-300 ease-out"
+        enterFrom="transform scale-90 opacity-0"
+        enterTo="transform scale-100 opacity-100"
+        leave="transition duration-300 ease-out"
+        leaveFrom="transform scale-100 opacity-100"
+        leaveTo="transform scale-90 opacity-0"
+      >
+        <Menu.Items className="flex-col items-center flex w-full bg-[#dadada47] mt-4 rounded-md">
+          {modes.map(mode => (
+            <Menu.Item key={mode}>
+              <button
+                className={`hover:bg-[#a0a0a047] py-2 px-4 rounded-md w-full flex justify-center`}
+                onClick={() => setTheme(mode)}
+              >
+                <span>{getCurrentThemeIconComponent(mode)}</span>
+              </button>
+            </Menu.Item>
+          ))}
+        </Menu.Items>
+      </Transition>
     </Menu>
   )
 }
