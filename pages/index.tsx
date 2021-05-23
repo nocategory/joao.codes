@@ -2,8 +2,12 @@ import Head from 'next/head'
 import PolyworkWarn from '@components/PolyworkWarn'
 import Layout from '@components/Layout'
 import ModeDropdown from '@components/ModeDropdown'
+import IntroText from '@components/IntroText'
+import { Client } from '../prismic'
+import { RichTextBlock } from 'prismic-reactjs'
+import { Data } from '@components/types'
 
-const IndexPage = (): JSX.Element => {
+const IndexPage = ({ prehey, hey, intro }: Data): JSX.Element => {
   return (
     <Layout>
       <Head>
@@ -15,11 +19,24 @@ const IndexPage = (): JSX.Element => {
       </Head>
       <PolyworkWarn />
       <ModeDropdown />
-      <h1 className="text-7xl lg:text-8xl font-bold leading-[1em] mb-10 dark:text-white">
-        Hey!
-      </h1>
+      <IntroText prehey={prehey} hey={hey} intro={intro} />
     </Layout>
   )
+}
+
+export async function getStaticProps() {
+  const client = Client()
+  const data = await client
+    .getByID(process.env.PRISMIC_ID!, {})
+    .then(res => [res.data.prehey, res.data.hey, res.data.intro])
+
+  return {
+    props: {
+      prehey: data[0],
+      hey: data[1],
+      intro: data[2],
+    },
+  }
 }
 
 export default IndexPage

@@ -36,7 +36,9 @@ const ModeDropdown = (): JSX.Element => {
     <Menu as="div" className="fixed top-7 md:right-20 right-5">
       <Menu.Button className="flex flex-row justify-center items-center rounded-md shadow-lg px-4 py-2 border-0 hover:mix-blend-difference focus:outline-none bg-codes-gray-2 hover:bg-codes-gray-3">
         <span>{getCurrentThemeIconComponent(theme)}</span>
-        <DropdownIcon />
+        <span>
+          <DropdownIcon />
+        </span>
       </Menu.Button>
       <Transition
         enter="transition duration-300 ease-out"
