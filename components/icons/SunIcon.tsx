@@ -8,7 +8,7 @@ const SunIcon = (): JSX.Element => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="mix-blend-difference"
+    className="fill-current"
   >
     <circle cx="12" cy="12" r="5" />
     <line x1="12" y1="1" x2="12" y2="3" />

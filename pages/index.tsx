@@ -1,10 +1,10 @@
 import Head from 'next/head'
+import { GetStaticProps } from 'next'
 import PolyworkWarn from '@components/PolyworkWarn'
 import Layout from '@components/Layout'
 import ModeDropdown from '@components/ModeDropdown'
 import IntroText from '@components/IntroText'
 import { Client } from '../prismic'
-import { RichTextBlock } from 'prismic-reactjs'
 import { Data } from '@components/types'
 
 const IndexPage = ({ prehey, hey, intro }: Data): JSX.Element => {
@@ -24,9 +24,10 @@ const IndexPage = ({ prehey, hey, intro }: Data): JSX.Element => {
   )
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const client = Client()
   const data = await client
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     .getByID(process.env.PRISMIC_ID!, {})
     .then(res => [res.data.prehey, res.data.hey, res.data.intro])
 
