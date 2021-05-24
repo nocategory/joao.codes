@@ -33,8 +33,8 @@ const ModeDropdown = (): JSX.Element => {
   }
 
   return (
-    <Menu as="div" className="fixed top-7 md:right-20 right-5">
-      <Menu.Button className="flex flex-row justify-center items-center rounded-md shadow-lg px-4 py-2 border-0 hover:mix-blend-difference focus:outline-none bg-codes-gray-2 hover:bg-codes-gray-3">
+    <Menu as="div" className="fixed top-7 md:right-16 right-5">
+      <Menu.Button className="flex flex-row justify-center items-center rounded-md shadow-lg px-4 py-2 border-0 hover:mix-blend-difference focus:outline-none bg-white dark:bg-codes-gray-3 filter hover:brightness-90">
         <span>{getCurrentThemeIconComponent(theme)}</span>
         <span>
           <DropdownIcon />
@@ -48,11 +48,11 @@ const ModeDropdown = (): JSX.Element => {
         leaveFrom="transform scale-100 opacity-100"
         leaveTo="transform scale-90 opacity-0"
       >
-        <Menu.Items className="flex-col items-center flex w-full bg-codes-gray-2 mt-4 rounded-md">
+        <Menu.Items className="flex-col items-center flex w-full bg-white filter brightness-90 dark:bg-codes-gray-3 mt-4 rounded-md">
           {modes.map(mode => (
-            <Menu.Item key={mode}>
+            <Menu.Item key={mode} disabled={mode === theme}>
               <button
-                className={`hover:bg-codes-gray-3 py-2 px-4 rounded-md w-full flex justify-center`}
+                className={`filter hover:brightness-90 bg-white dark:bg-codes-gray-3 py-2 px-4 rounded-md w-full flex justify-center`}
                 onClick={() => setTheme(mode)}
               >
                 <span>{getCurrentThemeIconComponent(mode)}</span>
