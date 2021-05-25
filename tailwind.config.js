@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   mode: 'jit',
@@ -8,6 +10,9 @@ module.exports = {
         'codes-gray-1': '#24292e',
         'codes-gray-2': '#565a5d',
         'codes-gray-3': '#484B4E',
+      },
+      fontFamily: {
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
       },
     },
   },
