@@ -22,10 +22,10 @@ const WaterColor = (): JSX.Element => {
           color: {
             value: [
               '#4D816A',
-              '#7BAB9B',
+              '#7bb3a0',
               '#398974',
-              '#035546',
-              '#D1D5C6',
+              '#025042',
+              '#c9ccc1',
               '#F0ECAC',
               '#ffffff',
             ],
@@ -53,11 +53,6 @@ const WaterColor = (): JSX.Element => {
             speed: 0.4,
             direction: 'none',
             random: true,
-            trail: {
-              enable: false,
-              length: 5,
-              fillColor: '#fff',
-            },
             outModes: {
               default: 'destroy',
             },
