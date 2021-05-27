@@ -10,21 +10,23 @@ import { Data } from '@components/types'
 const IndexPage = ({ prehey, hey, intro }: Data): JSX.Element => {
   return (
     <Layout>
-      <Head>
-        {/* https://github.com/w3c/html/issues/1292 */}
-        {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
-        <title>João 🦄 a.k.a. nocategory</title>
-        <meta name="description" content="TODO" />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
-      <PolyworkWarn />
-      <ModeDropdown />
-      <IntroText prehey={prehey} hey={hey} intro={intro} />
+      <div className="z-10">
+        <Head>
+          {/* https://github.com/w3c/html/issues/1292 */}
+          {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
+          <title>João 🦄 a.k.a. nocategory</title>
+          <meta name="description" content="TODO" />
+          <link rel="icon" href="/favicon.ico" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap"
+            rel="stylesheet"
+          />
+        </Head>
+        <PolyworkWarn />
+        <ModeDropdown />
+        <IntroText prehey={prehey} hey={hey} intro={intro} />
+      </div>
     </Layout>
   )
 }
