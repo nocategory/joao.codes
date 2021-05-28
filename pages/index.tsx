@@ -4,6 +4,7 @@ import PolyworkWarn from '@components/PolyworkWarn'
 import Layout from '@components/Layout'
 import ModeDropdown from '@components/ModeDropdown'
 import IntroText from '@components/IntroText'
+import Socials from '@components/Socials'
 import { Client } from '../prismic'
 import { Data } from '@components/types'
 
@@ -26,6 +27,7 @@ const IndexPage = ({ prehey, hey, intro }: Data): JSX.Element => {
         <PolyworkWarn />
         <ModeDropdown />
         <IntroText prehey={prehey} hey={hey} intro={intro} />
+        <Socials />
       </div>
     </Layout>
   )
