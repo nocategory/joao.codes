@@ -34,7 +34,10 @@ const ModeDropdown = (): JSX.Element => {
 
   return (
     <Menu as="div" className="fixed top-7 md:right-16 right-5">
-      <Menu.Button className="flex flex-row justify-center items-center rounded-md shadow-lg px-4 py-2 border-0 hover:mix-blend-difference focus:outline-none bg-white dark:bg-codes-gray-3 filter hover:brightness-90">
+      <Menu.Button
+        aria-label="change display mode"
+        className="flex flex-row justify-center items-center rounded-md shadow-lg px-4 py-2 border-0 hover:mix-blend-difference focus:outline-none bg-white dark:bg-codes-gray-3 filter hover:brightness-90"
+      >
         <span>{getCurrentThemeIconComponent(theme)}</span>
         <span>
           <DropdownIcon />
