@@ -13,11 +13,29 @@ const IndexPage = ({ prehey, hey, intro }: Data): JSX.Element => {
     <Layout>
       <div className="z-10">
         <Head>
-          {/* https://github.com/w3c/html/issues/1292 */}
-          {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
-          <title>João 🦄 a.k.a. nocategory</title>
-          <meta name="description" content="TODO" />
-          <link rel="icon" href="/favicon.ico" />
+          <title>João Salgueiro</title>
+          <meta
+            name="description"
+            content="João Salgueiro's small-ish introduction"
+          />
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+          />
+          <link rel="manifest" href="/site.webmanifest" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap"
