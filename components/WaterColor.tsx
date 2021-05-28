@@ -5,7 +5,7 @@ const WaterColor = (): JSX.Element => {
   return (
     <Particles
       id="tsparticles"
-      canvasClassName="dark:filter dark:blur-[100px] dark:brightness-[0.5] filter blur-[100px]"
+      canvasClassName="dark:filter dark:blur-[100px] dark:brightness-[0.7] filter blur-[100px] !pointer-events-none"
       options={{
         fpsLimit: 60,
         emitters: {
@@ -20,15 +20,7 @@ const WaterColor = (): JSX.Element => {
             value: 7,
           },
           color: {
-            value: [
-              '#4D816A',
-              '#7bb3a0',
-              '#398974',
-              '#025042',
-              '#c9ccc1',
-              '#F0ECAC',
-              '#ffffff',
-            ],
+            value: ['#398974', '#A19B84', '#454d54', '#495960'],
           },
           shape: {
             type: 'circle',
@@ -50,7 +42,7 @@ const WaterColor = (): JSX.Element => {
           },
           move: {
             enable: true,
-            speed: 0.4,
+            speed: 0.7,
             direction: 'none',
             random: true,
             outModes: {

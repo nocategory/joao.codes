@@ -15,3 +15,7 @@ canvas {
   top: 0;
   left: 0;
 }
+
+::selection {
+  background-color: rgba(37, 70, 161, 0.507);
+}
