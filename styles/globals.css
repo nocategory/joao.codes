@@ -16,6 +16,10 @@ canvas {
   left: 0;
 }
 
+a[href^='mailto:'] {
+  text-decoration: underline;
+}
+
 ::selection {
   background-color: rgba(37, 70, 161, 0.507);
 }
