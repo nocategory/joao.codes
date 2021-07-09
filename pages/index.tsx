@@ -11,7 +11,7 @@ import { Data } from '@components/types'
 const IndexPage = ({ prehey, hey, intro }: Data): JSX.Element => {
   return (
     <Layout>
-      <div className="z-10">
+      <div className="z-10 animate-fadeIn">
         <Head>
           <title>João Salgueiro</title>
           <meta
