@@ -4,7 +4,4 @@ This project is somewhat a small introduction to myself and my timeline-portfoli
 
 ![App Screenshot](https://user-images.githubusercontent.com/12294525/120118350-034da580-c18a-11eb-9a44-14fa2aad813e.png)
 
-![https://www.netlify.com](https://www.netlify.com/img/global/badges/netlify-light.svg)
-
-
 _made with ❤️_
