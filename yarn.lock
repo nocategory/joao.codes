@@ -254,6 +254,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@prismicio/client@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@prismicio/client@npm:4.0.0"
+  dependencies:
+    cross-fetch: ^3.0.6
+  checksum: d24594f3f46dd4c1d11539fc373345ffb143a1e3eb6672af19f2718c13b30a14d74b7f3573789fc11dcd41c2bbcb4d2412ee518581b9434ce3ad0542e69046d4
+  languageName: node
+  linkType: hard
+
 "@prismicio/helpers@npm:^1.0.4":
   version: 1.1.1
   resolution: "@prismicio/helpers@npm:1.1.1"
@@ -1324,6 +1333,15 @@ __metadata:
     safe-buffer: ^5.0.1
     sha.js: ^2.4.8
   checksum: 98957676a93081678a2a915ae14898d65aac9b5651ffa55b8888484dd9d79c06d3cb3f85b137cd833ab536d87adee17394bb2b0efc591ea0e34110266d5bcd75
+  languageName: node
+  linkType: hard
+
+"cross-fetch@npm:^3.0.6":
+  version: 3.1.4
+  resolution: "cross-fetch@npm:3.1.4"
+  dependencies:
+    node-fetch: 2.6.1
+  checksum: 47b33bc773d53f19805eeac914e7d76e022a1aee3b7a55277fae3d3d1a0cff354b92c4ec6c5d99aeef3e5757c2719e94c37879ba846c33de892e68a655758b61
   languageName: node
   linkType: hard
 
@@ -2941,6 +2959,7 @@ fsevents@~2.3.1:
   resolution: "joao.codes@workspace:."
   dependencies:
     "@headlessui/react": ^1.2.0
+    "@prismicio/client": ^4.0.0
     "@types/node": ^15.12.2
     "@types/prismic-dom": ^2.1.1
     "@types/react": ^17.0.11
