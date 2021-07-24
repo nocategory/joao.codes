@@ -40,3 +40,7 @@ yarn-error.log*
 
 # Yarn Integrity file
 .yarn-integrity
+
+# netlify
+.netlify/*
+netlify.toml
