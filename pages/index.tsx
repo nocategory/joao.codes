@@ -51,7 +51,10 @@ const IndexPage = ({ prehey, hey, intro }: Data): JSX.Element => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch(process.env.FUNCTION_URL as string)
+  const url = !process.env.DEPLOY_URL
+    ? process.env.FUNCTION_URL
+    : process.env.PRODUCTION_FUNCTION_URL
+  const res = await fetch(url as string)
   const data = await res.json()
   return {
     props: {
