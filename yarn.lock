@@ -161,6 +161,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@netlify/functions@npm:^0.7.2":
+  version: 0.7.2
+  resolution: "@netlify/functions@npm:0.7.2"
+  dependencies:
+    is-promise: ^4.0.0
+  checksum: c7f71c251ed4c11cb431aeedf5d3f7a3deed174cb6ce0ff87b163335262703f94e84f733713dd99b379ba5641cd42477efcef8a4ab2214fe24065e0b09e81d1f
+  languageName: node
+  linkType: hard
+
 "@next/env@npm:11.0.0":
   version: 11.0.0
   resolution: "@next/env@npm:11.0.0"
@@ -254,12 +263,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prismicio/client@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "@prismicio/client@npm:4.0.0"
+"@prismicio/client@npm:6.0.0-alpha.8":
+  version: 6.0.0-alpha.8
+  resolution: "@prismicio/client@npm:6.0.0-alpha.8"
   dependencies:
-    cross-fetch: ^3.0.6
-  checksum: d24594f3f46dd4c1d11539fc373345ffb143a1e3eb6672af19f2718c13b30a14d74b7f3573789fc11dcd41c2bbcb4d2412ee518581b9434ce3ad0542e69046d4
+    "@prismicio/helpers": ^2.0.0-alpha.3
+  checksum: 6287320091827693714caeb32c9c0e8cfb90d2256880bde83b3903390cb881afa36cf72a68d48ab821537c5dc0f8c28dd5ef3bc10cfd223227b2cfec4aacaf1b
   languageName: node
   linkType: hard
 
@@ -270,10 +279,37 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@prismicio/helpers@npm:^2.0.0-alpha.3":
+  version: 2.0.0-alpha.5
+  resolution: "@prismicio/helpers@npm:2.0.0-alpha.5"
+  dependencies:
+    "@prismicio/richtext": ^2.0.0-alpha.6
+    "@prismicio/types": ^0.1.2
+    escape-html: ^1.0.3
+  checksum: 5092cad1de42222cd4b25329d03595f264cbb6b7f5af0f7a9336b4a8e9ee891db91da82aa7cc074f25ddf0a2b036e675ff251846f6149e7a7e0867a8a1432805
+  languageName: node
+  linkType: hard
+
 "@prismicio/richtext@npm:^1.1.0":
   version: 1.1.0
   resolution: "@prismicio/richtext@npm:1.1.0"
   checksum: fae8f4652df15911568502b7d9e13246eb6368af70a5c33d715fd128128baec2195c2232a5f8152b22e3cb0636b6438e1f40486973afcc75cf60ce35785690ab
+  languageName: node
+  linkType: hard
+
+"@prismicio/richtext@npm:^2.0.0-alpha.6":
+  version: 2.0.0-alpha.6
+  resolution: "@prismicio/richtext@npm:2.0.0-alpha.6"
+  dependencies:
+    "@prismicio/types": ^0.1.2
+  checksum: 33843ddb1f7060535dc712a6d5405f6a2d845c193c3802b45490d37b67448e79ab55b80e212168f3e44d5e806dd8c3853c3b52930129049a8eeefe18615e6395
+  languageName: node
+  linkType: hard
+
+"@prismicio/types@npm:^0.1.2":
+  version: 0.1.4
+  resolution: "@prismicio/types@npm:0.1.4"
+  checksum: 948a627dc26f909d12fcc6028f3cace1299ea37f77dc35fa255269d6bf03bac6e2ba09e16cfbf76deb1fe7b12d24f6ccc79efb0ea14d0e326f05076c23a1a343
   languageName: node
   linkType: hard
 
@@ -302,6 +338,16 @@ __metadata:
   version: 0.0.29
   resolution: "@types/json5@npm:0.0.29"
   checksum: 66e9ac0143ec521522c7bb670301e9836ee886207eeed1aab6d4854a1b19b404ab3a54cd8d449f9b1f13acc357f540be96f8ac2d1e86e301eab52ae0f9a4066f
+  languageName: node
+  linkType: hard
+
+"@types/node-fetch@npm:^2.5.12":
+  version: 2.5.12
+  resolution: "@types/node-fetch@npm:2.5.12"
+  dependencies:
+    "@types/node": "*"
+    form-data: ^3.0.0
+  checksum: f648728116a24b9b5abc117e08788ed859283548ed65d374dba333d4604a7e8d22934cb4dbe7d64498c5c7f04885d84a2dc11c9a4115d426c242e74fb2f2a6a6
   languageName: node
   linkType: hard
 
@@ -772,6 +818,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"asynckit@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "asynckit@npm:0.4.0"
+  checksum: a024000b9ddd938e2f27b3cb8188f96a5e1fff58185e98b84862fc4e01de279a547874a800340c2b106bb9de9b0fc61c6c683bc6892abf65e6be29a96addafd3
+  languageName: node
+  linkType: hard
+
 "autoprefixer@npm:^10.2.5":
   version: 10.2.5
   resolution: "autoprefixer@npm:10.2.5"
@@ -1221,6 +1274,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"combined-stream@npm:^1.0.8":
+  version: 1.0.8
+  resolution: "combined-stream@npm:1.0.8"
+  dependencies:
+    delayed-stream: ~1.0.0
+  checksum: 5791ce7944530f0db74a97e77ea28b6fdbf89afcf038e41d6b4195019c4c803cd19ed2905a54959e5b3830d50bd5d6f93c681c6d3aaea8614ad43b48e62e9d65
+  languageName: node
+  linkType: hard
+
 "commander@npm:^6.0.0":
   version: 6.2.1
   resolution: "commander@npm:6.2.1"
@@ -1333,15 +1395,6 @@ __metadata:
     safe-buffer: ^5.0.1
     sha.js: ^2.4.8
   checksum: 98957676a93081678a2a915ae14898d65aac9b5651ffa55b8888484dd9d79c06d3cb3f85b137cd833ab536d87adee17394bb2b0efc591ea0e34110266d5bcd75
-  languageName: node
-  linkType: hard
-
-"cross-fetch@npm:^3.0.6":
-  version: 3.1.4
-  resolution: "cross-fetch@npm:3.1.4"
-  dependencies:
-    node-fetch: 2.6.1
-  checksum: 47b33bc773d53f19805eeac914e7d76e022a1aee3b7a55277fae3d3d1a0cff354b92c4ec6c5d99aeef3e5757c2719e94c37879ba846c33de892e68a655758b61
   languageName: node
   linkType: hard
 
@@ -1491,6 +1544,13 @@ __metadata:
   version: 1.0.0
   resolution: "defined@npm:1.0.0"
   checksum: 3f17b8807d66d9eb836eacb943a4df7097201b54e386c44be781e0198890e58b0fb88ced2997de95e9aad3b6ebd8df90547575f6b3fb986bdb8abe3417815bbc
+  languageName: node
+  linkType: hard
+
+"delayed-stream@npm:~1.0.0":
+  version: 1.0.0
+  resolution: "delayed-stream@npm:1.0.0"
+  checksum: d9dfb0a7c79fd308fada9db2cf29d1ff22047ceb50dd78f7e3c173567909b438f418259cb76a6d9c9f513e88ef41d3a14154f618741ec8368c3efeff616d0c9f
   languageName: node
   linkType: hard
 
@@ -1761,7 +1821,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"escape-html@npm:1.0.3":
+"escape-html@npm:1.0.3, escape-html@npm:^1.0.3":
   version: 1.0.3
   resolution: "escape-html@npm:1.0.3"
   checksum: 900a7f2b80b9f89c85b7a303d1b7a4d354b93e328871414f165f13c5c209a80eab787e3a63429e596877def69fe4dcb3d1b55af655207a901a9ec99f7f148743
@@ -2248,6 +2308,17 @@ __metadata:
   version: 2.0.5
   resolution: "foreach@npm:2.0.5"
   checksum: 890d6c3dec185be6b1f7a94003d67d1b36a068fd7ac5a89f92818c3459d7d43e040a0b228a632e2e50d8a5aa804da6a5d27258ccbc1b7b724fe39eea3834f240
+  languageName: node
+  linkType: hard
+
+"form-data@npm:^3.0.0":
+  version: 3.0.1
+  resolution: "form-data@npm:3.0.1"
+  dependencies:
+    asynckit: ^0.4.0
+    combined-stream: ^1.0.8
+    mime-types: ^2.1.12
+  checksum: 6574ff4d2d845c47ba288151a6e0573767eefdee9da358be199e0f0b66aa5c454e7d62ed5e0daef6f84167ba1e9596e064f36f206488e460ef449ef7b653cdfc
   languageName: node
   linkType: hard
 
@@ -2890,6 +2961,13 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"is-promise@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "is-promise@npm:4.0.0"
+  checksum: 7085bdc4eaff389c5730a1d54f014880e90ca1e4b7f0a49de9f3c5f5d2fb9e0c3a878ac226d3aa9190bfe4a78400e66d911427ef4812455756293cdb02fb05cf
+  languageName: node
+  linkType: hard
+
 "is-regex@npm:^1.1.2, is-regex@npm:^1.1.3":
   version: 1.1.3
   resolution: "is-regex@npm:1.1.3"
@@ -2959,8 +3037,10 @@ fsevents@~2.3.1:
   resolution: "joao.codes@workspace:."
   dependencies:
     "@headlessui/react": ^1.2.0
-    "@prismicio/client": ^4.0.0
+    "@netlify/functions": ^0.7.2
+    "@prismicio/client": 6.0.0-alpha.8
     "@types/node": ^15.12.2
+    "@types/node-fetch": ^2.5.12
     "@types/prismic-dom": ^2.1.1
     "@types/react": ^17.0.11
     "@typescript-eslint/eslint-plugin": ^4.27.0
@@ -2975,6 +3055,7 @@ fsevents@~2.3.1:
     eslint-plugin-react-hooks: ^4.2.0
     next: ^11.0.0
     next-themes: ^0.0.14
+    node-fetch: ^2.6.1
     postcss: ^8.3.0
     prettier: ^2.3.0
     prismic-dom: ^2.2.5
@@ -3305,6 +3386,22 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"mime-db@npm:1.48.0":
+  version: 1.48.0
+  resolution: "mime-db@npm:1.48.0"
+  checksum: 346d5df2ff2f501bdeff07e88a28d205f9cd27bccd3b8604847d3aee6ce73d4ecf88e943bbbce46c167d404487f46cdf09d57354c51b6f08a4d5833bcaafa59f
+  languageName: node
+  linkType: hard
+
+"mime-types@npm:^2.1.12":
+  version: 2.1.31
+  resolution: "mime-types@npm:2.1.31"
+  dependencies:
+    mime-db: 1.48.0
+  checksum: 0373e58e3826802e462cf0c180ca5556fd0990acaf123d421d5f8643f0ca61d2126ea57eb6f4ba96f9ef07d3e627c06261825418a6549b0671261cc1bb4219b4
+  languageName: node
+  linkType: hard
+
 "minimalistic-assert@npm:^1.0.0, minimalistic-assert@npm:^1.0.1":
   version: 1.0.1
   resolution: "minimalistic-assert@npm:1.0.1"
@@ -3560,7 +3657,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:2.6.1":
+"node-fetch@npm:2.6.1, node-fetch@npm:^2.6.1":
   version: 2.6.1
   resolution: "node-fetch@npm:2.6.1"
   checksum: cbb171635e538162b977eac5dfe7a1e07a9a02e991924377a6435502291e2f823d306b95aabc455caebf4a118ccf836868462bc70ccc3095af02bb9da61fda37
