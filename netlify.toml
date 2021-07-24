@@ -5,3 +5,9 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+# different environment variables for prod and dev
+[[plugins]]
+  package = "netlify-plugin-contextual-env"
+    [plugins.inputs]
+    mode = 'prefix'

@@ -5,7 +5,6 @@ import Layout from '@components/Layout'
 import ModeDropdown from '@components/ModeDropdown'
 import IntroText from '@components/IntroText'
 import Socials from '@components/Socials'
-import { Client } from '../prismic'
 import { Data } from '@components/types'
 
 const IndexPage = ({ prehey, hey, intro }: Data): JSX.Element => {
@@ -52,17 +51,13 @@ const IndexPage = ({ prehey, hey, intro }: Data): JSX.Element => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const client = Client()
-  const data = await client
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    .getByID(process.env.PRISMIC_ID!, {})
-    .then(res => [res.data.prehey, res.data.hey, res.data.intro])
-
+  const res = await fetch(process.env.FUNCTION_URL as string)
+  const data = await res.json()
   return {
     props: {
-      prehey: data[0],
-      hey: data[1],
-      intro: data[2],
+      prehey: data.prehey,
+      hey: data.hey,
+      intro: data.intro,
     },
   }
 }
