@@ -1,14 +1,19 @@
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
+import * as prismic from '@prismicio/client'
 import PolyworkWarn from '@components/PolyworkWarn'
 import Layout from '@components/Layout'
 import ModeDropdown from '@components/ModeDropdown'
 import IntroText from '@components/IntroText'
 import Socials from '@components/Socials'
-import { Client } from '../prismic'
-import { Data } from '@components/types'
+import { Data, Error } from '@components/types'
 
-const IndexPage = ({ prehey, hey, intro }: Data): JSX.Element => {
+const IndexPage = ({
+  prehey = [],
+  hey = [],
+  intro = [],
+  api_error = false,
+}: Data & Error): JSX.Element => {
   return (
     <Layout>
       <div className="z-10 animate-fadeIn">
@@ -44,7 +49,18 @@ const IndexPage = ({ prehey, hey, intro }: Data): JSX.Element => {
         </Head>
         <PolyworkWarn />
         <ModeDropdown />
-        <IntroText prehey={prehey} hey={hey} intro={intro} />
+        {api_error ? (
+          <h1 className="leading-relaxed text-5xl text-red-500">
+            Oopsie! Looks like something went wrong{' '}
+            <span role="img" aria-label="eyes">
+              👀
+            </span>
+          </h1>
+        ) : (
+          <>
+            <IntroText prehey={prehey} hey={hey} intro={intro} />
+          </>
+        )}
         <Socials />
       </div>
     </Layout>
@@ -52,18 +68,33 @@ const IndexPage = ({ prehey, hey, intro }: Data): JSX.Element => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const client = Client()
-  const data = await client
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    .getByID(process.env.PRISMIC_ID!, {})
-    .then(res => [res.data.prehey, res.data.hey, res.data.intro])
+  try {
+    const client = prismic.createClient(
+      process.env.PRISMIC_ENDPOINT as string,
+      {
+        accessToken: process.env.PRISMIC_TOKEN,
+        fetch,
+      }
+    )
 
-  return {
-    props: {
-      prehey: data[0],
-      hey: data[1],
-      intro: data[2],
-    },
+    const ref = await client.getRefByLabel('Master')
+    client.queryContentFromRef(ref.ref)
+
+    const doc = await client.getByID(process.env.PRISMIC_ID as string)
+    return {
+      props: {
+        prehey: doc.data.prehey,
+        hey: doc.data.hey,
+        intro: doc.data.intro,
+      },
+    }
+  } catch {
+    return {
+      props: {
+        api_error: true,
+        statusCode: 500,
+      },
+    }
   }
 }
 

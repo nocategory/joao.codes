@@ -5,3 +5,7 @@ export interface Data {
   hey: RichTextBlock[]
   intro: RichTextBlock[]
 }
+
+export interface Error {
+  api_error: boolean
+}
