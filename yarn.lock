@@ -254,7 +254,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prismicio/client@npm:6.0.0-alpha.8":
+"@prismicio/client@npm:^6.0.0-alpha.8":
   version: 6.0.0-alpha.8
   resolution: "@prismicio/client@npm:6.0.0-alpha.8"
   dependencies:
@@ -2977,7 +2977,7 @@ fsevents@~2.3.1:
   resolution: "joao.codes@workspace:."
   dependencies:
     "@headlessui/react": ^1.2.0
-    "@prismicio/client": 6.0.0-alpha.8
+    "@prismicio/client": ^6.0.0-alpha.8
     "@types/node": ^15.12.2
     "@types/prismic-dom": ^2.1.1
     "@types/react": ^17.0.11

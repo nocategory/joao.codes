@@ -4,12 +4,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next export",
     "start": "next start",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
   },
   "dependencies": {
     "@headlessui/react": "^1.2.0",
-    "@prismicio/client": "^6.0.0",
+    "@prismicio/client": "^6.0.0-alpha.8",
     "next": "^11.0.0",
     "next-themes": "^0.0.14",
     "prismic-dom": "^2.2.5",
