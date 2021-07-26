@@ -254,6 +254,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@prismicio/client@npm:6.0.0-alpha.8":
+  version: 6.0.0-alpha.8
+  resolution: "@prismicio/client@npm:6.0.0-alpha.8"
+  dependencies:
+    "@prismicio/helpers": ^2.0.0-alpha.3
+  checksum: 6287320091827693714caeb32c9c0e8cfb90d2256880bde83b3903390cb881afa36cf72a68d48ab821537c5dc0f8c28dd5ef3bc10cfd223227b2cfec4aacaf1b
+  languageName: node
+  linkType: hard
+
 "@prismicio/helpers@npm:^1.0.4":
   version: 1.1.1
   resolution: "@prismicio/helpers@npm:1.1.1"
@@ -261,10 +270,37 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@prismicio/helpers@npm:^2.0.0-alpha.3":
+  version: 2.0.0-alpha.5
+  resolution: "@prismicio/helpers@npm:2.0.0-alpha.5"
+  dependencies:
+    "@prismicio/richtext": ^2.0.0-alpha.6
+    "@prismicio/types": ^0.1.2
+    escape-html: ^1.0.3
+  checksum: 5092cad1de42222cd4b25329d03595f264cbb6b7f5af0f7a9336b4a8e9ee891db91da82aa7cc074f25ddf0a2b036e675ff251846f6149e7a7e0867a8a1432805
+  languageName: node
+  linkType: hard
+
 "@prismicio/richtext@npm:^1.1.0":
   version: 1.1.0
   resolution: "@prismicio/richtext@npm:1.1.0"
   checksum: fae8f4652df15911568502b7d9e13246eb6368af70a5c33d715fd128128baec2195c2232a5f8152b22e3cb0636b6438e1f40486973afcc75cf60ce35785690ab
+  languageName: node
+  linkType: hard
+
+"@prismicio/richtext@npm:^2.0.0-alpha.6":
+  version: 2.0.0-alpha.6
+  resolution: "@prismicio/richtext@npm:2.0.0-alpha.6"
+  dependencies:
+    "@prismicio/types": ^0.1.2
+  checksum: 33843ddb1f7060535dc712a6d5405f6a2d845c193c3802b45490d37b67448e79ab55b80e212168f3e44d5e806dd8c3853c3b52930129049a8eeefe18615e6395
+  languageName: node
+  linkType: hard
+
+"@prismicio/types@npm:^0.1.2":
+  version: 0.1.4
+  resolution: "@prismicio/types@npm:0.1.4"
+  checksum: 948a627dc26f909d12fcc6028f3cace1299ea37f77dc35fa255269d6bf03bac6e2ba09e16cfbf76deb1fe7b12d24f6ccc79efb0ea14d0e326f05076c23a1a343
   languageName: node
   linkType: hard
 
@@ -1743,7 +1779,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"escape-html@npm:1.0.3":
+"escape-html@npm:1.0.3, escape-html@npm:^1.0.3":
   version: 1.0.3
   resolution: "escape-html@npm:1.0.3"
   checksum: 900a7f2b80b9f89c85b7a303d1b7a4d354b93e328871414f165f13c5c209a80eab787e3a63429e596877def69fe4dcb3d1b55af655207a901a9ec99f7f148743
@@ -2941,6 +2977,7 @@ fsevents@~2.3.1:
   resolution: "joao.codes@workspace:."
   dependencies:
     "@headlessui/react": ^1.2.0
+    "@prismicio/client": 6.0.0-alpha.8
     "@types/node": ^15.12.2
     "@types/prismic-dom": ^2.1.1
     "@types/react": ^17.0.11
