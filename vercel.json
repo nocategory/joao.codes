@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "https://poly.joao.codes",
+      "destination": "https://www.poly.joao.codes",
+      "permanent": true
+    }
+  ]
+}
