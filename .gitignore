@@ -44,3 +44,4 @@ yarn-error.log*
 # netlify
 .netlify/*
 netlify.toml
+.vercel
