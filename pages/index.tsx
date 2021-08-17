@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
 import * as prismic from '@prismicio/client'
-import PolyworkWarn from '@components/PolyworkWarn'
 import Layout from '@components/Layout'
 import ModeDropdown from '@components/ModeDropdown'
 import IntroText from '@components/IntroText'
@@ -47,7 +46,6 @@ const IndexPage = ({
             rel="stylesheet"
           />
         </Head>
-        <PolyworkWarn />
         <ModeDropdown />
         {api_error ? (
           <h1 className="leading-relaxed text-5xl text-red-500">
