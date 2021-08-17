@@ -16,7 +16,7 @@ const IndexPage = ({
 }: Data & Error): JSX.Element => {
   return (
     <Layout>
-      <div className="z-10 animate-fadeIn">
+      <div className="z-10">
         <Head>
           <title>João Salgueiro</title>
           <meta
