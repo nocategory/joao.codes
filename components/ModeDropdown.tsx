@@ -3,13 +3,12 @@ import { Menu, Transition } from '@headlessui/react'
 import { useTheme } from 'next-themes'
 import SunIcon from '@components/icons/SunIcon'
 import MoonIcon from '@components/icons/MoonIcon'
-import SystemIcon from '@components/icons/SystemIcon'
 import DropdownIcon from '@components/icons/DropdownIcon'
 
 const ModeDropdown = (): JSX.Element => {
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
-  const modes = ['light', 'dark', 'system']
+  const modes = ['light', 'dark']
 
   // show component only after page is mounted so that theme isn't undefined
   useEffect(() => setMounted(true), [])
@@ -25,8 +24,6 @@ const ModeDropdown = (): JSX.Element => {
         return <SunIcon />
       case 'dark':
         return <MoonIcon />
-      case 'system':
-        return <SystemIcon />
       default:
         return <SunIcon />
     }
