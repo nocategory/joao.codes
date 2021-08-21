@@ -19,7 +19,10 @@ const ModeToggle = (): JSX.Element => {
   if (!mounted) return <></>
 
   return (
-    <>
+    <div className="fixed top-7 md:right-16 right-5 flex">
+      <span className={`${theme !== 'light' ? 'opacity-40' : ''}`}>
+        <SunIcon />
+      </span>
       <Switch
         checked={theme === 'light' ? false : true}
         onChange={
@@ -27,17 +30,20 @@ const ModeToggle = (): JSX.Element => {
         }
         defaultChecked={false}
         className={`${
-          theme === 'dark' ? 'bg-blue-600' : 'bg-gray-200'
-        } relative inline-flex items-center h-6 rounded-full w-11`}
+          theme === 'dark' ? 'bg-codes-gray-1/90' : 'bg-codes-gray-1/100'
+        } relative inline-flex items-center h-6 rounded-full w-11 mx-2 yel`}
       >
-        <span className="sr-only">Enable dark theme</span>
+        <span className="sr-only">Switch between light and dark theme</span>
         <span
           className={`${
             theme === 'dark' ? 'translate-x-6' : 'translate-x-1'
           } inline-block w-4 h-4 transform bg-white rounded-full`}
         />
       </Switch>
-    </>
+      <span className={`${theme !== 'dark' ? 'opacity-40' : ''}`}>
+        <MoonIcon />
+      </span>
+    </div>
     /** <Menu as="div" className="fixed top-7 md:right-16 right-5">
       <Menu.Button
         aria-label="change display mode"
