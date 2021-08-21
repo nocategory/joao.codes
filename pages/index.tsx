@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { GetStaticProps } from 'next'
 import * as prismic from '@prismicio/client'
 import Layout from '@components/Layout'
-import ModeDropdown from '@components/ModeDropdown'
+import ModeToggle from '@components/ModeToggle'
 import IntroText from '@components/IntroText'
 import Socials from '@components/Socials'
 import { Data, Error } from '@components/types'
@@ -46,7 +46,7 @@ const IndexPage = ({
             rel="stylesheet"
           />
         </Head>
-        <ModeDropdown />
+        <ModeToggle />
         {api_error ? (
           <h1 className="leading-relaxed text-5xl text-red-500">
             Oopsie! Looks like something went wrong{' '}
