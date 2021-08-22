@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
-import { Switch, Transition } from '@headlessui/react'
+import { Switch } from '@headlessui/react'
 import { useTheme } from 'next-themes'
 import SunIcon from '@components/icons/SunIcon'
 import MoonIcon from '@components/icons/MoonIcon'
-import DropdownIcon from '@components/icons/DropdownIcon'
 
 const ModeToggle = (): JSX.Element => {
   const [mounted, setMounted] = useState(false)
