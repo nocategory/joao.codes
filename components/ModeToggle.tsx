@@ -18,7 +18,7 @@ const ModeToggle = (): JSX.Element => {
   if (!mounted) return <></>
 
   return (
-    <div className="fixed top-7 md:right-16 right-5 flex">
+    <div className="fixed top-7 md:right-16 right-5 flex md:scale-110 lg:scale-[1.20]">
       <span className={`${theme !== 'light' ? 'opacity-40' : ''}`}>
         <SunIcon />
       </span>
@@ -29,14 +29,14 @@ const ModeToggle = (): JSX.Element => {
         }
         defaultChecked={false}
         className={`${
-          theme === 'dark' ? 'bg-codes-gray-1/90' : 'bg-codes-gray-1/100'
-        } relative inline-flex items-center h-6 rounded-full w-11 mx-2 yel`}
+          theme === 'dark' ? 'bg-white/20' : 'bg-black/40'
+        } relative inline-flex items-center h-6 w-11 mx-2 rounded-full transition-colors backdrop-brightness-75 dark:backdrop-brightness-150`}
       >
         <span className="sr-only">Switch between light and dark theme</span>
         <span
           className={`${
             theme === 'dark' ? 'translate-x-6' : 'translate-x-1'
-          } inline-block w-4 h-4 transform bg-white rounded-full`}
+          } inline-block w-4 h-4 transform bg-white/100 rounded-full transition-transform duration-300`}
         />
       </Switch>
       <span className={`${theme !== 'dark' ? 'opacity-40' : ''}`}>
