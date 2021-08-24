@@ -1,11 +1,18 @@
 import { RichTextBlock } from 'prismic-reactjs'
 
-export interface Data {
+export type Data = {
   prehey: RichTextBlock[]
   hey: RichTextBlock[]
   intro: RichTextBlock[]
 }
 
-export interface Error {
+export type Error = {
   api_error: boolean
+}
+
+export type SocialIcon = {
+  url: string
+  label: string
+  width?: number
+  height?: number
 }
