@@ -15,7 +15,7 @@ const ModeToggle = (): JSX.Element => {
   if (!mounted) return <></>
 
   return (
-    <div className="fixed top-7 md:right-16 right-5 flex md:scale-110 lg:scale-[1.20]">
+    <div className="absolute top-7 md:right-16 right-5 flex md:scale-110 lg:scale-[1.20]">
       <button
         className={`${theme !== 'light' ? 'opacity-40' : ''}`}
         onClick={() => (theme !== 'light' ? setTheme('light') : null)}
