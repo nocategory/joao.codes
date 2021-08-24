@@ -18,12 +18,14 @@ const ModeToggle = (): JSX.Element => {
     <div className="absolute top-7 md:right-16 right-5 flex md:scale-110 lg:scale-[1.20]">
       <button
         className={`${theme !== 'light' ? 'opacity-40' : ''}`}
+        aria-label="Toggle color scheme to light"
         onClick={() => (theme !== 'light' ? setTheme('light') : null)}
       >
         <SunIcon />
       </button>
       <Switch
         checked={theme === 'light' ? false : true}
+        aria-label="Toggle color scheme"
         onChange={
           theme === 'light' ? () => setTheme('dark') : () => setTheme('light')
         }
@@ -41,6 +43,7 @@ const ModeToggle = (): JSX.Element => {
       </Switch>
       <button
         className={`${theme !== 'dark' ? 'opacity-40' : ''}`}
+        aria-label="Toggle color scheme to dark"
         onClick={() => (theme !== 'dark' ? setTheme('dark') : null)}
       >
         <MoonIcon />
