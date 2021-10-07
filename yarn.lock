@@ -139,6 +139,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/inter@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "@fontsource/inter@npm:4.5.0"
+  checksum: 0aca0ae795ab4d6d94d53240f2dacecb7d21c0b969612022cc4a7561d68bfb46f6cddbbc3f4f2176aaa317ab852a90d13ceca458ee8607b7062140b27bf384b6
+  languageName: node
+  linkType: hard
+
 "@fullhuman/postcss-purgecss@npm:^4.0.3":
   version: 4.0.3
   resolution: "@fullhuman/postcss-purgecss@npm:4.0.3"
@@ -3012,6 +3019,7 @@ fsevents@~2.3.1:
   version: 0.0.0-use.local
   resolution: "joao.codes@workspace:."
   dependencies:
+    "@fontsource/inter": ^4.5.0
     "@headlessui/react": ^1.2.0
     "@prismicio/client": ^6.0.0-alpha.8
     "@types/node": ^15.12.2

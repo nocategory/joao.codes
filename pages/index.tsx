@@ -6,6 +6,7 @@ import ModeToggle from '@components/ModeToggle'
 import IntroText from '@components/IntroText'
 import Socials from '@components/Socials'
 import { Data, Error } from '@components/types'
+import '@fontsource/inter'
 
 const IndexPage = ({
   prehey = [],
@@ -41,10 +42,6 @@ const IndexPage = ({
           />
           <link rel="manifest" href="/site.webmanifest" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap"
-            rel="stylesheet"
-          />
         </Head>
         <ModeToggle />
         {api_error ? (
