@@ -9,6 +9,7 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
   },
   "dependencies": {
+    "@fontsource/inter": "^4.5.0",
     "@headlessui/react": "^1.2.0",
     "@prismicio/client": "^6.0.0-alpha.8",
     "next": "^11.1.0",
