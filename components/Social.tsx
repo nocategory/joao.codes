@@ -1,4 +1,5 @@
 import { SocialIcon } from './types'
+import Image from 'next/image'
 
 const Social = ({
   url,
@@ -13,7 +14,7 @@ const Social = ({
         className="hover:rotate-12 hover:opacity-100 opacity-80 hover:scale-125 transition-all ease-in px-4 sm:mx-2 py-4"
         aria-label={label}
       >
-        <img
+        <Image
           src={`/icons/${label}.svg`}
           alt={label}
           width={width}
