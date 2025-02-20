@@ -3086,6 +3086,7 @@ fsevents@~2.3.1:
     eslint-plugin-prettier: ^3.4.0
     eslint-plugin-react: ^7.23.2
     eslint-plugin-react-hooks: ^4.2.0
+    lucide-react: ^0.475.0
     next: ^12.0.1
     next-themes: ^0.0.14
     postcss: ^8.3.0
@@ -3336,6 +3337,15 @@ fsevents@~2.3.1:
   dependencies:
     yallist: ^4.0.0
   checksum: b8b78353d2391c0f135cdc245c4744ad41c2efb1a6d98f31bc57a2cf48ebf02de96e4876657c3026673576bf1f1f61fc3fdd77ab00ad1ead737537bf17d8019d
+  languageName: node
+  linkType: hard
+
+"lucide-react@npm:^0.475.0":
+  version: 0.475.0
+  resolution: "lucide-react@npm:0.475.0"
+  peerDependencies:
+    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: e7015835b4230711019082cb0576d43faf8683a1b64f1b28fce46cdd2a0f33dff768fbb1c984e99ba9b94054f2ba1d4c699d087540e4f7c168ea3f28875b216d
   languageName: node
   linkType: hard
 
