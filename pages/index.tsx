@@ -101,8 +101,8 @@ const IndexPage = ({ api_error = false }: Data & Error): JSX.Element => {
                     </h2>
                   </div>
                   <div className="w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden flex-shrink-0">
-                    <Image
-                      loader={loaderFunction}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
                       src="/avatar.jpg"
                       width={192}
                       height={192}
