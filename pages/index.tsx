@@ -53,6 +53,19 @@ const IndexPage = ({ api_error = false }: Data & Error): JSX.Element => {
       },
     ],
   }
+
+  const loaderFunction = ({
+    src,
+    width,
+    quality,
+  }: {
+    src: string
+    width: number
+    quality?: number
+  }) => {
+    return `https://joao-codes.pages.dev/${src}?w=${width}&q=${quality || 75}`
+  }
+
   return (
     <Layout>
       {/* Remove the min-h-screen here since Layout already handles it */}
@@ -89,6 +102,7 @@ const IndexPage = ({ api_error = false }: Data & Error): JSX.Element => {
                   </div>
                   <div className="w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden flex-shrink-0">
                     <Image
+                      loader={loaderFunction}
                       src="/avatar.jpg"
                       width={192}
                       height={192}
