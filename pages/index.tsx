@@ -3,7 +3,6 @@ import ModeToggle from '@components/ModeToggle'
 import Socials from '@components/Socials'
 import { Data, Error } from '@components/types'
 import '@fontsource/inter'
-import Image from 'next/image'
 import { useState } from 'react'
 
 const IndexPage = ({ api_error = false }: Data & Error): JSX.Element => {
@@ -52,18 +51,6 @@ const IndexPage = ({ api_error = false }: Data & Error): JSX.Element => {
           'Built websites and tools using HTML/CSS/JS, PHP, SAP Lumira, and Java for companies like Jerónimo Martins.',
       },
     ],
-  }
-
-  const loaderFunction = ({
-    src,
-    width,
-    quality,
-  }: {
-    src: string
-    width: number
-    quality?: number
-  }) => {
-    return `https://joao-codes.pages.dev/${src}?w=${width}&q=${quality || 75}`
   }
 
   return (
