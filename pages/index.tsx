@@ -3,7 +3,6 @@ import ModeToggle from '@components/ModeToggle'
 import Socials from '@components/Socials'
 import { Data, Error } from '@components/types'
 import '@fontsource/inter'
-import { ChevronDown } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
 
@@ -147,11 +146,6 @@ const IndexPage = ({ api_error = false }: Data & Error): JSX.Element => {
                         `}
                       >
                         {showAllWork ? 'Show Recent' : 'Show All'}
-                        <ChevronDown
-                          className={`w-4 h-4 transition-transform duration-200 ${
-                            showAllWork ? 'rotate-180' : ''
-                          }`}
-                        />
                       </button>
                     </div>
                     <div className="space-y-4 md:space-y-6">
