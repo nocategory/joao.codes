@@ -55,16 +55,7 @@ const IndexPage = ({ api_error = false }: Data & Error): JSX.Element => {
 
   return (
     <Layout>
-      {/* Remove the min-h-screen here since Layout already handles it */}
       <div className="z-10 flex flex-col w-full">
-        {/* Move ModeToggle inside a header for better positioning */}
-        <header
-          className="relative w-full flex justify-end mt-4 h-fit"
-          style={{ height: 'fit-content' }}
-        >
-          <ModeToggle />
-        </header>
-
         {api_error ? (
           <h1 className="leading-relaxed text-3xl md:text-5xl text-red-500 p-4 text-center">
             Oopsie! Looks like something went wrong{' '}
@@ -74,10 +65,14 @@ const IndexPage = ({ api_error = false }: Data & Error): JSX.Element => {
           </h1>
         ) : (
           <>
-            {/* Main content container with proper spacing */}
             <div className="flex-1 bg-zinc-900 text-zinc-100 font-mono p-4 sm:p-6 md:p-8">
               <div className="max-w-3xl mx-auto flex flex-col">
-                {/* Update header spacing */}
+                <header
+                  className="relative w-full flex justify-end mt-4 h-fit"
+                  style={{ height: 'fit-content' }}
+                >
+                  <ModeToggle />
+                </header>
                 <header className="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8 mb-8 md:mb-16 md:pt-12">
                   <div className="flex-1 text-center md:text-left">
                     <h1 className="text-3xl md:text-4xl font-bold mb-2">
@@ -94,7 +89,15 @@ const IndexPage = ({ api_error = false }: Data & Error): JSX.Element => {
                       width={192}
                       height={192}
                       alt="João Salgueiro"
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover dark:hidden"
+                    />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/avatar-dark.jpeg"
+                      width={192}
+                      height={192}
+                      alt="João Salgueiro"
+                      className="w-full h-full object-cover hidden dark:block"
                     />
                   </div>
                 </header>

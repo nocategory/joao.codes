@@ -41,7 +41,7 @@ const socials: Social[] = [
 ]
 
 const Socials: React.FC = () => (
-  <nav className="rounded-lg backdrop-blur-sm bg-white/10 dark:bg-black/20 py-3 px-5 md:py-2 shadow-md w-max m-auto">
+  <nav className="rounded-lg backdrop-blur-sm bg-white/10 dark:bg-black/20 py-3 px-5 md:py-2 shadow-md m-auto w-max">
     <ul className="flex flex-wrap items-center justify-center text-sm md:text-base font-medium max-w-content">
       {socials.map(social => (
         <li key={social.name}>

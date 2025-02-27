@@ -15,7 +15,7 @@ const ModeToggle = (): JSX.Element => {
   if (!mounted) return <></>
 
   return (
-    <div className="absolute right-4 top-4 md:right-8 md:top-6 flex items-center justify-center z-50">
+    <div className="right-4 top-4 md:right-10 md:top-6 flex items-center justify-center z-50">
       <button
         className={`${theme !== 'light' ? 'opacity-40' : ''}`}
         aria-label="Toggle color scheme to light"
