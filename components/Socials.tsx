@@ -1,3 +1,4 @@
+import { usePathname } from 'next/navigation'
 import React from 'react'
 
 type Social = {
@@ -8,6 +9,24 @@ type Social = {
 }
 
 const socials: Social[] = [
+  {
+    name: 'home',
+    url: '/',
+    color: 'text-zinc-700 dark:text-zinc-300',
+    underlineColor: '#21d286',
+  },
+  {
+    name: 'blog',
+    url: 'https://blog.joaosalgueiro.com',
+    color: 'text-zinc-700 dark:text-zinc-300',
+    underlineColor: '#8e99ed',
+  },
+  {
+    name: 'bluesky',
+    url: 'https://bsky.app/profile/joao.codes',
+    color: 'text-zinc-700 dark:text-zinc-300',
+    underlineColor: '#4a90e2',
+  },
   {
     name: 'X',
     url: 'https://x.com/joaodotcodes',
@@ -26,49 +45,52 @@ const socials: Social[] = [
     color: 'text-zinc-700 dark:text-zinc-300',
     underlineColor: '#21d286',
   },
-  {
-    name: 'polywork',
-    url: 'https://www.polywork.com/js',
-    color: 'text-zinc-700 dark:text-zinc-300',
-    underlineColor: '#8e99ed',
-  },
-  {
-    name: 'bluesky',
-    url: 'https://bsky.app/profile/joao.codes',
-    color: 'text-zinc-700 dark:text-zinc-300',
-    underlineColor: '#4a90e2',
-  },
 ]
 
-const Socials: React.FC = () => (
-  <nav className="rounded-lg backdrop-blur-sm bg-white/10 dark:bg-black/20 py-3 px-5 md:py-2 shadow-md m-auto w-max">
-    <ul className="flex flex-wrap items-center justify-center text-sm md:text-base font-medium max-w-content">
-      {socials.map(social => (
-        <li key={social.name}>
-          <a
-            href={social.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              textDecorationColor: social.underlineColor,
-              textDecorationThickness: '0.15rem',
-            }}
-            className={`
+const Socials: React.FC = () => {
+  const pathname = usePathname()
+  console.log(pathname)
+
+  const isActive = (name: string) => {
+    return (
+      pathname.includes(name) || (pathname.endsWith('/') && name === 'home')
+    )
+  }
+
+  return (
+    <nav className="rounded-lg backdrop-blur-sm">
+      <ul
+        className="text-sm md:text-base font-medium text-center
+             p-2 rounded-lg dark:bg-black/20 bg-black/5"
+      >
+        {socials.map(social => (
+          <li key={social.name} className={`inline-block`}>
+            <a
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                textDecorationColor: social.underlineColor,
+                textDecorationThickness: '0.15rem',
+              }}
+              className={`
               hover:${social.color}
               hover:underline
               transition-all duration-200
               px-3 py-1.5
               rounded-md
               active:scale-95
+              ${isActive(social.name) ? 'underline ' : ''}
             `}
-            aria-label={`Link to ${social.name}`}
-          >
-            {social.name}
-          </a>
-        </li>
-      ))}
-    </ul>
-  </nav>
-)
+              aria-label={`Link to ${social.name}`}
+            >
+              {social.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
 
 export default Socials

@@ -1,11 +1,13 @@
+'use client'
+import { ColorScript } from '@components/ColorScript'
 import Layout from '@components/Layout'
 import ModeToggle from '@components/ModeToggle'
 import Socials from '@components/Socials'
-import { Data, Error } from '@components/types'
+import { Error } from '@components/types'
 import '@fontsource/inter'
 import { useState } from 'react'
 
-const IndexPage = ({ api_error = false }: Data & Error): JSX.Element => {
+const IndexPage = ({ api_error = false }: Error): JSX.Element => {
   const [showAllWork, setShowAllWork] = useState(false)
   const workHistory = {
     recent: [
@@ -65,20 +67,15 @@ const IndexPage = ({ api_error = false }: Data & Error): JSX.Element => {
           </h1>
         ) : (
           <>
-            <div className="flex-1 bg-zinc-900 text-zinc-100 font-mono p-4 sm:p-6 md:p-8">
+            <div className="flex-1 dark:text-zinc-100 text-zinc-900 font-mono p-4 sm:p-6 md:p-8">
+              <ModeToggle />
               <div className="max-w-3xl mx-auto flex flex-col">
-                <header
-                  className="relative w-full flex justify-end mt-4 h-fit"
-                  style={{ height: 'fit-content' }}
-                >
-                  <ModeToggle />
-                </header>
-                <header className="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8 mb-8 md:mb-16 md:pt-12">
-                  <div className="flex-1 text-center md:text-left">
-                    <h1 className="text-3xl md:text-4xl font-bold mb-2">
+                <header className="flex flex-col lg:flex-row items-center gap-6 md:gap-8 mb-8 md:mb-16 md:pt-12">
+                  <div className="flex-1 md:text-center">
+                    <h1 className="lg:text-6xl md:text-4xl text-4xl font-bold mb-2 md:text-left text-center">
                       João Salgueiro
                     </h1>
-                    <h2 className="text-lg md:text-xl text-zinc-400 mb-4 md:mb-6">
+                    <h2 className="lg:text-2xl md:text-xl text-md mb-4 md:mb-6 dark:text-gray-400 text-gray-600 md:text-left text-center">
                       Software Engineer based in Lisbon
                     </h2>
                   </div>
@@ -105,14 +102,13 @@ const IndexPage = ({ api_error = false }: Data & Error): JSX.Element => {
                 <main className="space-y-8 md:space-y-12 flex-1">
                   <Socials />
 
-                  <section className="space-y-4">
-                    <p className="text-base md:text-lg leading-relaxed">
+                  <section className="space-y-2 md:mt-10 mt-5">
+                    <p className="text-base md:text-lg leading-loose">
                       Hi there! I&apos;m João, a passionate coder who loves
-                      creating neat UI experiences with a strong focus on
-                      reusability and best practices, whether in professional
-                      projects, open-source or when advising companies.
+                      creating neat UI experiences on the Web with a strong
+                      focus on reusability and best practices
                     </p>
-                    <p className="text-base md:text-lg leading-relaxed">
+                    <p className="text-base md:text-lg leading-loose sm:mt-10 mt-5">
                       Beyond the screen, I also love the simplicity and joy of
                       nature{' '}
                       <span role="img" aria-label="tree">
@@ -126,26 +122,24 @@ const IndexPage = ({ api_error = false }: Data & Error): JSX.Element => {
                       , reading, yoga, and meditation{' '}
                       <span role="img" aria-label="meditation">
                         🧘
-                      </span>{' '}
-                      - all of which help me maintain a balanced lifestyle.
+                      </span>
                     </p>
                   </section>
 
                   <section>
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
-                      <h3 className="text-xl md:text-2xl text-zinc-300">
-                        Experience
-                      </h3>
+                      <h3 className="text-xl md:text-2xl ">Experience</h3>
                       <button
                         onClick={() => setShowAllWork(!showAllWork)}
                         className={`
                           flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 text-sm
-                          rounded-lg backdrop-blur-sm bg-white/10 dark:bg-black/20
+                          rounded-lg backdrop-blur-sm dark:bg-black/20 bg-black/5
                           text-black
                           dark:text-white
                           shadow-md
                           relative
                           transition-all duration-200
+                          hover:cursor-pointer
                           hover:bg-opacity-80
                         `}
                       >
@@ -161,18 +155,18 @@ const IndexPage = ({ api_error = false }: Data & Error): JSX.Element => {
                           >
                             <h4 className="text-lg md:text-xl font-semibold">
                               {job.title}{' '}
-                              <span className="text-zinc-400 text-base md:text-lg">
+                              <span className="text-base md:text-lg">
                                 @ {job.company}
                               </span>
                             </h4>
-                            <p className="text-zinc-400 text-sm md:text-base mb-1 md:mb-2">
+                            <p className="text-sm md:text-base mb-1 md:mb-2">
                               {job.period}
                             </p>
                             <p className="text-sm md:text-base">
                               {job.description}
                             </p>
                           </article>
-                        )
+                        ),
                       )}
                     </div>
                   </section>
@@ -193,6 +187,7 @@ const IndexPage = ({ api_error = false }: Data & Error): JSX.Element => {
           </>
         )}
       </div>
+      <ColorScript />
     </Layout>
   )
 }

@@ -1,8 +1,12 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
-  mode: 'jit',
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+    './app/*.{js,ts,jsx,tsx}',
+    './styles/globals.css'
+  ],
   darkMode: 'class',
   theme: {
     screens: {
@@ -37,9 +41,6 @@ module.exports = {
         slideDown: 'slideDown 0.8s ease 2s forwards',
       },
     },
-  },
-  variants: {
-    extend: {},
   },
   plugins: [],
 }

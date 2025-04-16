@@ -23,13 +23,19 @@
         "components/*"
       ]
     },
-    "incremental": true
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
-    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "pages/index.js"
+    "next-env.d.ts",
+    "app/pages/index.js",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

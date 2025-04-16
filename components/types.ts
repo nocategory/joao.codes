@@ -1,11 +1,3 @@
-import { RichTextBlock } from 'prismic-reactjs'
-
-export type Data = {
-  prehey: RichTextBlock[]
-  hey: RichTextBlock[]
-  intro: RichTextBlock[]
-}
-
 export type Error = {
   api_error: boolean
 }

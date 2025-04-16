@@ -1,8 +1,10 @@
-import MoonIcon from '@components/icons/MoonIcon'
-import SunIcon from '@components/icons/SunIcon'
+'use client'
+
 import { Switch } from '@headlessui/react'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
+import MoonIcon from './icons/MoonIcon'
+import SunIcon from './icons/SunIcon'
 
 const ModeToggle = (): JSX.Element => {
   const [mounted, setMounted] = useState(false)
@@ -15,7 +17,7 @@ const ModeToggle = (): JSX.Element => {
   if (!mounted) return <></>
 
   return (
-    <div className="right-4 top-4 md:right-10 md:top-6 flex items-center justify-center z-50">
+    <div className="md:right-4 top-4 right-10 md:top-6 flex justify-end z-1">
       <button
         className={`${theme !== 'light' ? 'opacity-40' : ''}`}
         aria-label="Toggle color scheme to light"
@@ -32,7 +34,7 @@ const ModeToggle = (): JSX.Element => {
         defaultChecked={false}
         className={`${
           theme === 'dark' ? 'bg-white/20' : 'bg-black/40'
-        } relative inline-flex items-center h-6 w-11 mx-2 rounded-full transition-all backdrop-brightness-75  hover:backdrop-brightness-50 dark:backdrop-brightness-150 dark:hover:backdrop-brightness-50`}
+        } relative inline-flex items-center h-6 w-11 mx-2 rounded-full transition-all backdrop-brightness-75  hover:backdrop-brightness-50 dark:backdrop-brightness-150 dark:hover:backdrop-brightness-50 cursor-pointer`}
       >
         <span className="sr-only">
           Toggle between light and dark color schemes
@@ -40,7 +42,7 @@ const ModeToggle = (): JSX.Element => {
         <span
           className={`${
             theme === 'dark' ? 'translate-x-6' : 'translate-x-1'
-          } inline-block w-4 h-4 transform bg-white/100 rounded-full transition-transform duration-300`}
+          } inline-block w-4 h-4 transform bg-white/100 rounded-full transition-transform duration-300 cursor-pointer`}
         />
       </Switch>
       <button
