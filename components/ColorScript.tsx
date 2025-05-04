@@ -1,8 +1,9 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export const ColorScript = () => {
+  const [mounted, setMounted] = useState(false)
   let colors = ['#4A90E2', '#50E3C2', '#F5A623', '#7ED321', '#9013FE']
 
   function getRandomColor() {
@@ -25,9 +26,15 @@ export const ColorScript = () => {
   }
 
   useEffect(() => {
+    setMounted(true)
     setRandomLinkColor()
     setColorHoverListener()
   }, [])
+
+  // Don't render anything until after hydration
+  if (!mounted) {
+    return <></>
+  }
 
   return <></>
 }

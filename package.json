@@ -2,8 +2,8 @@
   "name": "joao.codes",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "TINA_PUBLIC_IS_LOCAL=true tinacms dev -c \"next dev\"",
+    "build": "tinacms build && next build",
     "export": "next export",
     "start": "next start",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
@@ -17,13 +17,15 @@
     "next-themes": "^0.4.6",
     "payload": "^3.34.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "react-dom": "^19.1.0", 
     "react-tsparticles": "^1.27.0",
     "sharp": "^0.34.1",
+    "tinacms": "^2.7.5",
     "typescript": "^5.8.2"
   },
   "devDependencies": {
-    "@types/node": "^15.12.2",
+    "@tinacms/cli": "^1.9.5",
+    "@types/node": "^15.14.9",
     "@types/prismic-dom": "^2.1.1",
     "@types/react": "^17.0.11",
     "@typescript-eslint/eslint-plugin": "^8.28.0",
