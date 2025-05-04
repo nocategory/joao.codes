@@ -4,6 +4,7 @@ import { tinaField, useTina } from 'tinacms/dist/react'
 import ModeToggle from '../../../components/ModeToggle'
 import { PostQuery } from '../../../tina/__generated__/types'
 import Image from 'next/image'
+import Intro from '@components/Intro'
 
 interface ClientPageProps {
   query: string
@@ -14,7 +15,6 @@ interface ClientPageProps {
 }
 
 export default function Post(props: ClientPageProps) {
-  // data passes though in production mode and data is updated to the sidebar data in edit-mode
   const { data } = useTina({
     query: props.query,
     variables: props.variables,
@@ -92,18 +92,9 @@ export default function Post(props: ClientPageProps) {
 
   return (
     <div className="z-10 flex flex-col w-full">
+          <Intro />
       <div className="flex-1 dark:text-zinc-100 text-zinc-900 font-mono p-4 sm:p-6 md:p-8">
-        <ModeToggle />
         <div className="max-w-3xl mx-auto flex flex-col">
-          <header className="p-4 text-sm md:text-base text-center mt-8">
-            <a
-              href="/"
-              className="hover:underline transition-all duration-200"
-              style={{ textDecorationColor: '#398974' }}
-            >
-              ← Back to home
-            </a>
-          </header>
           <header className="flex flex-col gap-6 md:gap-8 mb-8 md:mb-16 md:pt-12">
             <div className="flex-1">
               <h1 className="lg:text-4xl md:text-3xl text-2xl font-bold mb-4">

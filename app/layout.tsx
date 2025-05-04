@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { ColorScript } from '@components/ColorScript'
 import ModeToggle from '@components/ModeToggle'
 import { ThemeProvider } from '@components/theme-provider'
-import WaterColor from '@components/WaterColor'
+import { Analytics } from '@vercel/analytics/react'
 import '../styles/globals.css'
 
 interface LayoutProps {
@@ -34,6 +34,7 @@ export default function RootLayout({ children }: LayoutProps): JSX.Element {
           </footer>
           <ColorScript />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )

@@ -31,12 +31,12 @@ const WaterColor = (): JSX.Element => {
             direction: 'none',
             rate: {
               delay: 0.5,
-              quantity: 7,
+              quantity: 3,
             },
           },
           particles: {
             number: {
-              value: 7,
+              value: 3,
             },
             color: {
               value: ['#2A4054', '#7A817F', '#436074', '#398974'],

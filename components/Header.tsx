@@ -1,5 +1,6 @@
 'use client'
 import WaterColor from '@components/WaterColor'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 
@@ -60,7 +61,7 @@ const Header: React.FC = () => {
       >
         {links.map(link => (
           <li key={link.name} className={`inline-block`}>
-            <a
+            <Link
               href={link.url}
               rel="noopener noreferrer"
               style={{
@@ -79,7 +80,7 @@ const Header: React.FC = () => {
               aria-label={`Link to ${link.name}`}
             >
               {link.name}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
