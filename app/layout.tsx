@@ -1,27 +1,40 @@
 import type { Metadata } from 'next'
 
+import { ColorScript } from '@components/ColorScript'
 import ModeToggle from '@components/ModeToggle'
 import { ThemeProvider } from '@components/theme-provider'
-import WaterColor from '@components/WaterColor'
+import { Analytics } from '@vercel/analytics/react'
 import '../styles/globals.css'
 
-export const metadata: Metadata = {
-  title: 'Joao Salgueiro | Software Engineer',
-  description: 'Software Engineer based in Lisbon, Portugal',
+interface LayoutProps {
+  children?: JSX.Element
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export const metadata: Metadata = {
+  title: 'João Salgueiro | Software Engineer',
+  description: 'Neurospicy Software Engineer based in Lisbon, Portugal',
+}
+
+export default function RootLayout({ children }: LayoutProps): JSX.Element {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <WaterColor />
+          <ModeToggle />
           {children}
+          <footer className="p-4 text-sm md:text-base text-center mt-8">
+            © 2025 João Salgueiro.{' '}
+            <a
+              href="https://github.com/nocategory/joao.codes"
+              className="hover:underline"
+            >
+              This site is open source
+            </a>{' '}
+            and was built with &lt;3
+          </footer>
+          <ColorScript />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )

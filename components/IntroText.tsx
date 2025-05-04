@@ -1,18 +1,27 @@
-import { RichText } from 'prismic-reactjs'
-import { Data } from './types'
-
-const IntroText = ({ prehey, hey, intro }: Data): JSX.Element => (
-  <div className="text-left w-full md:w-auto overflow-hidden mb-4 flex flex-col">
-    <h3 className="text-lg leading-loose mb-2 transition-colors duration-300 ease-in">
-      {RichText.asText(prehey)}
-    </h3>
-    <h1 className="text-7xl lg:text-8xl font-bold text-codes-gray-1 leading-[1em] mb-7 dark:text-white whitespace-pre-line transition-colors duration-300 ease-in">
-      {RichText.asText(hey)}
-    </h1>
-    <div className="leading-relaxed max-w-[60rem] text-2xl transition-colors duration-300 ease-in">
-      {<RichText render={intro} />}
-    </div>
-  </div>
-)
+const IntroText = () => {
+  return (
+    <section className="max-w-3xl mx-auto flex flex-col space-y-8 sm:mt- md:mt-10 md:space-y-12 flex-1 mt-5 dark:text-zinc-100 text-zinc-900 font-mono">
+      <p className="text-base md:text-lg leading-relaxed mb-4">
+        Hi there! I&apos;m João, a passionate coder who loves creating neat UI
+        experiences on the Web with a strong focus on reusability and best
+        practices
+      </p>
+      <p className="text-base md:text-lg leading-relaxed">
+        Beyond the screen, I also love the simplicity and joy of nature{' '}
+        <span role="img" aria-label="tree">
+          🌳
+        </span>
+        , the chilling cold from winters, the warmth from a good cup of tea{' '}
+        <span role="img" aria-label="tea">
+          🍵
+        </span>
+        , reading, yoga, and meditation{' '}
+        <span role="img" aria-label="meditation">
+          🧘
+        </span>
+      </p>
+    </section>
+  )
+}
 
 export default IntroText

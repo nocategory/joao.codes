@@ -45,3 +45,5 @@ yarn-error.log*
 .netlify/*
 netlify.toml
 .vercel
+
+node_modules
