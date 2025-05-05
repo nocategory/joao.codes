@@ -47,5 +47,10 @@ export const ColorScript = () => {
     return <></>
   }
 
+  // Don't render anything until after hydration
+  if (!mounted) {
+    return <></>
+  }
+
   return <></>
 }
