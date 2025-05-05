@@ -1,10 +1,9 @@
 'use client'
+import Intro from '@components/Intro'
+import Image from 'next/image'
 import React from 'react'
 import { tinaField, useTina } from 'tinacms/dist/react'
-import ModeToggle from '../../../components/ModeToggle'
 import { PostQuery } from '../../../tina/__generated__/types'
-import Image from 'next/image'
-import Intro from '@components/Intro'
 
 interface ClientPageProps {
   query: string
@@ -21,15 +20,30 @@ export default function Post(props: ClientPageProps) {
     data: props.data,
   })
 
-  const renderRichText = (node: any) => {
+  const renderRichText = (node: {
+    type: string
+    text?: string
+    children?: JSX.Element[]
+    url?: string
+    caption?: string
+  }) => {
     if (node.type === 'text') {
       return node.text
     }
     console.log('Node:', node)
 
-    const children = node.children?.map((child: any, i: number) => (
-      <React.Fragment key={i}>{renderRichText(child)}</React.Fragment>
-    ))
+    const children = node.children?.map(
+      (
+        child: {
+          type: string
+          text?: string
+          children?: JSX.Element[]
+          url?: string
+          caption?: string
+        },
+        i: number,
+      ) => <React.Fragment key={i}>{renderRichText(child)}</React.Fragment>,
+    )
 
     switch (node.type) {
       case 'h1':
@@ -76,7 +90,15 @@ export default function Post(props: ClientPageProps) {
           </pre>
         )
       case 'img':
-        return <Image width="500" height="500" src={node.url} alt={node.caption ?? ''} className="my-4" />
+        return (
+          <Image
+            width="500"
+            height="500"
+            src={String(node.url)}
+            alt={node.caption ?? ''}
+            className="my-4"
+          />
+        )
       case 'hr':
         return (
           <hr className="border-t-2 border-gray-300 dark:border-gray-600 my-4" />
@@ -92,7 +114,7 @@ export default function Post(props: ClientPageProps) {
 
   return (
     <div className="z-10 flex flex-col w-full">
-          <Intro />
+      <Intro />
       <div className="flex-1 dark:text-zinc-100 text-zinc-900 font-mono p-4 sm:p-6 md:p-8">
         <div className="max-w-3xl mx-auto flex flex-col">
           <header className="flex flex-col gap-6 md:gap-8 mb-8 md:mb-16 md:pt-12">

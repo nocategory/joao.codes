@@ -1,4 +1,3 @@
-
 import WaterColor from '@components/WaterColor'
 import Image from 'next/image'
 import Header from './Header'
