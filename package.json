@@ -12,6 +12,8 @@
     "@fontsource/inter": "^5.2.5",
     "@headlessui/react": "^2.2.0",
     "@tailwindcss/postcss": "^4.0.17",
+    "@tsparticles/react": "^3.0.0",
+    "@tsparticles/slim": "^3.8.1",
     "@vercel/analytics": "^1.5.0",
     "graphql": "^16.10.0",
     "next": "^15.2.4",
@@ -19,7 +21,6 @@
     "payload": "^3.34.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-tsparticles": "^1.27.0",
     "sharp": "^0.34.1",
     "tinacms": "^2.7.5",
     "typescript": "^5.8.2"

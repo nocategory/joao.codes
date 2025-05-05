@@ -1,9 +1,15 @@
 import Intro from '@components/Intro'
-import Link from 'next/link'
+import PostCard from '@components/PostCard'
 import { client } from '../../tina/__generated__/client'
 
-export default async function PostsPage() {
+const getPosts = async () => {
   const { data } = await client.queries.postConnection()
+  const posts = data?.postConnection?.edges?.map(edge => edge?.node)
+  return posts
+}
+
+export default async function PostsPage() {
+  const posts = await getPosts() || []
 
   return (
     <div className="z-10 flex flex-col w-full">
@@ -11,22 +17,19 @@ export default async function PostsPage() {
       <div className="flex-1 p-4 sm:p-6 md:p-8">
         <div className="max-w-3xl mx-auto flex flex-col">
           <main className="space-y-8 md:space-y-12 flex-1">
+            <header className="flex flex-col gap-6 md:gap-8 mb-8 md:mb-16 md:pt-12">
+              <div className="flex-1">
+                <h1 className="lg:text-4xl md:text-3xl text-2xl font-bold mb-4">
+                  Posts
+                </h1>
+              </div>
+            </header>
             <div className="grid gap-6">
-              {data?.postConnection?.edges?.map(post => (
-                <Link
-                  key={post?.node?.id}
-                  href={`/posts/${post?.node?._sys.filename}`}
-                  className="block p-6 rounded-lg backdrop-blur-sm dark:bg-black/20 bg-black/5
-                             transition-all duration-200 hover:scale-[1.02] hover:shadow-lg"
-                >
-                  <h2 className="text-xl md:text-2xl font-semibold mb-2">
-                    {post?.node?.title}
-                  </h2>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    {post?.node?._sys.filename}
-                  </p>
-                </Link>
-              ))}
+              {posts?.length > 0 ? (
+                posts?.map(post => <PostCard key={post?.id} post={post} />)
+              ) : (
+                <p>No posts available.</p>
+              )}
             </div>
           </main>
         </div>
