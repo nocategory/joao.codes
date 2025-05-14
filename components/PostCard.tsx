@@ -13,8 +13,7 @@ export const PostCard = ({ post }) => {
         {post?.description}
       </p>
       <h4 className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-        {new Date(post?._createdAt).toLocaleDateString('en-US', {
-          year: 'numeric',
+        {new Date(post?.createdAt).toLocaleDateString('en-US', {
           month: 'long',
           day: 'numeric',
         })}

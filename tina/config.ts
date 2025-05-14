@@ -51,10 +51,6 @@ export default defineConfig({
             type: 'datetime',
             name: 'createdAt',
             label: 'Created At',
-            required: true,
-            ui: {
-              dateFormat: 'YY-MM',
-            },
           },
           {
             type: 'rich-text',
