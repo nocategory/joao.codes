@@ -1,6 +1,11 @@
-import Layout from '../../../components/Layout'
 import client from '../../../tina/__generated__/client'
 import Post from './client-page'
+
+type Props = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  params: Promise<any>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
 
 export async function generateStaticParams() {
   const pages = await client.queries.postConnection()
@@ -14,16 +19,12 @@ export async function generateStaticParams() {
 
 export default async function PostPage({
   params,
-}: {
-  params: { filename: string[] }
-}) {
+}: Props): Promise<JSX.Element> {
   const { filename } = await params
   const relativePath = filename?.join('/') + '.md'
   const data = await client.queries.post({
     relativePath,
   })
 
-  return (
-      <Post {...data} />
-  )
+  return <Post {...data} />
 }

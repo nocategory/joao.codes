@@ -1,83 +1,79 @@
 'use client'
 
-import { useTheme } from 'next-themes'
+import Particles, { initParticlesEngine } from '@tsparticles/react'
+import { loadSlim } from '@tsparticles/slim'
 import { useEffect, useState } from 'react'
-import Particles from 'react-tsparticles'
 
 // greatly inspired by Amelia Wattenberger's page @ https://wattenberger.com/
 const WaterColor = (): JSX.Element => {
-  const { theme, resolvedTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
+  const [init, setInit] = useState(false)
 
+  // this should be run only once per application lifetime
   useEffect(() => {
-    setMounted(true)
+    initParticlesEngine(async engine => {
+      await loadSlim(engine)
+    }).then(() => {
+      setInit(true)
+    })
   }, [])
-
-  if (!mounted) {
-    return <></>
-  }
 
   return (
     <div className="relative w-full h-full">
-      <Particles
-        key={resolvedTheme || theme}
-        id="tsparticles"
-        canvasClassName="watercolor-canvas w-4 relative dark:filter dark:blur-[190px] brightness-[0.95] filter blur-[190px] block p-0 m-0 !pointer-events-none"
-        className="w-full h-full -z-10"
-        options={{
-          fullScreen: false,
-          fpsLimit: 60,
-          emitters: {
-            direction: 'none',
-            rate: {
-              delay: 0.5,
-              quantity: 3,
-            },
-          },
-          particles: {
-            number: {
-              value: 3,
-            },
-            color: {
-              value: ['#2A4054', '#7A817F', '#436074', '#398974'],
-            },
-            shape: {
-              type: 'edge',
-            },
-            opacity: {
-              value: 0.3,
-            },
-            size: {
-              value: 150,
-              anim: {
-                enable: true,
-                speed: 200,
-                count: 1,
-                size_min: 10,
-                sync: true,
-                startValue: 'random',
-                destroy: 'none',
-              },
-            },
-            move: {
-              enable: true,
-              speed: 0.7,
+      {init && (
+        <Particles
+          id="tsparticles"
+          className="w-full h-full -z-10 watercolor-canvas relative dark:filter dark:blur-[90px] brightness-[0.95] filter blur-[90px] block p-0 m-0 !pointer-events-none"
+          options={{
+            fullScreen: false,
+            fpsLimit: 60,
+            emitters: {
               direction: 'none',
-              random: true,
-              outModes: {
-                default: 'out',
+              rate: {
+                delay: 0.5,
+                quantity: 7,
               },
             },
-          },
-          interactivity: {
-            detectsOn: 'canvas',
-            events: {
-              resize: true,
+            particles: {
+              number: {
+                value: 7,
+              },
+              color: {
+                value: ['#2A4054', '#7A817F', '#436074', '#398974'],
+              },
+              shape: {
+                type: 'edge',
+              },
+              opacity: {
+                value: 0.3,
+              },
+              size: {
+                value: 150,
+                animation: {
+                  enable: true,
+                  speed: 200,
+                  count: 10,
+                  sync: true,
+                  startValue: 'random',
+                  destroy: 'none',
+                },
+              },
+              move: {
+                enable: true,
+                speed: 0.7,
+                direction: 'none',
+                random: true,
+                outModes: {
+                  default: 'out',
+                },
+              },
             },
-          },
-          detectRetina: true,
-        }}
-      />
+            interactivity: {
+              detectsOn: 'canvas',
+            },
+            detectRetina: true,
+          }}
+        />
+      )}
     </div>
   )
 }
