@@ -1,7 +1,6 @@
 import Link from 'next/link'
 
 export const PostCard = ({ post }) => {
-  console.log('this post', post)
   return (
     <Link
       key={post?.id}

@@ -11,7 +11,7 @@ const getPosts = async () => {
 }
 
 export default async function IndexPage() {
-  const posts = await getPosts() || []
+  const posts = (await getPosts()) || []
 
   return (
     <>

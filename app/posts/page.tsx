@@ -9,7 +9,7 @@ const getPosts = async () => {
 }
 
 export default async function PostsPage() {
-  const posts = await getPosts() || []
+  const posts = (await getPosts()) || []
 
   return (
     <div className="z-10 flex flex-col w-full">

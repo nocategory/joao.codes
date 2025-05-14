@@ -30,7 +30,6 @@ export default function Post(props: ClientPageProps) {
     if (node.type === 'text') {
       return node.text
     }
-    console.log('Node:', node)
 
     const children = node.children?.map(
       (
@@ -109,8 +108,6 @@ export default function Post(props: ClientPageProps) {
         return children
     }
   }
-
-  console.log('Post data:', data.post)
 
   return (
     <div className="z-10 flex flex-col w-full">
