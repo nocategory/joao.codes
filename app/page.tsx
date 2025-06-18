@@ -18,8 +18,8 @@ export default async function IndexPage() {
       <Intro />
       <div className="md:p-7 sm:p-10 pl-5 pr-5">
         <IntroText />
-        <div className="max-w-3xl m-auto">
-          <h2 className="text-2xl mt-10 mb-5">Recent posts</h2>
+        <div className="max-w-xl m-auto">
+          <h2 className="text-2xl text-[#a4a4a4] mt-10 mb-5">Some of my recent posts</h2>
           {posts?.length > 0 ? (
             posts?.map(post => <PostCard key={post?.id} post={post} />)
           ) : (

@@ -1,6 +1,13 @@
 @import 'tailwindcss';
 
 @config '../tailwind.config.js';
+@import './components/blog-post.css';
+@import './components/post-card.css';
+@import './components/header.css';
+@import './components/intro.css';
+@import './components/layout.css';
+@import './components/social.css';
+@import './components/water-color.css';
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
@@ -45,7 +52,7 @@
   }
 
   body {
-    @apply bg-white dark:bg-codes-gray-1 text-black dark:text-white;
+    @apply bg-codes-gray-1 text-white;
     @apply transition-colors duration-200;
   }
 
