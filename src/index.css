@@ -68,16 +68,21 @@ body {
   z-index: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.26;
+  opacity: 0.42;
+  filter: blur(34px) saturate(0.45);
+  mix-blend-mode: screen;
   pointer-events: none;
 }
 
 html[data-theme='light'] .watercolor-canvas {
-  opacity: 0.18;
+  opacity: 0.34;
+  filter: blur(32px) saturate(0.35) contrast(1.05);
+  mix-blend-mode: multiply;
 }
 
 html[data-theme='dark'] .watercolor-canvas {
-  opacity: 0.26;
+  opacity: 0.42;
+  mix-blend-mode: screen;
 }
 
 body,
@@ -362,27 +367,13 @@ h3 {
 }
 
 .avatar-mark {
-  position: absolute;
-  inset: 0;
+  position: relative;
   z-index: 1;
   width: 100%;
   height: 100%;
   display: block;
   border-radius: inherit;
   object-fit: cover;
-  opacity: 0;
-}
-
-.avatar-mark-dark {
-  opacity: 1;
-}
-
-html[data-theme='light'] .avatar-mark-dark {
-  opacity: 0;
-}
-
-html[data-theme='light'] .avatar-mark-light {
-  opacity: 1;
 }
 
 @keyframes avatar-switch-pulse {
@@ -395,6 +386,10 @@ html[data-theme='light'] .avatar-mark-light {
     opacity: 0;
     transform: scale(1.22);
   }
+}
+
+html[data-theme='light'] .avatar-mark {
+  filter: invert(1);
 }
 
 .section {

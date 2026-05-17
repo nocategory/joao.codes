@@ -132,16 +132,8 @@ function App() {
               aria-label="João Salgueiro monogram"
             >
               <img
-                className="avatar-mark avatar-mark-dark"
+                className="avatar-mark"
                 src="/avatar-mark.jpeg"
-                alt=""
-                aria-hidden="true"
-                width="320"
-                height="320"
-              />
-              <img
-                className="avatar-mark avatar-mark-light"
-                src="/avatar-mark-light.jpeg"
                 alt="Illustrated João Salgueiro avatar"
                 width="320"
                 height="320"
