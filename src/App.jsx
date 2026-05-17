@@ -78,7 +78,7 @@ function App() {
 
   return (
     <div className="page">
-      <WaterColor theme={theme} />
+      <WaterColor />
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="joao.codes home">
           joao.codes

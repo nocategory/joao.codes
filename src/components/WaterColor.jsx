@@ -1,8 +1,8 @@
 import Particles, { initParticlesEngine } from '@tsparticles/react'
 import { loadSlim } from '@tsparticles/slim'
-import { useEffect, useMemo, useState } from 'react'
+import { memo, useEffect, useMemo, useState } from 'react'
 
-const WaterColor = ({ theme }) => {
+const WaterColor = () => {
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
@@ -12,11 +12,6 @@ const WaterColor = ({ theme }) => {
   }, [])
 
   const options = useMemo(() => {
-    const colors =
-      theme === 'dark'
-        ? ['#202424', '#2c3232', '#3a4141']
-        : ['#d8d8cf', '#c8cbc0', '#b7beb2']
-
     return {
       fullScreen: false,
       fpsLimit: 60,
@@ -32,13 +27,13 @@ const WaterColor = ({ theme }) => {
           value: 5,
         },
         color: {
-          value: colors,
+          value: ['#68706b', '#848a82', '#a4a99f'],
         },
         shape: {
           type: 'circle',
         },
         opacity: {
-          value: theme === 'dark' ? 0.55 : 0.86,
+          value: 0.54,
         },
         size: {
           value: { min: 180, max: 420 },
@@ -66,7 +61,7 @@ const WaterColor = ({ theme }) => {
       },
       detectRetina: true,
     }
-  }, [theme])
+  }, [])
 
   if (!ready) {
     return null
@@ -81,4 +76,4 @@ const WaterColor = ({ theme }) => {
   )
 }
 
-export default WaterColor
+export default memo(WaterColor)

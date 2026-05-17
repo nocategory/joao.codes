@@ -68,18 +68,21 @@ body {
   z-index: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.82;
-  filter: blur(34px) saturate(0.75);
+  opacity: 0.42;
+  filter: blur(34px) saturate(0.45);
+  mix-blend-mode: screen;
   pointer-events: none;
 }
 
 html[data-theme='light'] .watercolor-canvas {
-  opacity: 0.86;
-  filter: blur(32px) saturate(0.75) contrast(1.03);
+  opacity: 0.34;
+  filter: blur(32px) saturate(0.35) contrast(1.05);
+  mix-blend-mode: multiply;
 }
 
 html[data-theme='dark'] .watercolor-canvas {
-  opacity: 0.84;
+  opacity: 0.42;
+  mix-blend-mode: screen;
 }
 
 body,
