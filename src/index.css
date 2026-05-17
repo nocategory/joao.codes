@@ -332,6 +332,7 @@ h3 {
 
 .portrait {
   position: relative;
+  isolation: isolate;
   aspect-ratio: 1;
   overflow: visible;
   border: 1px solid var(--line-strong);
@@ -345,21 +346,16 @@ h3 {
   content: '';
   position: absolute;
   inset: -8px;
-  z-index: 1;
+  z-index: 0;
   border: 1px solid var(--line-strong);
   border-radius: inherit;
   opacity: 0;
-  mix-blend-mode: multiply;
   pointer-events: none;
 }
 
-html[data-theme='dark'] .portrait::before,
-html[data-theme='dark'] .portrait::after {
-  mix-blend-mode: screen;
-}
-
 .portrait::before {
-  animation: avatar-pulse 3.2s var(--ease) infinite;
+  opacity: 0.32;
+  transform: scale(1.035);
 }
 
 .portrait::after {
@@ -372,32 +368,17 @@ html[data-theme='dark'] .portrait::after {
 
 .avatar-mark {
   position: relative;
-  z-index: 0;
+  z-index: 1;
   width: 100%;
   height: 100%;
   display: block;
   border-radius: inherit;
   object-fit: cover;
-  transition: filter var(--theme-speed) var(--ease);
-}
-
-@keyframes avatar-pulse {
-  0%,
-  72%,
-  100% {
-    opacity: 0;
-    transform: scale(1);
-  }
-
-  18% {
-    opacity: 0.62;
-    transform: scale(1.065);
-  }
 }
 
 @keyframes avatar-switch-pulse {
   0% {
-    opacity: 0.84;
+    opacity: 0.52;
     transform: scale(0.98);
   }
 
