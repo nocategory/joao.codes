@@ -14,17 +14,10 @@ const WaterColor = () => {
   const options = useMemo(() => {
     return {
       fullScreen: false,
-      fpsLimit: 60,
-      emitters: {
-        direction: 'none',
-        rate: {
-          delay: 1.4,
-          quantity: 2,
-        },
-      },
+      fpsLimit: 45,
       particles: {
         number: {
-          value: 5,
+          value: 8,
         },
         color: {
           value: ['#68706b', '#848a82', '#a4a99f'],
@@ -33,26 +26,18 @@ const WaterColor = () => {
           type: 'circle',
         },
         opacity: {
-          value: 0.54,
+          value: { min: 0.26, max: 0.46 },
         },
         size: {
-          value: { min: 180, max: 420 },
-          animation: {
-            enable: true,
-            speed: 55,
-            count: 1,
-            sync: true,
-            startValue: 'random',
-            destroy: 'max',
-          },
+          value: { min: 170, max: 360 },
         },
         move: {
           enable: true,
-          speed: 0.18,
+          speed: 0.12,
           direction: 'none',
           random: true,
           outModes: {
-            default: 'out',
+            default: 'bounce',
           },
         },
       },
