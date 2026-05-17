@@ -354,16 +354,18 @@ h3 {
 }
 
 .portrait::before {
-  opacity: 0.32;
-  transform: scale(1.035);
+  opacity: 0.24;
+  transform: scale(1.025);
+  animation: avatar-idle-pulse 3.8s var(--ease) infinite;
 }
 
 .portrait::after {
   inset: -18px;
+  border-color: var(--ink);
 }
 
 .portrait.is-switching::after {
-  animation: avatar-switch-pulse 900ms var(--ease);
+  animation: avatar-switch-pulse 820ms var(--ease);
 }
 
 .avatar-mark {
@@ -378,13 +380,30 @@ h3 {
 
 @keyframes avatar-switch-pulse {
   0% {
-    opacity: 0.52;
-    transform: scale(0.98);
+    opacity: 0.48;
+    transform: scale(0.94);
+  }
+
+  38% {
+    opacity: 0.28;
   }
 
   100% {
     opacity: 0;
-    transform: scale(1.22);
+    transform: scale(1.18);
+  }
+}
+
+@keyframes avatar-idle-pulse {
+  0%,
+  100% {
+    opacity: 0.16;
+    transform: scale(1.015);
+  }
+
+  50% {
+    opacity: 0.34;
+    transform: scale(1.05);
   }
 }
 
