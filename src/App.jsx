@@ -21,18 +21,6 @@ const sources = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/jfilsalgueiro/' },
 ]
 
-const variants = ['1', '2', '3', '4', '5']
-
-const getVariant = () => {
-  if (typeof window === 'undefined') {
-    return '1'
-  }
-
-  const path = window.location.pathname.replaceAll('/', '')
-
-  return variants.includes(path) ? path : '1'
-}
-
 const getSystemTheme = () =>
   window.matchMedia &&
   window.matchMedia('(prefers-color-scheme: light)').matches
@@ -56,15 +44,10 @@ const getInitialTheme = () => {
 function App() {
   const [theme, setTheme] = useState(getInitialTheme)
   const [isThemeAnimating, setIsThemeAnimating] = useState(false)
-  const variant = getVariant()
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
   }, [theme])
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-variant', variant)
-  }, [variant])
 
   useEffect(() => {
     const sections = document.querySelectorAll('.section.reveal')
@@ -123,7 +106,7 @@ function App() {
 
   return (
     <div className="page">
-      <WaterColor density={variant === '5' ? 4 : 8} theme={theme} />
+      <WaterColor density={4} theme={theme} />
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="joao.codes home">
           joao<span className="accent-dot">.</span>codes
@@ -285,15 +268,6 @@ function App() {
           </div>
         </section>
       </main>
-
-      <nav className="variant-switcher" aria-label="Design variants">
-        <span>style</span>
-        {variants.map(v => (
-          <a key={v} href={`/${v}`} className={v === variant ? 'is-active' : ''}>
-            {v}
-          </a>
-        ))}
-      </nav>
 
       <footer className="site-footer">
         <div className="footer-primary">
