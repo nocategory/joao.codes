@@ -21,6 +21,18 @@ const sources = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/jfilsalgueiro/' },
 ]
 
+const variants = ['1', '2', '3', '4', '5']
+
+const getVariant = () => {
+  if (typeof window === 'undefined') {
+    return '1'
+  }
+
+  const path = window.location.pathname.replaceAll('/', '')
+
+  return variants.includes(path) ? path : '1'
+}
+
 const getSystemTheme = () =>
   window.matchMedia &&
   window.matchMedia('(prefers-color-scheme: light)').matches
@@ -44,10 +56,43 @@ const getInitialTheme = () => {
 function App() {
   const [theme, setTheme] = useState(getInitialTheme)
   const [isThemeAnimating, setIsThemeAnimating] = useState(false)
+  const variant = getVariant()
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
   }, [theme])
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-variant', variant)
+  }, [variant])
+
+  useEffect(() => {
+    const sections = document.querySelectorAll('.section.reveal')
+
+    if (
+      !('IntersectionObserver' in window) ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      sections.forEach(section => section.classList.add('is-visible'))
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.12 },
+    )
+
+    sections.forEach(section => observer.observe(section))
+
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     if (localStorage.getItem('theme')) {
@@ -78,10 +123,10 @@ function App() {
 
   return (
     <div className="page">
-      <WaterColor />
+      <WaterColor density={variant === '5' ? 4 : 8} theme={theme} />
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="joao.codes home">
-          joao.codes
+          joao<span className="accent-dot">.</span>codes
         </a>
         <nav className="nav" aria-label="Primary navigation">
           <a href="#work">work</a>
@@ -92,8 +137,38 @@ function App() {
           type="button"
           onClick={handleThemeToggle}
           aria-pressed={theme === 'dark'}
+          aria-label={toggleLabel}
+          title={toggleLabel}
         >
-          {toggleLabel}
+          {theme === 'dark' ? (
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+            </svg>
+          ) : (
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+            </svg>
+          )}
         </button>
       </header>
 
@@ -101,7 +176,10 @@ function App() {
         <section className="hero">
           <div className="hero-copy">
             <p className="eyebrow">Full-stack developer | JavaScript ♥</p>
-            <h1>I build clean, reusable web experiences.</h1>
+            <h1>
+              I build clean, reusable web experiences
+              <span className="accent-dot">.</span>
+            </h1>
             <p className="lead">
               I am João, a <strong>remote-first</strong> full-stack developer
               with a heart for the JavaScript ecosystem and the flexibility to
@@ -156,7 +234,7 @@ function App() {
           </aside>
         </section>
 
-        <section id="work" className="section split">
+        <section id="work" className="section split reveal">
           <div>
             <p className="section-kicker">About</p>
             <h2>Neat UI. Reusable systems. Practical engineering.</h2>
@@ -179,7 +257,7 @@ function App() {
           </div>
         </section>
 
-        <section id="contact" className="section contact">
+        <section id="contact" className="section contact reveal">
           <p className="section-kicker">Find me online</p>
           <h2>Lisbon-based, remote lover.</h2>
           <p className="contact-meta">
@@ -208,10 +286,18 @@ function App() {
         </section>
       </main>
 
+      <nav className="variant-switcher" aria-label="Design variants">
+        <span>style</span>
+        {variants.map(v => (
+          <a key={v} href={`/${v}`} className={v === variant ? 'is-active' : ''}>
+            {v}
+          </a>
+        ))}
+      </nav>
+
       <footer className="site-footer">
         <div className="footer-primary">
           <span>© 2026 João Salgueiro</span>
-          <a href="mailto:hi@joao.codes">hi@joao.codes</a>
         </div>
         <div className="footer-sources">
           <span>References:</span>

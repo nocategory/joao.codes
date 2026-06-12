@@ -2,13 +2,25 @@ import Particles, { initParticlesEngine } from '@tsparticles/react'
 import { loadSlim } from '@tsparticles/slim'
 import { memo, useEffect, useMemo, useState } from 'react'
 
-const WaterColor = () => {
+const WaterColor = ({ density = 8, theme = 'dark' }) => {
   const [ready, setReady] = useState(false)
+  const [reducedMotion, setReducedMotion] = useState(
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  )
 
   useEffect(() => {
     initParticlesEngine(async engine => {
       await loadSlim(engine)
     }).then(() => setReady(true))
+  }, [])
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const handleChange = () => setReducedMotion(mediaQuery.matches)
+
+    mediaQuery.addEventListener('change', handleChange)
+
+    return () => mediaQuery.removeEventListener('change', handleChange)
   }, [])
 
   const options = useMemo(() => {
@@ -17,10 +29,13 @@ const WaterColor = () => {
       fpsLimit: 45,
       particles: {
         number: {
-          value: 8,
+          value: density,
         },
         color: {
-          value: ['#68706b', '#848a82', '#a4a99f'],
+          value:
+            theme === 'light'
+              ? ['#74603f', '#8c7448', '#57503c']
+              : ['#68706b', '#848a82', '#a4a99f'],
         },
         shape: {
           type: 'circle',
@@ -32,7 +47,7 @@ const WaterColor = () => {
           value: { min: 170, max: 360 },
         },
         move: {
-          enable: true,
+          enable: !reducedMotion,
           speed: 0.12,
           direction: 'none',
           random: true,
@@ -46,7 +61,7 @@ const WaterColor = () => {
       },
       detectRetina: true,
     }
-  }, [])
+  }, [density, theme, reducedMotion])
 
   if (!ready) {
     return null
