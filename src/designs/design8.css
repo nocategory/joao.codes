@@ -1,0 +1,793 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+/* Design 8 — Design 7's launch-site diorama under Design 6's editorial type. */
+
+/* Overscroll (rubber-band past the page edges) must reveal the scene color,
+   not the browser's default white. */
+html:has(.d8-page) {
+  background: #0d0e12;
+}
+
+html[data-theme='light']:has(.d8-page) {
+  background: #f2efe7;
+}
+
+.d8-page {
+  --d8-bg: #0d0e12;
+  --d8-ink: #ecedf0;
+  --d8-muted: #a3a7b0;
+  --d8-line: rgba(236, 237, 240, 0.18);
+  --d8-scrim: rgba(13, 14, 18, 0.8);
+  /* Veil = the reading plate under type. Light theme needs a stronger one. */
+  --d8-veil: rgba(13, 14, 18, 0.86);
+  --d8-veil-solid: rgba(13, 14, 18, 0.93);
+  --d8-accent: #e0895c;
+  /* Corner reserved for the external design-switcher pill. */
+  --d8-safe-bottom: 96px;
+  --d8-header-h: 74px;
+
+  position: relative;
+  isolation: isolate;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--d8-bg);
+  color: var(--d8-ink);
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  line-height: 1.5;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.d8-page.d8-theme-light {
+  --d8-bg: #f2efe7;
+  --d8-ink: #1d201f;
+  --d8-muted: #5f625e;
+  --d8-line: rgba(29, 32, 31, 0.2);
+  --d8-scrim: rgba(242, 239, 231, 0.84);
+  --d8-veil: rgba(242, 239, 231, 0.95);
+  --d8-veil-solid: rgba(242, 239, 231, 0.96);
+  --d8-accent: #9c4b2b;
+}
+
+.d8-page *,
+.d8-page *::before,
+.d8-page *::after {
+  box-sizing: border-box;
+}
+
+.d8-page a {
+  color: inherit;
+}
+
+.d8-page :focus-visible {
+  outline: 2px solid var(--d8-accent);
+  outline-offset: 3px;
+}
+
+/* --- scene ----------------------------------------------------------- */
+
+.d8-canvas {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  pointer-events: none;
+}
+
+.d8-page.is-ready .d8-canvas {
+  opacity: 1;
+}
+
+/* --- chrome ---------------------------------------------------------- */
+
+/* Near-opaque plate: type scrolling under it fades out instead of ghosting
+   through a half-transparent blur. */
+.d8-header {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 22px clamp(20px, 4vw, 64px);
+  border-bottom: 1px solid var(--d8-line);
+  background: var(--d8-veil-solid);
+  backdrop-filter: blur(14px);
+}
+
+/* Soft hand-off from the plate to the open scene below it. */
+.d8-header::after {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  height: 44px;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--d8-veil) 85%, transparent) 0%,
+    transparent 100%
+  );
+  content: '';
+  pointer-events: none;
+}
+
+.d8-wordmark {
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+
+.d8-wordmark::before {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: var(--d8-accent);
+  content: '';
+  vertical-align: 0.08em;
+}
+
+.d8-nav {
+  display: flex;
+  gap: clamp(20px, 4vw, 52px);
+}
+
+.d8-nav-link {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.d8-nav-index,
+.d8-social-index,
+.d8-social-tone {
+  color: var(--d8-muted);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+}
+
+/* --- chapters -------------------------------------------------------- */
+
+.d8-main {
+  position: relative;
+  z-index: 1;
+}
+
+.d8-chapter {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: min(100%, 1440px);
+  min-height: 116vh;
+  margin: 0 auto;
+  padding: clamp(122px, 15vh, 176px) clamp(20px, 4vw, 64px)
+    calc(clamp(76px, 11vh, 130px) + var(--d8-safe-bottom));
+  scroll-margin-top: calc(var(--d8-header-h) + 28px);
+}
+
+/* Anchored headings never land under the fixed header. */
+.d8-hero h1,
+.d8-about h2,
+.d8-contact h2 {
+  scroll-margin-top: calc(var(--d8-header-h) + 32px);
+}
+
+.d8-chapter::before {
+  position: absolute;
+  z-index: -1;
+  content: '';
+  pointer-events: none;
+}
+
+.d8-kicker,
+.d8-rule-label,
+.d8-footer {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.d8-kicker {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 0 0 24px;
+  color: var(--d8-accent);
+}
+
+.d8-kicker::before {
+  width: 34px;
+  height: 1px;
+  background: currentColor;
+  content: '';
+}
+
+.d8-hero {
+  grid-template-columns: minmax(0, 1.45fr) minmax(210px, 0.55fr);
+  grid-template-rows: 1fr auto;
+  gap: 40px clamp(42px, 7vw, 116px);
+  align-items: center;
+  min-height: 125vh;
+}
+
+.d8-hero-copy {
+  grid-area: 1 / 1 / 3 / 2;
+}
+
+.d8-portrait {
+  grid-area: 1 / 2 / 2 / 3;
+}
+
+.d8-hero::before {
+  content: none;
+}
+
+.d8-hero-copy {
+  position: relative;
+  align-self: end;
+  max-width: 900px;
+  padding: clamp(30px, 5vw, 72px) 0;
+}
+
+/* Directional plate under the text column only — the island stays readable
+   to its right. Masked so the blur has no visible edge. */
+.d8-hero-copy::before {
+  position: absolute;
+  z-index: -1;
+  top: -14%;
+  right: -8%;
+  bottom: -14%;
+  left: -50vw;
+  background: linear-gradient(
+    92deg,
+    var(--d8-veil) 0%,
+    var(--d8-veil) 66%,
+    color-mix(in srgb, var(--d8-veil) 55%, transparent) 84%,
+    transparent 100%
+  );
+  backdrop-filter: blur(4px);
+  -webkit-mask-image: linear-gradient(
+      92deg,
+      #000 0%,
+      #000 66%,
+      rgba(0, 0, 0, 0.5) 84%,
+      transparent 100%
+    ),
+    linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(
+      92deg,
+      #000 0%,
+      #000 66%,
+      rgba(0, 0, 0, 0.5) 84%,
+      transparent 100%
+    ),
+    linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
+  mask-composite: intersect;
+  content: '';
+  pointer-events: none;
+}
+
+.d8-hero h1,
+.d8-about h2,
+.d8-contact h2 {
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: -0.065em;
+  line-height: 0.94;
+  text-wrap: balance;
+}
+
+.d8-hero h1 {
+  max-width: 13ch;
+  font-size: clamp(3.4rem, 8.1vw, 8rem);
+}
+
+.d8-lead {
+  max-width: 62ch;
+  margin: clamp(30px, 4vw, 52px) 0 0;
+  color: var(--d8-muted);
+  font-size: clamp(1.02rem, 1.35vw, 1.25rem);
+  line-height: 1.65;
+}
+
+.d8-lead strong,
+.d8-contact-meta strong {
+  color: var(--d8-accent);
+  font-weight: 700;
+}
+
+.d8-portrait {
+  align-self: end;
+  justify-self: end;
+  width: min(100%, 250px);
+  margin: 0;
+  padding: 12px;
+  border: 1px solid var(--d8-line);
+  background: color-mix(in srgb, var(--d8-scrim) 78%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.d8-avatar-frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
+  background: var(--d8-line);
+}
+
+.d8-avatar-frame::after {
+  position: absolute;
+  inset: 0;
+  border: 1px solid color-mix(in srgb, var(--d8-accent) 55%, transparent);
+  content: '';
+  pointer-events: none;
+}
+
+.d8-avatar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(0.94);
+}
+
+.d8-portrait-caption {
+  display: grid;
+  gap: 4px;
+  padding: 12px 2px 0;
+  color: var(--d8-muted);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+}
+
+/* Quiet second voice: a mono annotation hung off the lead paragraph. */
+.d8-hero-aside {
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
+  max-width: 62ch;
+  margin-top: clamp(24px, 3vw, 36px);
+  padding-top: 18px;
+  border-top: 1px solid var(--d8-line);
+}
+
+.d8-hero-aside p {
+  margin: 0;
+  color: var(--d8-muted);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.76rem;
+  letter-spacing: 0.01em;
+  line-height: 1.75;
+}
+
+.d8-rule-label {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--d8-accent);
+}
+
+.d8-emoji {
+  display: inline-block;
+  opacity: 0.72;
+  filter: grayscale(0.4);
+  font-size: 0.86em;
+  vertical-align: 0.04em;
+}
+
+.d8-about {
+  grid-template-columns: minmax(0, 0.85fr) minmax(260px, 0.42fr);
+  gap: 9vw;
+  align-items: center;
+  min-height: 130vh;
+}
+
+.d8-about::before {
+  content: none;
+}
+
+.d8-about-copy {
+  position: relative;
+  max-width: 710px;
+  padding: clamp(32px, 5vw, 70px);
+  border-left: 1px solid var(--d8-line);
+}
+
+/* Soft plate under the about text — fades out on every edge. */
+.d8-about-copy::before {
+  position: absolute;
+  z-index: -1;
+  top: -8%;
+  right: -14%;
+  bottom: -8%;
+  left: -30vw;
+  background: linear-gradient(
+    92deg,
+    var(--d8-veil) 0%,
+    var(--d8-veil) 60%,
+    color-mix(in srgb, var(--d8-veil) 55%, transparent) 82%,
+    transparent 100%
+  );
+  backdrop-filter: blur(4px);
+  -webkit-mask-image: linear-gradient(
+      92deg,
+      #000 0%,
+      #000 60%,
+      rgba(0, 0, 0, 0.5) 82%,
+      transparent 100%
+    ),
+    linear-gradient(180deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(
+      92deg,
+      #000 0%,
+      #000 60%,
+      rgba(0, 0, 0, 0.5) 82%,
+      transparent 100%
+    ),
+    linear-gradient(180deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  mask-composite: intersect;
+  content: '';
+  pointer-events: none;
+}
+
+.d8-about h2,
+.d8-contact h2 {
+  font-size: clamp(2.8rem, 6vw, 6rem);
+}
+
+.d8-prose {
+  max-width: 58ch;
+  margin-top: clamp(36px, 5vw, 62px);
+  color: var(--d8-muted);
+  font-size: clamp(1rem, 1.25vw, 1.18rem);
+  line-height: 1.75;
+}
+
+.d8-prose p {
+  margin: 0;
+}
+
+.d8-prose p + p {
+  margin-top: 1.3em;
+}
+
+.d8-stack {
+  margin-top: 48px;
+}
+
+.d8-stack ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.d8-stack li {
+  padding: 9px 18px;
+  border: 1px solid var(--d8-line);
+  border-radius: 999px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--d8-ink);
+}
+
+.d8-contact {
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.38fr);
+  grid-template-rows: 1fr auto;
+  gap: 64px 9vw;
+  align-items: center;
+  min-height: 122vh;
+}
+
+.d8-contact::before {
+  content: none;
+}
+
+.d8-contact-copy {
+  position: relative;
+  max-width: 810px;
+  padding: clamp(36px, 5vw, 70px) 0;
+}
+
+/* Soft plate under the contact text — fades out on every edge. */
+.d8-contact-copy::before {
+  position: absolute;
+  z-index: -1;
+  top: -10%;
+  right: -12%;
+  bottom: -10%;
+  left: -30vw;
+  background: linear-gradient(
+    92deg,
+    var(--d8-veil) 0%,
+    var(--d8-veil) 60%,
+    color-mix(in srgb, var(--d8-veil) 55%, transparent) 82%,
+    transparent 100%
+  );
+  backdrop-filter: blur(4px);
+  -webkit-mask-image: linear-gradient(
+      92deg,
+      #000 0%,
+      #000 60%,
+      rgba(0, 0, 0, 0.5) 82%,
+      transparent 100%
+    ),
+    linear-gradient(180deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(
+      92deg,
+      #000 0%,
+      #000 60%,
+      rgba(0, 0, 0, 0.5) 82%,
+      transparent 100%
+    ),
+    linear-gradient(180deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  mask-composite: intersect;
+  content: '';
+  pointer-events: none;
+}
+
+.d8-contact-meta {
+  max-width: 58ch;
+  margin: clamp(34px, 5vw, 58px) 0 0;
+  color: var(--d8-muted);
+  font-size: clamp(1rem, 1.35vw, 1.22rem);
+  line-height: 1.7;
+}
+
+.d8-email {
+  display: inline-block;
+  margin-top: clamp(38px, 5vw, 64px);
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--d8-accent);
+  font-size: clamp(1.55rem, 4vw, 3.75rem);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 1.1;
+  text-decoration: none;
+}
+
+.d8-socials {
+  position: relative;
+  align-self: center;
+  padding: 20px clamp(18px, 2.5vw, 32px);
+}
+
+/* Soft full-bleed band behind the list — fades in and out vertically like
+   the section veils, no side edges to catch the eye while scrolling. */
+.d8-socials::before {
+  position: absolute;
+  z-index: -1;
+  top: -56px;
+  bottom: -56px;
+  left: -100vw;
+  right: -100vw;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--d8-scrim) 78%, transparent) 26%,
+    color-mix(in srgb, var(--d8-scrim) 78%, transparent) 74%,
+    transparent 100%
+  );
+  content: '';
+  pointer-events: none;
+}
+
+.d8-social-link {
+  display: grid;
+  grid-template-columns: 30px 1fr auto;
+  gap: 12px;
+  align-items: baseline;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--d8-line);
+  text-decoration: none;
+}
+
+.d8-social-link:hover,
+.d8-social-link:focus-visible,
+.d8-nav-link:hover,
+.d8-nav-link:focus-visible,
+.d8-wordmark:hover,
+.d8-wordmark:focus-visible,
+.d8-email:hover,
+.d8-email:focus-visible,
+.d8-references a:hover,
+.d8-references a:focus-visible {
+  color: var(--d8-accent);
+}
+
+.d8-footer {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 26px;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-top: 28px;
+  border-top: 1px solid var(--d8-line);
+  color: var(--d8-muted);
+  line-height: 1.7;
+}
+
+.d8-footer p {
+  margin: 0;
+}
+
+.d8-references {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  justify-content: flex-end;
+}
+
+.d8-references a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  .d8-hero,
+  .d8-about,
+  .d8-contact {
+    grid-template-columns: 1fr;
+  }
+
+  .d8-hero {
+    grid-template-rows: auto auto auto;
+    gap: 34px;
+  }
+
+  .d8-hero-copy,
+  .d8-portrait {
+    grid-area: auto;
+  }
+
+  .d8-hero-copy {
+    align-self: center;
+    padding-top: 8vh;
+  }
+
+  .d8-hero-copy::before {
+    right: -6vw;
+    left: -6vw;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      var(--d8-veil) 8%,
+      var(--d8-veil) 92%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 8%,
+      #000 92%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 8%,
+      #000 92%,
+      transparent 100%
+    );
+  }
+
+  /* In flow, compact, and never near the bottom-right corner. */
+  .d8-portrait {
+    display: grid;
+    grid-template-columns: 108px minmax(0, 1fr);
+    gap: 14px;
+    align-self: start;
+    justify-self: start;
+    width: min(100%, 360px);
+  }
+
+  .d8-portrait-caption {
+    align-content: center;
+    padding: 0;
+  }
+
+  .d8-about-copy {
+    padding-right: clamp(20px, 5vw, 54px);
+  }
+
+  .d8-stack,
+  .d8-socials {
+    width: min(100%, 430px);
+  }
+
+  .d8-stack {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .d8-page {
+    --d8-safe-bottom: 96px;
+    --d8-header-h: 64px;
+  }
+
+  .d8-header {
+    padding: 18px 20px;
+  }
+
+  .d8-nav {
+    gap: 16px;
+  }
+
+  .d8-nav-index {
+    display: none;
+  }
+
+  .d8-chapter {
+    min-height: 112vh;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .d8-hero h1 {
+    font-size: clamp(3rem, 15vw, 4.8rem);
+  }
+
+  .d8-hero::before,
+  .d8-about::before,
+  .d8-contact::before {
+    width: 100%;
+  }
+
+  .d8-about-copy {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .d8-hero-aside {
+    display: block;
+  }
+
+  .d8-about h2,
+  .d8-contact h2 {
+    font-size: clamp(2.65rem, 13vw, 4rem);
+  }
+
+  .d8-portrait {
+    grid-template-columns: 92px minmax(0, 1fr);
+    width: 100%;
+  }
+
+  .d8-email {
+    font-size: clamp(1.45rem, 8.2vw, 2.25rem);
+  }
+
+  .d8-footer {
+    display: block;
+  }
+
+  .d8-references {
+    justify-content: flex-start;
+    margin-top: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .d8-canvas {
+    transition: none;
+  }
+}

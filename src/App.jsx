@@ -1,25 +1,24 @@
-import { useEffect, useMemo, useState } from 'react'
-import WaterColor from './components/WaterColor'
+import { lazy, Suspense, useEffect, useState } from 'react'
 
-const links = [
-  { label: 'GitHub', href: 'https://github.com/nocategory', tone: 'github' },
-  {
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/jfilsalgueiro/',
-    tone: 'linkedin',
-  },
-  {
-    label: 'Bluesky',
-    href: 'https://bsky.app/profile/joao.codes',
-    tone: 'bluesky',
-  },
-]
+const designModules = import.meta.glob('./designs/Design*.jsx')
+const designNames = {
+  1: 'Constellation',
+  2: 'Terminal',
+  3: 'Flowfield',
+  4: 'Polyhedra',
+  5: 'Chapters A',
+  6: 'Chapters B',
+  7: 'Diorama',
+  8: 'Hybrid',
+}
 
-const sources = [
-  { label: 'Current site', href: 'https://www.joao.codes/' },
-  { label: 'Open source site', href: 'https://github.com/nocategory/joao.codes' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/jfilsalgueiro/' },
-]
+const designs = Object.fromEntries(
+  Object.entries(designModules).map(([path, loader]) => {
+    const id = path.match(/Design(\d+)/)[1]
+
+    return [id, { name: designNames[id] ?? `Design ${id}`, Component: lazy(loader) }]
+  }),
+)
 
 const getSystemTheme = () =>
   window.matchMedia &&
@@ -41,41 +40,20 @@ const getInitialTheme = () => {
   return getSystemTheme()
 }
 
+const getDesignId = () => {
+  const requested = new URLSearchParams(window.location.search).get('design')
+
+  return designs[requested] ? requested : Object.keys(designs)[0]
+}
+
 function App() {
   const [theme, setTheme] = useState(getInitialTheme)
-  const [isThemeAnimating, setIsThemeAnimating] = useState(false)
+  const designId = getDesignId()
+  const { Component } = designs[designId]
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
   }, [theme])
-
-  useEffect(() => {
-    const sections = document.querySelectorAll('.section.reveal')
-
-    if (
-      !('IntersectionObserver' in window) ||
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    ) {
-      sections.forEach(section => section.classList.add('is-visible'))
-      return
-    }
-
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible')
-            observer.unobserve(entry.target)
-          }
-        })
-      },
-      { threshold: 0.12 },
-    )
-
-    sections.forEach(section => observer.observe(section))
-
-    return () => observer.disconnect()
-  }, [])
 
   useEffect(() => {
     if (localStorage.getItem('theme')) {
@@ -90,199 +68,39 @@ function App() {
     return () => mediaQuery.removeEventListener('change', handleSystemChange)
   }, [])
 
-  const toggleLabel = useMemo(
-    () => (theme === 'dark' ? 'Switch to light' : 'Switch to dark'),
-    [theme],
-  )
-
   const handleThemeToggle = () => {
     const nextTheme = theme === 'dark' ? 'light' : 'dark'
 
-    setIsThemeAnimating(true)
     setTheme(nextTheme)
     localStorage.setItem('theme', nextTheme)
-    window.setTimeout(() => setIsThemeAnimating(false), 900)
   }
 
   return (
-    <div className="page">
-      <WaterColor density={4} theme={theme} />
-      <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="joao.codes home">
-          joao<span className="accent-dot">.</span>codes
-        </a>
-        <nav className="nav" aria-label="Primary navigation">
-          <a href="#work">work</a>
-          <a href="#contact">contact</a>
-        </nav>
+    <>
+      <Suspense fallback={null}>
+        <Component theme={theme} />
+      </Suspense>
+      <aside className="design-switcher" aria-label="Design variant switcher">
+        {Object.entries(designs).map(([id, design]) => (
+          <a
+            key={id}
+            href={`?design=${id}`}
+            className={id === designId ? 'is-active' : ''}
+            title={design.name}
+          >
+            {id}
+          </a>
+        ))}
         <button
-          className="theme-toggle"
           type="button"
           onClick={handleThemeToggle}
           aria-pressed={theme === 'dark'}
-          aria-label={toggleLabel}
-          title={toggleLabel}
+          aria-label={theme === 'dark' ? 'Switch to light' : 'Switch to dark'}
         >
-          {theme === 'dark' ? (
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              aria-hidden="true"
-            >
-              <circle cx="12" cy="12" r="4" />
-              <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
-            </svg>
-          ) : (
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
-            </svg>
-          )}
+          {theme === 'dark' ? '☀' : '☾'}
         </button>
-      </header>
-
-      <main id="top">
-        <section className="hero">
-          <div className="hero-copy">
-            <p className="eyebrow">Full-stack developer | JavaScript ♥</p>
-            <h1>
-              I build clean, reusable web experiences
-              <span className="accent-dot">.</span>
-            </h1>
-            <p className="lead">
-              I am João, a <strong>remote-first</strong> full-stack developer
-              with a heart for the JavaScript ecosystem and the flexibility to
-              move across stacks when the product needs it. I love the{' '}
-              <strong>focus</strong> and <strong>trust</strong> of remote work.
-              <br />
-              <span className="lead-aside">
-                Away from the screen, I like nature{' '}
-              <span role="img" aria-label="tree">
-                🌳
-              </span>
-              , winter cold, tea{' '}
-              <span role="img" aria-label="tea">
-                🍵
-              </span>
-              , reading, yoga, and meditation{' '}
-              <span role="img" aria-label="meditation">
-                🧘
-              </span>
-              .
-              </span>
-            </p>
-          </div>
-
-          <aside className="hero-side" aria-label="Profile links">
-            <div
-              className={`portrait ${isThemeAnimating ? 'is-switching' : ''}`}
-              aria-label="João Salgueiro monogram"
-            >
-              <img
-                className="avatar-mark"
-                src="/avatar-mark.jpeg"
-                alt="Illustrated João Salgueiro avatar"
-                width="320"
-                height="320"
-              />
-            </div>
-            <div className="link-row" aria-label="Social links">
-              {links.map(link => (
-                <a
-                  key={link.label}
-                  className={`social-link ${link.tone}`}
-                  href={link.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`Open ${link.label}`}
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          </aside>
-        </section>
-
-        <section id="work" className="section split reveal">
-          <div>
-            <p className="section-kicker">About</p>
-            <h2>Neat UI. Reusable systems. Practical engineering.</h2>
-          </div>
-          <div className="statement">
-            <p>
-              I care about interfaces that feel neat, reusable, and easy to
-              keep improving. That shows up in professional projects,
-              open-source contributions, and the advice I give to teams.
-            </p>
-            <p>
-              Most of my work sits in the JavaScript web world, especially
-              React, TypeScript, Node.js, and Next.js, but I am happy crossing
-              boundaries{' '}
-              <span role="img" aria-label="wink">
-                😉
-              </span>
-              .
-            </p>
-          </div>
-        </section>
-
-        <section id="contact" className="section contact reveal">
-          <p className="section-kicker">Find me online</p>
-          <h2>Lisbon-based, remote lover.</h2>
-          <p className="contact-meta">
-            I like working with teams that communicate clearly, leave room for
-            focus, and care about the <strong>purpose</strong> behind what
-            they are building. Portuguese and English are both native languages
-            for me.
-          </p>
-          <div className="contact-links">
-            <a className="email-link" href="mailto:hi@joao.codes">
-              hi@joao.codes
-            </a>
-            {links.map(link => (
-              <a
-                key={link.label}
-                className={`social-link ${link.tone}`}
-                href={link.href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`Open ${link.label}`}
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-        </section>
-      </main>
-
-      <footer className="site-footer">
-        <div className="footer-primary">
-          <span>© 2026 João Salgueiro</span>
-        </div>
-        <div className="footer-sources">
-          <span>References:</span>
-          {sources.map(source => (
-            <a key={source.label} href={source.href} target="_blank" rel="noreferrer">
-              {source.label}
-            </a>
-          ))}
-        </div>
-      </footer>
-    </div>
+      </aside>
+    </>
   )
 }
 
