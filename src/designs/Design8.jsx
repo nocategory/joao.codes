@@ -128,7 +128,9 @@ export default function Design8({ theme }) {
   const themeRef = useRef(theme)
   const [ready, setReady] = useState(false)
 
-  themeRef.current = theme
+  useEffect(() => {
+    themeRef.current = theme
+  }, [theme])
 
   useEffect(() => {
     document.title = site.title
@@ -406,7 +408,6 @@ export default function Design8({ theme }) {
     let easedY = 0
     let radiusScale = 1
     let panScale = 1
-    let currentChapter = 0
 
     const applyRadiusScale = () => {
       const aspect = window.innerWidth / Math.max(window.innerHeight, 1)
@@ -426,12 +427,6 @@ export default function Design8({ theme }) {
         progress = targetProgress
       }
 
-      const next = targetProgress < 0.34 ? 0 : targetProgress < 0.72 ? 1 : 2
-
-      if (next !== currentChapter) {
-        currentChapter = next
-        setChapter(next)
-      }
     }
 
     const handlePointer = (event) => {

@@ -1,4 +1,4 @@
-/* Base reset + switcher chrome. Each design owns everything else in its own CSS. */
+/* Base reset. The design owns everything else in its own CSS. */
 
 *,
 *::before,
@@ -26,45 +26,4 @@ img {
   html {
     scroll-behavior: auto;
   }
-}
-
-/* Temporary variant-comparison widget — removed once a design wins. */
-.design-switcher {
-  position: fixed;
-  right: 14px;
-  bottom: 14px;
-  z-index: 999;
-  display: flex;
-  gap: 6px;
-  padding: 6px;
-  border-radius: 999px;
-  background: rgba(20, 20, 22, 0.72);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  font: 600 13px/1 system-ui, sans-serif;
-}
-
-.design-switcher a,
-.design-switcher button {
-  display: grid;
-  place-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 1px solid transparent;
-  background: transparent;
-  color: rgba(255, 255, 255, 0.75);
-  text-decoration: none;
-  cursor: pointer;
-  font: inherit;
-}
-
-.design-switcher a:hover,
-.design-switcher button:hover {
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.design-switcher a.is-active {
-  background: rgba(255, 255, 255, 0.92);
-  color: #141416;
 }

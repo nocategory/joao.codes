@@ -10,24 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>João Salgueiro | Software Engineer</title>
     <script>
-      ;(() => {
-        let stored
-
-        try {
-          stored = localStorage.getItem('theme')
-        } catch {
-          stored = null
-        }
-
-        const prefersLight =
-          window.matchMedia &&
-          window.matchMedia('(prefers-color-scheme: light)').matches
-        const systemTheme = prefersLight ? 'light' : 'dark'
-        const theme =
-          stored === 'light' || stored === 'dark' ? stored : systemTheme
-
-        document.documentElement.dataset.theme = theme
-      })()
+      document.documentElement.dataset.theme = 'dark'
     </script>
   </head>
   <body>
