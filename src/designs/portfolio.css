@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650&family=Instrument+Serif:ital@0;1&display=swap');
+
+html:has(.horizon-page) { background: #060809; }
+.horizon-page { --paper: #eeeae2; --muted: #a6aaa8; --accent: #adc5dd; --line: #ffffff24; color: var(--paper); background: #060809; font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; overflow: clip; }
+.horizon-page a { color: inherit; text-decoration: none; }
+.horizon-page button { font: inherit; }
+.horizon-page :focus-visible { outline: 2px solid var(--accent); outline-offset: 7px; }
+.horizon-skip { position: fixed; top: -100px; left: 20px; padding: 15px; background: #eeeae2; color: #060809 !important; z-index: 100; }
+.horizon-skip:focus { top: 12px; }
+.horizon-header { position: absolute; z-index: 5; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 32px 4.5%; }
+.horizon-wordmark { font-size: 20px; font-weight: 550; letter-spacing: -1px; }
+.horizon-header nav { display: flex; align-items: center; gap: 35px; font-size: 13px; }
+.horizon-header nav a:last-child { display: flex; gap: 8px; align-items: center; }
+.horizon-header nav a { transition: color .2s; }
+.horizon-header nav a:hover { color: var(--accent); }
+.horizon-hero { min-height: 780px; height: 100svh; max-height: none; position: relative; display: flex; justify-content: center; text-align: center; isolation: isolate; background: radial-gradient(ellipse at 50% 35%, #0d1419, #060809 70%); }
+.horizon-landscape { position: absolute; inset: 0; height: 100%; width: 100%; z-index: -3; }
+.horizon-hero-shade { position: absolute; inset: 0; z-index: -2; background: linear-gradient(0deg,#060809 0%,transparent 24%,transparent 70%,#080d1020); }
+.horizon-hero-copy { width: 100%; padding: 62vh 30px 100px; }
+.horizon-eyebrow { font-size: 10px; text-transform: uppercase; font-weight: 500; letter-spacing: .19em; }
+.horizon-hero .horizon-eyebrow { position: absolute; top: 120px; left: 0; right: 0; color: #cfcdc7; display: flex; justify-content: center; align-items: center; gap: 16px; }
+.horizon-hero .horizon-eyebrow span { display: inline-block; width: 3px; height: 3px; background: var(--accent); border-radius: 50%; }
+.horizon-hero h1 { margin: 15px 0 13px; font-size: clamp(65px, 7.4vw, 115px); font-weight: 450; letter-spacing: -.075em; line-height: 1.12; }
+.horizon-tagline { font-size: clamp(16px, 1.35vw, 21px); font-weight: 400; color: #dedbd4; letter-spacing: -.03em; margin: 0; }
+.horizon-explore { display: inline-flex; align-items: center; gap: 32px; margin-top: 24px; padding: 13px 21px; border: 1px solid #ffffff45; border-radius: 30px; font-size: 12px; background: #12191d26; backdrop-filter: blur(8px); transition: background .25s, border-color .25s; }
+.horizon-explore:hover { background: #ffffff16; border-color: #ffffffa6; }
+.horizon-explore span { font-size: 19px; line-height: 1; }
+.horizon-hero-bottom { position: absolute; bottom: 35px; left: 4.5%; right: 4.5%; display: flex; justify-content: space-between; align-items: center; color: #c1c5c2; font-size: 11px; }
+.horizon-hero-bottom p { display: flex; align-items: center; gap: 9px; }
+.location-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+.motion-toggle { color: inherit; background: none; border: 0; display: flex; align-items: center; gap: 10px; padding: 10px 0 10px 15px; cursor: pointer; }
+.motion-toggle span { font-size: 13px; }
+.hero-enter { animation: hero-enter 1.6s both cubic-bezier(.16,1,.3,1); }
+.horizon-hero h1 { animation-delay: .15s; }
+.horizon-tagline { animation-delay: .3s; }
+.horizon-explore { animation-delay: .45s; }
+@keyframes hero-enter { from { opacity: 0; transform: translateY(24px); filter: blur(5px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+.horizon-section { max-width: 1100px; margin: auto; padding: 115px 6%; scroll-margin-top: 35px; }
+.about-copy .horizon-eyebrow, .horizon-contact .horizon-eyebrow { color: var(--accent); margin: 0 0 23px; }
+.horizon-section h2 { font-weight: 400; font-size: clamp(40px, 4.4vw, 65px); line-height: 1.08; letter-spacing: -.055em; margin: 0; white-space: pre-line; }
+.horizon-about { border-top: 1px solid var(--line); padding-top: 140px; padding-bottom: 140px; }
+.about-layout { display: grid; grid-template-columns: .85fr 1fr; gap: 13%; align-items: center; }
+.about-portrait { padding-right: 15px; }
+.about-portrait figure { margin: 0; }
+.about-portrait img { width: 100%; height: auto; aspect-ratio: 4/5; object-fit: cover; object-position: 43% center; filter: saturate(.55); border-radius: 2px; }
+.about-portrait figcaption { font-size: 10px; color: #8b9695; margin-top: 15px; }
+.portrait-note { display: block; font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: #b5c2cf; font-size: 28px; line-height: 1.2; margin-top: 29px; transform: rotate(-4deg); text-align: right; }
+.about-copy h2 { margin-bottom: 35px; }
+.about-copy > p:not(.horizon-eyebrow) { color: var(--muted); font-size: 15px; line-height: 1.9; margin: 0 0 18px; }
+.horizon-stack { display: flex; flex-wrap: wrap; gap: 12px 24px; list-style: none; padding: 26px 0 0; margin: 32px 0 0; border-top: 1px solid var(--line); color: #c5c7c0; font-size: 11px; }
+.horizon-contact { position: relative; text-align: center; padding-top: 125px; padding-bottom: 145px; isolation: isolate; border-top: 1px solid var(--line); }
+.horizon-contact h2 { font-size: clamp(65px, 8vw, 112px); }
+.contact-intro { color: var(--muted); font-size: 14px; max-width: 340px; margin: 25px auto 35px; line-height: 1.8; }
+.contact-email { font-size: 23px; display: inline-flex; align-items: center; gap: 22px; padding-bottom: 10px; border-bottom: 1px solid #adc5dd80; letter-spacing: -.025em; transition: color .2s; }
+.contact-email:hover { color: var(--accent); }
+.contact-halo { position: absolute; width: min(700px,100%); height: 350px; bottom: 0; left: 50%; transform: translateX(-50%); z-index: -1; opacity: .3; background: radial-gradient(ellipse at 50% 100%,#425d78,transparent 68%); }
+.horizon-footer { border-top: 1px solid var(--line); padding: 44px 7% 65px; display: grid; grid-template-columns: 1fr auto; gap: 32px; max-width: 1440px; margin: auto; }
+.horizon-footer p { color: #8f9897; font-size: 11px; margin: 11px 0 0; }
+.horizon-footer nav { display: flex; gap: 28px; align-items: flex-start; padding-top: 6px; }
+.horizon-footer nav a { display: flex; gap: 9px; align-items: center; font-size: 11px; }
+.horizon-footer nav svg { width: 12px; height: 12px; }
+.horizon-footer nav a:hover { color: var(--accent); }
+.copyright { grid-column: 1/-1; }
+.will-reveal { opacity: 0; transform: translateY(25px); transition: opacity 1s ease, transform 1s cubic-bezier(.2,.7,.3,1); }
+.will-reveal.is-visible { opacity: 1; transform: translateY(0); }
+@media (min-width: 1500px) { .horizon-hero-copy { padding-top: 62vh; } }
+@media (max-width: 900px) {
+  .horizon-hero { min-height: 740px; }
+  .horizon-hero-copy { padding-top: 61vh; }
+  .horizon-hero h1 { font-size: 9vw; }
+  .horizon-section { padding: 90px 6%; }
+  .about-layout { gap: 8%; }
+  .about-copy > p:not(.horizon-eyebrow) { font-size: 14px; }
+}
+@media (max-width: 600px) {
+  .horizon-header { padding: 24px; }
+  .horizon-wordmark { font-size: 18px; }
+  .horizon-header nav { gap: 20px; font-size: 11px; }
+  .horizon-header nav a:last-child { gap: 4px; }
+  .horizon-header nav svg { width: 14px; }
+  .horizon-hero { height: 100svh; min-height: 700px; max-height: 980px; }
+  .horizon-hero-copy { padding: 57svh 20px 120px; }
+  .horizon-hero .horizon-eyebrow { top: 103px; font-size: 8px; letter-spacing: .12em; gap: 9px; }
+  .horizon-hero h1 { max-width: 380px; margin: 22px auto 17px; font-size: clamp(56px,15vw,85px); line-height: .98; letter-spacing: -.07em; }
+  .horizon-tagline { font-size: 15px; }
+  .horizon-explore { margin-top: 28px; font-size: 11px; padding: 12px 17px; }
+  .horizon-hero-bottom { left: 24px; right: 24px; bottom: 35px; font-size: 9px; align-items: flex-end; }
+  .horizon-hero-bottom p { max-width: 150px; line-height: 1.6; text-align: left; gap: 8px; }
+  .location-dot { flex-shrink: 0; }
+  .horizon-section { padding: 78px 24px; }
+  .horizon-section h2 { font-size: 42px; }
+  .horizon-eyebrow { font-size: 9px; }
+  .about-layout { grid-template-columns: 1fr; gap: 45px; }
+  .about-portrait { padding: 0 35px 0 10px; }
+  .about-portrait img { max-height: 420px; }
+  .portrait-note { font-size: 25px; margin-top: 20px; }
+  .about-copy h2 { font-size: 47px; }
+  .horizon-contact { padding: 85px 24px 100px; }
+  .horizon-contact h2 { font-size: 66px; }
+  .horizon-contact .horizon-eyebrow { letter-spacing: .1em; font-size: 8px; }
+  .contact-email { font-size: 23px; }
+  .horizon-footer { padding: 35px 24px 65px; grid-template-columns: 1fr; gap: 22px; }
+  .horizon-footer nav { gap: 25px; }
+}
+.horizon-experience { border-top: 1px solid var(--line); }
+.experience-intro { max-width: 610px; margin: 0 auto; }
+.experience-intro .horizon-eyebrow, .experience-detail .horizon-eyebrow { color: var(--accent); margin: 0 0 23px; }
+.experience-intro > p:last-child { color: var(--muted); font-size: 15px; line-height: 1.8; margin: 25px 0 0; }
+.experience-layout { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; align-items: start; margin-top: 60px; }
+.experience-chart { min-width: 0; position: sticky; top: 32px; }
+.experience-axis { position: relative; margin-left: 155px; height: 30px; color: #9aa39f; font-size: 10px; }
+.experience-axis > span { position: absolute; }
+.experience-rows { border-bottom: 1px solid var(--line); }
+.experience-row { position: relative; display: grid; grid-template-columns: 155px 1fr; width: 100%; padding: 19px 0; border: 0; border-top: 1px solid var(--line); background: transparent; color: #949e9c; cursor: pointer; text-align: left; transition: color .2s; }
+.experience-row:hover, .experience-row.is-selected { color: var(--paper); }
+.experience-label { display: grid; gap: 7px; padding-right: 18px; font-size: 13px; }
+.experience-period { font-size: 9px; color: #929b99; line-height: 1.5; }
+.experience-track { display: block; position: relative; min-height: 36px; }
+.experience-gridline { position: absolute; width: 1px; height: calc(100% + 38px); top: -19px; background: #ffffff06; }
+.experience-bar { position: absolute; height: 3px; min-width: 4px; top: 50%; transform: translateY(-50%); background: #65797d; border-radius: 5px; transition: background .3s, box-shadow .3s; }
+.experience-bar.is-approximate { height: 2px; background: repeating-linear-gradient(to right,#65797d 0 6px,transparent 6px 10px); }
+.experience-row.is-selected .experience-bar { background: var(--accent); box-shadow: 0 0 14px #adc5dd40; }
+.experience-row.is-selected .experience-bar.is-approximate { background: repeating-linear-gradient(to right,var(--accent) 0 6px,transparent 6px 10px); }
+.experience-now { position: absolute; right: -2px; top: calc(50% - 3px); width: 6px; height: 6px; border-radius: 50%; background: #65797d; }
+.experience-row.is-selected .experience-now { background: #deebf7; box-shadow: 0 0 12px #adc5dd70; }
+.experience-detail { min-width: 0; }
+.experience-desktop-detail { padding: 30px 0 0 30px; border-left: 1px solid var(--line); min-height: 550px; }
+.experience-detail-content { animation: experience-fade .3s ease both; }
+@keyframes experience-fade { from { opacity: 0; } to { opacity: 1; } }
+.experience-detail .horizon-eyebrow { font-size: 9px; margin-bottom: 13px; }
+.experience-detail h3 { font-size: 32px; font-weight: 400; letter-spacing: -.04em; margin: 0 0 8px; }
+.experience-role { color: #c1c5bd; font-size: 12px; margin: 0; }
+.experience-summary { color: var(--muted); font-size: 15px; line-height: 1.8; margin: 25px 0; }
+.experience-tools { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0; }
+.experience-tools li { padding: 7px 12px; border: 1px solid var(--line); border-radius: 25px; font-size: 11px; color: #c5c8c0; }
+.experience-work { margin-top: 30px; border-top: 1px solid var(--line); padding-top: 22px; }
+.experience-work h4 { font-size: 11px; font-weight: 500; margin: 0 0 15px; color: var(--paper); }
+.experience-work ul { list-style: none; padding: 0; margin: 0; }
+.experience-work li { font-size: 12px; color: var(--muted); line-height: 1.8; margin: 9px 0; }
+@media (max-width: 900px) {
+  .experience-intro > p:last-child, .experience-summary { font-size: 14px; }
+  .experience-layout { display: block; margin-top: 38px; }
+  .experience-chart { position: static; }
+  .experience-axis { margin-left: 0; }
+  .experience-row { grid-template-columns: 1fr; gap: 9px; padding: 15px 0 9px; }
+  .experience-label { display: flex; align-items: baseline; justify-content: space-between; padding: 0 25px 0 0; font-size: 12px; }
+  .experience-period { max-width: 140px; font-size: 9px; text-align: right; line-height: 1.5; }
+  .experience-track { min-height: 20px; }
+  .experience-gridline { top: 0; height: 100%; }
+  .experience-expand { position: absolute; top: 11px; right: 0; color: var(--accent); font-size: 19px; }
+  .experience-inline-detail { padding: 18px 0 30px; }
+  .experience-inline-detail h3 { display: none; }
+  .experience-inline-detail .experience-detail-heading .horizon-eyebrow { display: none; }
+  .experience-summary { margin: 18px 0; }
+}
+@media (max-width: 600px) {
+  .horizon-header nav { gap: 15px; }
+}
+@media (max-width: 380px) {
+  .horizon-header { padding-left: 20px; padding-right: 20px; }
+  .horizon-header nav { gap: 12px; font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .horizon-page *, .horizon-page *::before, .horizon-page *::after { animation: none !important; transition: none !important; }
+  .will-reveal { opacity: 1; transform: none; }
+  .motion-toggle { display: none; }
+}
