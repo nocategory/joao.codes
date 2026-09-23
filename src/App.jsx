@@ -1,12 +1,7 @@
-import { useEffect } from 'react'
-import Portfolio from './designs/Portfolio.jsx'
+import PlainText from './designs/plaintext/PlainText.jsx'
 
 function App() {
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', 'dark')
-  }, [])
-
-  return <Portfolio />
+  return <PlainText />
 }
 
 export default App

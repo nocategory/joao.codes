@@ -1,0 +1,333 @@
+/* Plain text: joao.codes as a single monospaced document.
+   Every width is a whole number of characters, every vertical space a whole number of lines. */
+
+@font-face {
+  font-family: 'Sometype Mono';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/sometype-mono/sometype-mono-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Sometype Mono';
+  font-style: italic;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/sometype-mono/sometype-mono-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+html:has(.plaintext-page) {
+  background: #fcfcfc;
+  color-scheme: light;
+}
+
+.plaintext-page {
+  --plaintext-paper: #fcfcfc;
+  --plaintext-ink: #000;
+  --plaintext-graphite: #5c5c5c;
+  --plaintext-size: 17px;
+  --plaintext-line: 28px;
+  min-height: 100svh;
+  background: var(--plaintext-paper);
+  color: var(--plaintext-ink);
+  font-family: 'Sometype Mono', ui-monospace, Menlo, Consolas, monospace;
+  font-size: var(--plaintext-size);
+  font-weight: 400;
+  line-height: var(--plaintext-line);
+  font-variant-ligatures: none;
+  font-feature-settings: 'liga' 0, 'calt' 0;
+  font-synthesis: none;
+  overflow-wrap: break-word;
+}
+
+/* Dark: the colours of the site's earlier design. */
+html:has(.plaintext-page.is-night) {
+  background: #060809;
+  color-scheme: dark;
+}
+
+.plaintext-page.is-night {
+  --plaintext-paper: #060809;
+  --plaintext-ink: #eeeae2;
+  --plaintext-graphite: #a6aaa8;
+}
+
+.plaintext-body {
+  padding: var(--plaintext-line) 2ch calc(var(--plaintext-line) * 3);
+}
+
+.plaintext-page ::selection {
+  background: var(--plaintext-ink);
+  color: var(--plaintext-paper);
+}
+
+.plaintext-doc {
+  width: min(100%, 72ch);
+  margin-inline: auto;
+}
+
+.plaintext-body :where(h1, h2, h3, p, ul, figure, pre) {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+.plaintext-body :where(ul) {
+  list-style: none;
+}
+
+.plaintext-body :where(p + p, p + ul, ul + p) {
+  margin-top: var(--plaintext-line);
+}
+
+.plaintext-body :where(p, li) {
+  text-wrap: pretty;
+}
+
+/* Links, the buttons and focus share one signal: reverse video. */
+.plaintext-body a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.24em;
+}
+
+.plaintext-body a:hover,
+.plaintext-spin:hover {
+  background: var(--plaintext-ink);
+  color: var(--plaintext-paper);
+  text-decoration: none;
+}
+
+.plaintext-body :focus-visible,
+.plaintext-skip:focus-visible {
+  outline: 2px solid var(--plaintext-ink);
+  outline-offset: 0;
+  background: var(--plaintext-ink);
+  color: var(--plaintext-paper);
+  text-decoration: none;
+}
+
+.plaintext-body main:focus {
+  outline: none;
+  background: none;
+  color: inherit;
+}
+
+.plaintext-skip {
+  position: absolute;
+  top: var(--plaintext-line);
+  left: 2ch;
+  z-index: 2;
+  transform: translateY(-300%);
+}
+
+.plaintext-skip:focus-visible {
+  transform: none;
+}
+
+.plaintext-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* The galaxy. Same font, same columns as the text; rows are half a line. */
+.plaintext-sky {
+  position: relative;
+}
+
+.plaintext-probe {
+  position: absolute;
+  visibility: hidden;
+  white-space: pre;
+  pointer-events: none;
+}
+
+.plaintext-art {
+  display: block;
+  height: calc(var(--plaintext-line) * 10);
+  overflow: hidden;
+  line-height: calc(var(--plaintext-line) / 2);
+  white-space: pre;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: crosshair;
+}
+
+.plaintext-theme {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: var(--plaintext-line);
+  color: var(--plaintext-graphite);
+}
+
+.plaintext-spin {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--plaintext-ink);
+  font: inherit;
+  cursor: pointer;
+}
+
+/* The document. */
+.plaintext-heading {
+  font-weight: 600;
+}
+
+.plaintext-heading > span {
+  display: block;
+}
+
+.plaintext-underline {
+  font-weight: 400;
+}
+
+.plaintext-intro {
+  margin-top: calc(var(--plaintext-line) * 2);
+}
+
+.plaintext-intro .plaintext-heading,
+.plaintext-contents .plaintext-heading,
+.plaintext-section .plaintext-heading {
+  margin-bottom: var(--plaintext-line);
+}
+
+.plaintext-contents {
+  margin-top: calc(var(--plaintext-line) * 2);
+}
+
+.plaintext-contents li {
+  padding-left: 12ch;
+  text-indent: -12ch;
+}
+
+.plaintext-section {
+  margin-top: calc(var(--plaintext-line) * 3);
+  scroll-margin-top: var(--plaintext-line);
+}
+
+.plaintext-role {
+  display: grid;
+  grid-template-columns: 21ch minmax(0, 1fr);
+  margin-top: calc(var(--plaintext-line) * 2);
+}
+
+.plaintext-role > * {
+  grid-column: 2;
+}
+
+.plaintext-role h3 {
+  font-weight: 600;
+}
+
+.plaintext-role .plaintext-role-dates {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  margin: 0;
+}
+
+.plaintext-role-dates > span {
+  display: block;
+}
+
+.plaintext-role .plaintext-role-title {
+  margin: 0;
+}
+
+.plaintext-role .plaintext-role-summary {
+  margin-top: var(--plaintext-line);
+}
+
+.plaintext-role .plaintext-role-label {
+  margin-top: var(--plaintext-line);
+}
+
+.plaintext-role .plaintext-role-work {
+  margin: 0;
+}
+
+.plaintext-role-work li {
+  padding-left: 2ch;
+  text-indent: -2ch;
+}
+
+.plaintext-role-work li::before {
+  content: '- ';
+  white-space: pre;
+}
+
+.plaintext-role .plaintext-role-tools {
+  margin: 0;
+  color: var(--plaintext-graphite);
+}
+
+/* An indented two-column block, like the options list in a manual page. */
+.plaintext-contact {
+  margin: var(--plaintext-line) 0 0;
+  padding-left: 4ch;
+}
+
+.plaintext-contact > div {
+  display: grid;
+  grid-template-columns: 11ch minmax(0, 1fr);
+}
+
+.plaintext-contact dd {
+  margin: 0;
+}
+
+.plaintext-footer {
+  margin-top: calc(var(--plaintext-line) * 4);
+  color: var(--plaintext-graphite);
+}
+
+.plaintext-footer p {
+  margin-top: 0;
+}
+
+@media (min-width: 1600px) {
+  .plaintext-page {
+    --plaintext-size: 18px;
+    --plaintext-line: 30px;
+  }
+}
+
+@media (max-width: 700px) {
+  .plaintext-role {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .plaintext-role > *,
+  .plaintext-role .plaintext-role-dates {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .plaintext-role .plaintext-role-dates {
+    order: -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .plaintext-contact {
+    padding-left: 0;
+  }
+
+  .plaintext-contact > div {
+    grid-template-columns: 10ch minmax(0, 1fr);
+  }
+
+  .plaintext-page {
+    --plaintext-size: 15px;
+    --plaintext-line: 24px;
+  }
+}
