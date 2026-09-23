@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.joao.codes/sitemap.xml
