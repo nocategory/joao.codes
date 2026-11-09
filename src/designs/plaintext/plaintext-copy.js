@@ -20,7 +20,7 @@ export const plaintextCopy = {
   about: [
     'I work remotely, and it’s how I want to keep working. I like the focus and the trust that come with it. Clear communication, thoughtful decisions and space to do good work matter to me.',
     'JavaScript is familiar ground: React, TypeScript and Node.js. My current role has taken me into Elixir and Phoenix, which I learned on the job. I like figuring things out, whatever the stack happens to be.',
-    'Most days I work alongside AI coding agents like Claude Code and Codex. They help me explore unfamiliar code and try ideas quickly, and I review what they write before it ships.',
+    'I like using AI coding agents such as Claude Code and Codex on systems that already have good guardrails: tests, types, CI and code review. With those in place, the agents can move fast and mistakes get caught.',
     'Away from the screen, you’ll find me with a book or a cup of tea. Preferably somewhere quiet, close to nature, and a little cold.',
     'Portuguese and English are both native languages for me.',
   ],
