@@ -125,7 +125,7 @@ export const horizon = {
     {
       id: 'polywork', company: 'Polywork', start: '2021-03', end: '2024-12',
       period: 'Mar 2021 – Dec 2024', role: 'Advisor',
-      summary: 'Contributed product feedback, bug reports, and ideas for a professional network built around the different kinds of work people do.',
+      summary: 'As an advisor to Polywork, a professional network built around the different kinds of work people do, I gave product feedback, reported bugs and suggested ideas.',
       tools: ['Product feedback', 'Bug reporting', 'Code reviews'], work: [],
     },
     {
@@ -144,9 +144,9 @@ export const horizon = {
   ],
 }
 
-// Sites from the Marzee years, each with a 1440×900 screenshot scaled to 800×500 in public/work.
-// A site redesigned since has an archive entry: the screenshot and the link show that Wayback Machine copy.
-// Without one, the screenshot was taken from the live site.
+// Public sites I worked on, each with a 1440×900 screenshot scaled to 800×500 in public/work.
+// A site redesigned or shut down since has an archive entry: the screenshot and the link show that Wayback Machine copy.
+// Without one, the screenshot was taken from the live site. A site with no live address is gone.
 export const selectedWork = [
   {
     id: 'ilo',
@@ -174,5 +174,11 @@ export const selectedWork = [
     what: 'satellite data company',
     live: 'https://www.constellr.com/',
     archive: { year: 2024, href: 'https://web.archive.org/web/20241213045146/https://www.constellr.com/' },
+  },
+  {
+    id: 'polywork',
+    name: 'Polywork',
+    what: 'professional network I advised',
+    archive: { year: 2023, href: 'https://web.archive.org/web/20230601034044/https://www.polywork.com/' },
   },
 ]

@@ -21,8 +21,9 @@ function Project({ item, hidden }) {
       <p className="plaintext-shot-name"><span>{name}</span> <span className="plaintext-shot-when">[{when}]</span></p>
       <p className="plaintext-shot-what">{what}</p>
       <p className="plaintext-shot-links">
-        <a href={live}>{copy.visitLive}<span className="plaintext-sr">: {name}</span></a>
-        {archive && <> · <a href={archive.href}>{copy.archived}<span className="plaintext-sr">: {name}</span></a></>}
+        {live && <a href={live}>{copy.visitLive}<span className="plaintext-sr">: {name}</span></a>}
+        {live && archive && ' · '}
+        {archive && <a href={archive.href}>{copy.archived}<span className="plaintext-sr">: {name}</span></a>}
       </p>
     </li>
   )
