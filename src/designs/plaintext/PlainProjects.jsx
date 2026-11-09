@@ -2,15 +2,11 @@ import { useLayoutEffect, useRef, useState } from 'react'
 import { selectedWork } from '../../content.js'
 import { plaintextCopy as copy } from './plaintext-copy.js'
 
-const PEEK = 0.4 // share of the second row left showing, under the fade, while collapsed
+const PEEK = 0.5 // share of the first row's screenshots left showing, under the fade, while collapsed
 
-// The first row, plus the top of the second. Null when everything fits in one row.
 function measure(list) {
-  const cards = [...list.children]
-  const firstHidden = cards.findIndex(card => card.offsetTop > cards[0].offsetTop)
-  if (firstHidden === -1) return null
-  const next = cards[firstHidden]
-  return { collapsed: Math.round(next.offsetTop + next.offsetHeight * PEEK), full: list.offsetHeight, firstHidden }
+  const shot = list.querySelector('img')
+  return { collapsed: Math.round(shot.offsetTop + shot.offsetHeight * PEEK), full: list.offsetHeight }
 }
 
 // The screenshot links to the version it shows: the archived copy when there is one.
@@ -46,7 +42,6 @@ export default function PlainProjects() {
     return () => observer.disconnect()
   }, [])
 
-  const collapsible = size !== null
   const toggle = () => {
     const section = clip.current.closest('section')
     if (open && section.getBoundingClientRect().top < 0) section.scrollIntoView({ block: 'start' })
@@ -58,22 +53,21 @@ export default function PlainProjects() {
       <div
         ref={clip}
         id="plaintext-shots"
-        className={`plaintext-shots-clip${collapsible && !open ? ' is-collapsed' : ''}`}
-        style={collapsible ? { height: open ? size.full : size.collapsed } : undefined}
+        className={`plaintext-shots-clip${open ? '' : ' is-collapsed'}`}
+        style={size ? { height: open ? size.full : size.collapsed } : undefined}
+        onClick={open ? undefined : toggle}
       >
         <ul ref={list} className="plaintext-shots">
-          {selectedWork.map((item, index) => (
-            <Project key={item.id} item={item} hidden={collapsible && !open && index >= size.firstHidden} />
+          {selectedWork.map(item => (
+            <Project key={item.id} item={item} hidden={!open} />
           ))}
         </ul>
       </div>
-      {collapsible && (
-        <p className="plaintext-more">
-          <button type="button" className="plaintext-spin" aria-expanded={open} aria-controls="plaintext-shots" onClick={toggle}>
-            <span aria-hidden="true">[ </span>{open ? copy.showFewer : copy.showAll(selectedWork.length)}<span aria-hidden="true"> ]</span>
-          </button>
-        </p>
-      )}
+      <p className="plaintext-more">
+        <button type="button" className="plaintext-spin" aria-expanded={open} aria-controls="plaintext-shots" onClick={toggle}>
+          <span aria-hidden="true">[ </span>{open ? copy.showFewer : copy.showAll(selectedWork.length)}<span aria-hidden="true"> ]</span>
+        </button>
+      </p>
     </>
   )
 }

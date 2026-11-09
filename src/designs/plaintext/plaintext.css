@@ -271,7 +271,7 @@ html:has(.plaintext-page.is-night) {
 }
 
 /* Screenshots two to a row, a caption under each.
-   Collapsed, the second row fades into the page; opening grows the box to its full height. */
+   Collapsed, the top half of the first row fades into the page; opening grows the box to its full height. */
 .plaintext-shots-clip {
   position: relative;
   overflow: hidden;
@@ -282,11 +282,15 @@ html:has(.plaintext-page.is-night) {
   content: '';
   position: absolute;
   inset: auto 0 0;
-  height: calc(var(--plaintext-line) * 5);
+  height: 70%;
   background: linear-gradient(to bottom, transparent, var(--plaintext-paper));
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.6s ease;
+}
+
+.plaintext-shots-clip.is-collapsed {
+  cursor: pointer;
 }
 
 .plaintext-shots-clip.is-collapsed::after {
