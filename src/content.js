@@ -116,7 +116,7 @@ export const horizon = {
       tools: ['Ruby', 'Rails', 'Vue.js'], work: [],
     },
     {
-      id: 'appbrewery', company: 'The App Brewery', start: '2020-01', end: '2022-12',
+      id: 'appbrewery', company: 'The App Brewery', href: 'https://www.appbrewery.com/', start: '2020-01', end: '2022-12',
       period: '2020 – 2022', role: 'Community manager',
       summary: 'Helped learners with code and technology questions across the iOS, web, Flutter, and Python course communities. Supported new members and moderated the Discord servers.',
       tools: ['Technical support', 'Community', 'Discord'], work: [],
@@ -129,14 +129,14 @@ export const horizon = {
       tools: ['Product feedback', 'Bug reporting', 'Code reviews'], work: [],
     },
     {
-      id: 'marzee', company: 'Marzee', start: '2022-03', end: '2024-12',
+      id: 'marzee', company: 'Marzee', href: 'https://marzee.co/', start: '2022-03', end: '2024-12',
       period: 'Mar 2022 – Dec 2024', role: 'Full-stack Node & React developer',
       summary: 'Built client websites and applications across nonprofit, media, and commercial projects, working with different content systems, integrations, and backends.',
       tools: ['React', 'Node.js', 'Next.js', 'Sanity', 'GraphQL', 'Astro', 'Algolia'],
       work: ['International Labour Organization · Livestreaming platform', 'Malaria No More · Zero Malaria, Change the Story, and the UK website', 'CreativStrategies · Website and integrations', 'Canal River Trust · React, Ruby, and Redux', 'Discriminology · Report Cards', 'Marzee · Astro and Sanity website', 'Constellr · React and a custom backend'],
     },
     {
-      id: 'complear', company: 'Complear', start: '2025-06', end: null,
+      id: 'complear', company: 'Complear', href: 'https://complear.com/', start: '2025-06', end: null,
       period: 'Jun 2025 – Present', role: 'Full-stack developer',
       summary: 'Building company software with React, Elixir, and Phoenix. I learned Elixir and Phoenix as part of the job, adapting to the existing product and the work it needed.',
       tools: ['React', 'Elixir', 'Phoenix'], work: [],

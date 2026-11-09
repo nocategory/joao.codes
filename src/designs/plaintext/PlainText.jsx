@@ -81,9 +81,11 @@ export default function PlainText() {
               {copy.contents.map(item => (
                 <li key={item.href}>
                   <a href={item.href}>{item.label}</a>
-                  <span aria-hidden="true"> {'.'.repeat(LEADER_WIDTH - item.label.length - 2)} </span>
-                  <span className="plaintext-sr">: </span>
-                  {item.note}
+                  <span className="plaintext-contents-note">
+                    <span aria-hidden="true"> {'.'.repeat(LEADER_WIDTH - item.label.length - 2)} </span>
+                    <span className="plaintext-sr">: </span>
+                    {item.note}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -104,7 +106,7 @@ export default function PlainText() {
             <p>{copy.workIntro}</p>
             {roles.map(role => (
               <article key={role.id} className="plaintext-role" aria-labelledby={`plaintext-role-${role.id}`}>
-                <h3 id={`plaintext-role-${role.id}`}>{role.company}</h3>
+                <h3 id={`plaintext-role-${role.id}`}>{role.href ? <a href={role.href}>{role.company}</a> : role.company}</h3>
                 <p className="plaintext-role-dates"><Dates role={role} /></p>
                 <p className="plaintext-role-title">{role.role}</p>
                 <p className="plaintext-role-summary">{role.summary}</p>
