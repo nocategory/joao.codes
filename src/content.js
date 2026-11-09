@@ -159,7 +159,7 @@ export const selectedWork = [
     id: 'polywork',
     name: 'Polywork',
     what: 'AI website builder I advised',
-    archive: { year: 2024, href: 'https://web.archive.org/web/20241201210418/https://www.polywork.com/' },
+    archive: { year: 2023, href: 'https://web.archive.org/web/20231204054445/https://www.polywork.com/' },
   },
   {
     id: 'zero-malaria',
