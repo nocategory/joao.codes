@@ -11,7 +11,7 @@ export const plaintextCopy = {
   contentsTitle: 'Contents',
   contents: [
     { href: '#about', label: 'About', note: 'how I like to work, and away from it' },
-    { href: '#projects', label: 'Projects', note: 'four sites from my Marzee years' },
+    { href: '#projects', label: 'Projects', note: 'public-facing sites I worked on' },
     { href: '#work', label: 'Work', note: 'six roles since 2017, latest first' },
     { href: '#contact', label: 'Contact', note: 'email, and where else to find me' },
   ],
@@ -24,11 +24,12 @@ export const plaintextCopy = {
     'Portuguese and English are both native languages for me.',
   ],
 
-  projectsTitle: 'Projects',
-  projectsIntro: 'Sites I worked on at Marzee. Most have been redesigned since, so the screenshots and archived copies show them as they were in 2024.',
+  projectsTitle: 'Public projects',
   visitLive: 'Visit live',
   archived: 'Archived copy',
   today: 'today',
+  showAll: count => `Show all ${count}`,
+  showFewer: 'Show fewer',
 
   workTitle: 'Work',
   workIntro: 'Latest first. Dates marked ~ are approximate.',
