@@ -6,11 +6,11 @@ export const plaintextCopy = {
   toLight: 'Switch to light',
   toDark: 'Switch to dark',
 
-  intro: 'I’m a software engineer based in Lisbon. I build web interfaces and the systems behind them.',
+  intro: 'I’m a software engineer working remotely from Lisbon. I build web interfaces and the systems behind them.',
 
   contentsTitle: 'Contents',
   contents: [
-    { href: '#about', label: 'About', note: 'how I like to work, and away from it' },
+    { href: '#about', label: 'About', note: 'working remotely, and away from the screen' },
     { href: '#projects', label: 'Projects', note: 'public-facing sites I worked on' },
     { href: '#work', label: 'Work', note: 'six roles since 2017, latest first' },
     { href: '#contact', label: 'Contact', note: 'email, and where else to find me' },
@@ -18,8 +18,8 @@ export const plaintextCopy = {
 
   aboutTitle: 'About',
   about: [
+    'I work remotely, and it’s how I want to keep working. I like the focus and the trust that come with it. Clear communication, thoughtful decisions and space to do good work matter to me.',
     'JavaScript is familiar ground: React, TypeScript and Node.js. My current role has taken me into Elixir and Phoenix, which I learned on the job. I like figuring things out, whatever the stack happens to be.',
-    'I like the focus and trust of remote work. Clear communication, thoughtful decisions and space to do good work matter to me.',
     'Away from the screen, you’ll find me with a book or a cup of tea. Preferably somewhere quiet, close to nature, and a little cold.',
     'Portuguese and English are both native languages for me.',
   ],
