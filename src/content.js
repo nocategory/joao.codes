@@ -156,6 +156,12 @@ export const selectedWork = [
     archive: { year: 2024, href: 'https://web.archive.org/web/20241213014757/https://live.ilo.org/' },
   },
   {
+    id: 'polywork',
+    name: 'Polywork',
+    what: 'AI website builder I advised',
+    archive: { year: 2024, href: 'https://web.archive.org/web/20241201210418/https://www.polywork.com/' },
+  },
+  {
     id: 'zero-malaria',
     name: 'Zero Malaria',
     what: 'campaign site',
@@ -174,11 +180,5 @@ export const selectedWork = [
     what: 'satellite data company',
     live: 'https://www.constellr.com/',
     archive: { year: 2024, href: 'https://web.archive.org/web/20241213045146/https://www.constellr.com/' },
-  },
-  {
-    id: 'polywork',
-    name: 'Polywork',
-    what: 'professional network I advised',
-    archive: { year: 2023, href: 'https://web.archive.org/web/20230601034044/https://www.polywork.com/' },
   },
 ]
