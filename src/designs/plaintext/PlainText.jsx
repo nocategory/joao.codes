@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import { contact, horizon, links, person, site } from '../../content.js'
+import { contact, horizon, links, person, selectedWork, site } from '../../content.js'
 import { plaintextCopy as copy } from './plaintext-copy.js'
 import PlainSky from './PlainSky.jsx'
 import { useTheme } from './useTheme.js'
@@ -55,6 +55,25 @@ function ThemeSwitch({ theme, onToggle }) {
   </p>
 }
 
+// The screenshot links to the version it shows: the archived copy when there is one.
+function Project({ item }) {
+  const { name, what, live, archive } = item
+  const when = archive ? String(archive.year) : copy.today
+  return (
+    <li className="plaintext-shot">
+      <a className="plaintext-shot-image" href={archive?.href ?? live}>
+        <img src={`/work/${item.id}.webp`} width="800" height="500" loading="lazy" decoding="async" alt={`${name} home page, ${when}`} />
+      </a>
+      <p className="plaintext-shot-name"><span>{name}</span> <span className="plaintext-shot-when">[{when}]</span></p>
+      <p className="plaintext-shot-what">{what}</p>
+      <p className="plaintext-shot-links">
+        <a href={live}>{copy.visitLive}<span className="plaintext-sr">: {name}</span></a>
+        {archive && <> · <a href={archive.href}>{copy.archived}<span className="plaintext-sr">: {name}</span></a></>}
+      </p>
+    </li>
+  )
+}
+
 export default function PlainText() {
   const roles = [...horizon.experience].sort((a, b) => b.start.localeCompare(a.start))
   const [theme, toggleTheme] = useTheme()
@@ -91,6 +110,14 @@ export default function PlainText() {
           <section id="about" className="plaintext-section" aria-labelledby="plaintext-about-title">
             <Heading as="h2" id="plaintext-about-title" mark="-">{copy.aboutTitle}</Heading>
             {copy.about.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+          </section>
+
+          <section id="projects" className="plaintext-section" aria-labelledby="plaintext-projects-title">
+            <Heading as="h2" id="plaintext-projects-title" mark="-">{copy.projectsTitle}</Heading>
+            <p>{copy.projectsIntro}</p>
+            <ul className="plaintext-shots">
+              {selectedWork.map(item => <Project key={item.id} item={item} />)}
+            </ul>
           </section>
 
           <section id="work" className="plaintext-section" aria-labelledby="plaintext-work-title">

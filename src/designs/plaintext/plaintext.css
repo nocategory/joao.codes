@@ -270,6 +270,53 @@ html:has(.plaintext-page.is-night) {
   color: var(--plaintext-graphite);
 }
 
+/* Screenshots two to a row, a caption under each. */
+.plaintext-shots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(var(--plaintext-line) * 2) 2ch;
+  margin-top: calc(var(--plaintext-line) * 2);
+}
+
+.plaintext-shot p {
+  margin: 0;
+}
+
+.plaintext-body .plaintext-shot-image {
+  display: block;
+  margin-bottom: calc(var(--plaintext-line) / 2);
+  text-decoration: none;
+}
+
+.plaintext-body .plaintext-shot-image:hover,
+.plaintext-body .plaintext-shot-image:focus-visible {
+  background: none;
+}
+
+.plaintext-shot-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--plaintext-graphite);
+}
+
+.plaintext-shot-image:hover img {
+  border-color: var(--plaintext-ink);
+}
+
+.plaintext-shot-name {
+  display: flex;
+  justify-content: space-between;
+  gap: 1ch;
+  font-weight: 600;
+}
+
+.plaintext-shot-when,
+.plaintext-shot-what {
+  font-weight: 400;
+  color: var(--plaintext-graphite);
+}
+
 /* An indented two-column block, like the options list in a manual page. */
 .plaintext-contact {
   margin: var(--plaintext-line) 0 0;
@@ -318,6 +365,10 @@ html:has(.plaintext-page.is-night) {
 }
 
 @media (max-width: 600px) {
+  .plaintext-shots {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .plaintext-contact {
     padding-left: 0;
   }
