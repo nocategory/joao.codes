@@ -143,3 +143,36 @@ export const horizon = {
     },
   ],
 }
+
+// Sites from the Marzee years, each with a 1440×900 screenshot scaled to 800×500 in public/work.
+// A site redesigned since has an archive entry: the screenshot and the link show that Wayback Machine copy.
+// Without one, the screenshot was taken from the live site.
+export const selectedWork = [
+  {
+    id: 'ilo',
+    name: 'ILO Live',
+    what: 'livestreaming platform',
+    live: 'https://live.ilo.org/',
+    archive: { year: 2024, href: 'https://web.archive.org/web/20241213014757/https://live.ilo.org/' },
+  },
+  {
+    id: 'zero-malaria',
+    name: 'Zero Malaria',
+    what: 'campaign site',
+    live: 'https://zeromalaria.org/',
+    archive: { year: 2024, href: 'https://web.archive.org/web/20241119180628/https://zeromalaria.org/' },
+  },
+  {
+    id: 'malaria-no-more-uk',
+    name: 'Malaria No More UK',
+    what: 'charity website',
+    live: 'https://malarianomore.org.uk/',
+  },
+  {
+    id: 'constellr',
+    name: 'Constellr',
+    what: 'satellite data company',
+    live: 'https://www.constellr.com/',
+    archive: { year: 2024, href: 'https://web.archive.org/web/20241213045146/https://www.constellr.com/' },
+  },
+]

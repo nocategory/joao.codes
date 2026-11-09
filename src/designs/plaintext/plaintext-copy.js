@@ -11,6 +11,7 @@ export const plaintextCopy = {
   contentsTitle: 'Contents',
   contents: [
     { href: '#about', label: 'About', note: 'how I like to work, and away from it' },
+    { href: '#projects', label: 'Projects', note: 'four sites from my Marzee years' },
     { href: '#work', label: 'Work', note: 'six roles since 2017, latest first' },
     { href: '#contact', label: 'Contact', note: 'email, and where else to find me' },
   ],
@@ -22,6 +23,12 @@ export const plaintextCopy = {
     'Away from the screen, you’ll find me with a book or a cup of tea. Preferably somewhere quiet, close to nature, and a little cold.',
     'Portuguese and English are both native languages for me.',
   ],
+
+  projectsTitle: 'Projects',
+  projectsIntro: 'Sites I worked on at Marzee. Most have been redesigned since, so the screenshots and archived copies show them as they were in 2024.',
+  visitLive: 'Visit live',
+  archived: 'Archived copy',
+  today: 'today',
 
   workTitle: 'Work',
   workIntro: 'Latest first. Dates marked ~ are approximate.',
