@@ -20,14 +20,14 @@
 }
 
 html:has(.plaintext-page) {
-  background: #fcfcfc;
+  background: #f7f5f0;
   color-scheme: light;
 }
 
 .plaintext-page {
-  --plaintext-paper: #fcfcfc;
-  --plaintext-ink: #000;
-  --plaintext-graphite: #5c5c5c;
+  --plaintext-paper: #f7f5f0;
+  --plaintext-ink: #171512;
+  --plaintext-graphite: #5e5a53;
   --plaintext-size: 17px;
   --plaintext-line: 28px;
   min-height: 100svh;
@@ -178,6 +178,15 @@ html:has(.plaintext-page.is-night) {
   cursor: pointer;
 }
 
+.plaintext-theme .plaintext-spin {
+  color: inherit;
+}
+
+.plaintext-theme .plaintext-spin:hover,
+.plaintext-theme .plaintext-spin:focus-visible {
+  color: var(--plaintext-paper);
+}
+
 /* The document. */
 .plaintext-heading {
   font-weight: 600;
@@ -233,6 +242,7 @@ html:has(.plaintext-page.is-night) {
   grid-column: 1;
   grid-row: 1 / span 2;
   margin: 0;
+  color: var(--plaintext-graphite);
 }
 
 .plaintext-role-dates > span {
@@ -266,7 +276,7 @@ html:has(.plaintext-page.is-night) {
 }
 
 .plaintext-role .plaintext-role-tools {
-  margin: 0;
+  margin: var(--plaintext-line) 0 0;
   color: var(--plaintext-graphite);
 }
 
@@ -309,7 +319,8 @@ html:has(.plaintext-page.is-night) {
 
 @media (prefers-reduced-motion: reduce) {
   .plaintext-shots-clip,
-  .plaintext-shots-clip::after {
+  .plaintext-shots-clip::after,
+  .is-night .plaintext-shot-image img {
     transition: none;
   }
 }
@@ -338,6 +349,17 @@ html:has(.plaintext-page.is-night) {
 
 .plaintext-shot-image:hover img {
   border-color: var(--plaintext-ink);
+}
+
+/* On the dark page a mostly white screenshot glares, so each one is dimmed until pointed at. */
+.is-night .plaintext-shot-image img {
+  filter: brightness(0.8);
+  transition: filter 0.2s ease;
+}
+
+.is-night .plaintext-shot-image:hover img,
+.is-night .plaintext-shot-image:focus-visible img {
+  filter: none;
 }
 
 .plaintext-shot-name {
@@ -401,6 +423,11 @@ html:has(.plaintext-page.is-night) {
 }
 
 @media (max-width: 600px) {
+  /* The notes would wrap every entry onto two lines; the links alone fit. */
+  .plaintext-contents-note {
+    display: none;
+  }
+
   .plaintext-shots {
     grid-template-columns: minmax(0, 1fr);
   }

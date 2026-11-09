@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 const KEY = 'joao.codes-theme'
-const COLOURS = { dark: '#060809', light: '#fcfcfc' }
+const COLOURS = { dark: '#060809', light: '#f7f5f0' }
 const lightQuery = '(prefers-color-scheme: light)'
 
 function saved() {
