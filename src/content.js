@@ -178,7 +178,7 @@ export const selectedWork = [
   {
     id: 'polywork',
     name: 'Polywork',
-    what: 'professional network I advised',
-    archive: { year: 2023, href: 'https://web.archive.org/web/20230601034044/https://www.polywork.com/' },
+    what: 'AI website builder I advised',
+    archive: { year: 2024, href: 'https://web.archive.org/web/20241201210418/https://www.polywork.com/' },
   },
 ]
