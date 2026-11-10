@@ -6,7 +6,10 @@ export const plaintextCopy = {
   toLight: 'Switch to light',
   toDark: 'Switch to dark',
 
-  intro: 'I’m a software engineer working remotely from Lisbon. I build web interfaces and the systems behind them.',
+  intro: [
+    'I’m a software engineer in Lisbon. I build web interfaces and the systems behind them, mostly with React, TypeScript and Node.js, and lately with Elixir and Phoenix.',
+    'I work remotely, and it’s how I want to keep working.',
+  ],
 
   contentsTitle: 'Contents',
   contents: [
@@ -18,11 +21,9 @@ export const plaintextCopy = {
 
   aboutTitle: 'About',
   about: [
-    'I work remotely, and it’s how I want to keep working. I like the focus and the trust that come with it. Clear communication, thoughtful decisions and space to do good work matter to me.',
-    'JavaScript is familiar ground: React, TypeScript and Node.js. My current role has taken me into Elixir and Phoenix, which I learned on the job. I like figuring things out, whatever the stack happens to be.',
-    'I use AI coding agents like Claude Code and Codex every day, and I trust them as far as the system can check them. Tests, types, CI and code review are what make their speed safe.',
+    'I like the focus and the trust that come with remote work. Clear communication, thoughtful decisions and space to do good work matter to me. Portuguese and English are both native languages for me.',
+    'I learned Elixir and Phoenix on the job, and I like figuring things out, whatever the stack happens to be. I use AI coding agents like Claude Code and Codex every day, and I trust them as far as the system can check them. Tests, types, CI and code review are what make their speed safe.',
     'Away from the screen, you’ll find me with a book or a cup of tea. Preferably somewhere quiet, close to nature, and a little cold.',
-    'Portuguese and English are both native languages for me.',
   ],
 
   projectsTitle: 'Public projects',
