@@ -23,7 +23,7 @@ export const plaintextCopy = {
   about: [
     'I like the focus and the trust that come with remote work. Clear communication, thoughtful decisions and space to do good work matter to me. Portuguese and English are both native languages for me.',
     'I learned Elixir and Phoenix on the job, and I like figuring things out, whatever the stack happens to be. I use AI coding agents like Claude Code and Codex every day, and I trust them as far as the system can check them. Tests, types, CI and code review are what make their speed safe.',
-    'Away from the screen, you’ll find me with a book or a cup of tea. Preferably somewhere quiet, close to nature, and a little cold.',
+    'Away from the screen, you’ll find me meditating, doing yoga or having a cup of tea. Preferably somewhere quiet, close to nature, and a little cold.',
   ],
 
   projectsTitle: 'Public projects',
