@@ -4,7 +4,7 @@
 export const site = {
   title: 'João Salgueiro | Software Engineer',
   description:
-    'João Salgueiro, Lisbon-based Software Engineer focused on React, TypeScript, Node.js, and reusable web interfaces.',
+    'João Salgueiro, Portugal-based Software Engineer focused on React, TypeScript, Node.js, and reusable web interfaces.',
   wordmark: 'joao.codes',
   copyright: '© 2026 João Salgueiro',
 }
@@ -13,7 +13,7 @@ export const person = {
   name: 'João Salgueiro',
   firstName: 'João',
   email: 'hi@joao.codes',
-  location: 'Lisbon, Portugal',
+  location: 'Portugal',
   avatar: {
     src: '/avatar-photo.jpg',
     alt: 'Photo of João Salgueiro',
@@ -51,7 +51,7 @@ export const about = {
 export const contact = {
   id: 'contact',
   kicker: 'Find me online',
-  heading: 'Lisbon-based, remote lover.',
+  heading: 'Portugal-based, remote lover.',
   meta: 'I like working with teams that communicate clearly, leave room for focus, and care about the purpose and meaning behind what they are building. Portuguese and English are both native languages for me.',
   metaEmphasis: ['purpose', 'meaning'],
   email: 'hi@joao.codes',
@@ -86,17 +86,17 @@ export const horizon = {
   role: 'Software engineer',
   intro: 'Building for the web. Learning what comes next.',
   aboutCta: 'A little about me',
-  location: 'Based in Lisbon. Working everywhere.',
+  location: 'Based in Portugal. Working everywhere.',
   aboutTitle: 'A person behind\nthe pixels.',
   aboutParagraphs: [
-    "I'm João, a full-stack developer in Lisbon. I build web interfaces and the systems behind them, using the tools the work calls for. JavaScript is familiar ground; my current role has taken me into Elixir and Phoenix.",
+    "I'm João, a full-stack developer from Portugal. I build web interfaces and the systems behind them, using the tools the work calls for. JavaScript is familiar ground; my current role has taken me into Elixir and Phoenix.",
     'I like the focus and trust of remote work. Clear communication, thoughtful decisions, and space to do good work matter to me.',
     'Away from the screen, you’ll find me with a book or a cup of tea. Preferably somewhere quiet, close to nature, and a little cold.',
   ],
   portraitCaption: 'João, away from the keyboard.',
   contactTitle: 'Have something\nin mind?',
   contactIntro: 'I’m always happy to hear about thoughtful projects and the people behind them.',
-  footerNote: 'Built with care, in Lisbon.',
+  footerNote: 'Built with care, in Portugal.',
   stack: ['React', 'TypeScript', 'Node.js', 'Elixir', 'Phoenix'],
   experienceTitle: 'Experience across stacks.',
   experienceIntro: 'The product shapes the toolkit. Select a role to see what I worked on and the technologies I used.',
