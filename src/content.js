@@ -147,13 +147,13 @@ export const horizon = {
 // Public sites I worked on, each with a 1440×900 screenshot scaled to 800×500 in public/work.
 // A site redesigned or shut down since has an archive entry: the screenshot and the link show that Wayback Machine copy.
 // Without one, the screenshot was taken from the live site. A site with no live address is gone.
-// year is roughly when I worked on it: the middle of my time at the company.
+// year is roughly when I worked on it: the middle of my time at the company, or the year the site launched.
 export const selectedWork = [
   {
     id: 'ilo',
     name: 'ILO Live',
     what: 'livestreaming platform',
-    year: 2023,
+    year: 2022,
     live: 'https://live.ilo.org/',
     archive: { year: 2024, href: 'https://web.archive.org/web/20241213014757/https://live.ilo.org/' },
   },
