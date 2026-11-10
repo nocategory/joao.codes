@@ -7,7 +7,7 @@ export const plaintextCopy = {
   toDark: 'Switch to dark',
 
   intro: [
-    'I’m a software engineer in Lisbon, Portugal. I build web interfaces and the systems behind them, mostly with React, TypeScript and Node.js, and lately with Elixir and Phoenix.',
+    'I’m a software engineer from Lisbon, Portugal. I build web interfaces and the systems behind them, mostly with React, TypeScript and Node.js, and lately with Elixir and Phoenix.',
     'I work remotely, and it’s how I want to keep working.',
   ],
 
