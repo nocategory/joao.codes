@@ -173,6 +173,7 @@ export const selectedWork = [
     name: 'Malaria No More UK',
     what: 'charity website',
     live: 'https://malarianomore.org.uk/',
+    archive: { year: 2024, href: 'https://web.archive.org/web/20241203094340/https://malarianomore.org.uk/' },
   },
   {
     id: 'constellr',
