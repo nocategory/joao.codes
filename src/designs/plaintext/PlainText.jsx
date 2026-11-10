@@ -72,7 +72,7 @@ export default function PlainText() {
         <main id="plaintext-main" tabIndex={-1}>
           <header className="plaintext-intro">
             <Heading as="h1" mark="=">{person.name}</Heading>
-            <p>{copy.intro}</p>
+            {copy.intro.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
           </header>
 
           <nav className="plaintext-contents" aria-labelledby="plaintext-contents-title">
