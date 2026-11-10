@@ -11,14 +11,14 @@ function measure(list) {
 
 // The screenshot links to the version it shows: the archived copy when there is one.
 function Project({ item, hidden }) {
-  const { name, what, live, archive } = item
-  const when = archive ? String(archive.year) : copy.today
+  const { name, what, year, live, archive } = item
+  const shown = archive ? String(archive.year) : copy.today
   return (
     <li className="plaintext-shot" inert={hidden}>
       <a className="plaintext-shot-image" href={archive?.href ?? live}>
-        <img src={`/work/${item.id}.webp`} width="800" height="500" loading="lazy" decoding="async" alt={`${name} home page, ${when}`} />
+        <img src={`/work/${item.id}.webp`} width="800" height="500" loading="lazy" decoding="async" alt={`${name} home page, ${shown}`} />
       </a>
-      <p className="plaintext-shot-name"><span>{name}</span> <span className="plaintext-shot-when">[{when}]</span></p>
+      <p className="plaintext-shot-name"><span>{name}</span> <span className="plaintext-shot-when">[{year}]</span></p>
       <p className="plaintext-shot-what">{what}</p>
       <p className="plaintext-shot-links">
         {live && <a href={live}>{copy.visitLive}<span className="plaintext-sr">: {name}</span></a>}

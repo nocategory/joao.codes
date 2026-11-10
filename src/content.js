@@ -147,11 +147,13 @@ export const horizon = {
 // Public sites I worked on, each with a 1440×900 screenshot scaled to 800×500 in public/work.
 // A site redesigned or shut down since has an archive entry: the screenshot and the link show that Wayback Machine copy.
 // Without one, the screenshot was taken from the live site. A site with no live address is gone.
+// year is roughly when I worked on it: the middle of my time at the company, or the year the site launched.
 export const selectedWork = [
   {
     id: 'ilo',
     name: 'ILO Live',
     what: 'livestreaming platform',
+    year: 2022,
     live: 'https://live.ilo.org/',
     archive: { year: 2024, href: 'https://web.archive.org/web/20241213014757/https://live.ilo.org/' },
   },
@@ -159,12 +161,14 @@ export const selectedWork = [
     id: 'polywork',
     name: 'Polywork',
     what: 'AI website builder I advised',
+    year: 2023,
     archive: { year: 2023, href: 'https://web.archive.org/web/20231204054445/https://www.polywork.com/' },
   },
   {
     id: 'zero-malaria',
     name: 'Zero Malaria',
     what: 'campaign site',
+    year: 2023,
     live: 'https://zeromalaria.org/',
     archive: { year: 2024, href: 'https://web.archive.org/web/20241119180628/https://zeromalaria.org/' },
   },
@@ -172,12 +176,15 @@ export const selectedWork = [
     id: 'malaria-no-more-uk',
     name: 'Malaria No More UK',
     what: 'charity website',
+    year: 2023,
     live: 'https://malarianomore.org.uk/',
+    archive: { year: 2024, href: 'https://web.archive.org/web/20241203094340/https://malarianomore.org.uk/' },
   },
   {
     id: 'constellr',
     name: 'Constellr',
     what: 'satellite data company',
+    year: 2023,
     live: 'https://www.constellr.com/',
     archive: { year: 2024, href: 'https://web.archive.org/web/20241213045146/https://www.constellr.com/' },
   },
