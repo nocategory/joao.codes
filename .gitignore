@@ -29,3 +29,6 @@ output/
 *.njsproj
 *.sln
 *.sw?
+
+# Wrangler
+.wrangler/

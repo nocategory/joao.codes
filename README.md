@@ -18,8 +18,17 @@ npm run build
 
 ## Deploy
 
-Vercel settings:
+The site is a static build served by Cloudflare Workers with static assets.
+`wrangler.jsonc` points the Worker at `dist`.
 
-- Framework preset: Vite
+Cloudflare Workers Builds settings:
+
 - Build command: `npm run build`
-- Output directory: `dist`
+- Deploy command: `npx wrangler deploy`
+
+To deploy by hand:
+
+```bash
+npm run build
+npx wrangler deploy
+```
