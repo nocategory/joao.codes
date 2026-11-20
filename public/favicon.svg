@@ -1,4 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" fill="#080808"/>
-  <text x="32" y="39" text-anchor="middle" fill="#f5f5f1" font-family="monospace" font-size="22" font-weight="700">JS</text>
+  <style>
+    rect { fill: #060809; stroke: rgba(238, 234, 226, 0.28); }
+    text { fill: #eeeae2; }
+    @media (prefers-color-scheme: light) {
+      rect { fill: #f7f5f0; stroke: rgba(23, 21, 18, 0.22); }
+      text { fill: #171512; }
+    }
+  </style>
+  <rect x="2" y="2" width="60" height="60" rx="10" stroke-width="2" />
+  <text x="32" y="40" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="24" font-weight="700">JS</text>
 </svg>

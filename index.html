@@ -10,6 +10,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>João Salgueiro | Software Engineer</title>
     <meta name="theme-color" content="#060809" />
+    <script>
+      (function () {
+        var t = null
+        try {
+          t = localStorage.getItem('joao.codes-theme')
+        } catch (e) {
+          /* private browsing */
+        }
+        if (t !== 'dark' && t !== 'light') {
+          t =
+            window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
+              ? 'light'
+              : 'dark'
+        }
+        document.documentElement.dataset.theme = t
+        var m = document.querySelector('meta[name="theme-color"]')
+        if (m) m.content = t === 'dark' ? '#060809' : '#f7f5f0'
+      })()
+    </script>
     <link rel="canonical" href="https://www.joao.codes/" />
     <link rel="preload" href="/fonts/sometype-mono/sometype-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
     <meta property="og:type" content="website" />
