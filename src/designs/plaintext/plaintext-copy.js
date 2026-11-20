@@ -1,6 +1,7 @@
 // Copy for the site. Roles, dates, tools and links come from src/content.js; this file only rewrites wording.
 export const plaintextCopy = {
   skip: 'Skip to content',
+  manual: 'JOAO.CODES(1)',
 
   galaxyLabel: 'A spiral galaxy drawn in text characters, turning slowly.',
   toLight: 'Switch to light',
@@ -30,8 +31,6 @@ export const plaintextCopy = {
   visitLive: 'Visit live',
   archived: 'Archived copy',
   today: 'today',
-  showAll: count => `Show all ${count}`,
-  showFewer: 'Show fewer',
 
   workTitle: 'Work',
   workIntro: 'Latest first. Dates marked ~ are approximate.',
@@ -42,18 +41,28 @@ export const plaintextCopy = {
   tools: 'Tools:',
   // The source joins client and project with a middle dot; here they read as a sentence.
   workItems: {
-    'International Labour Organization · Livestreaming platform': 'International Labour Organization: a livestreaming platform',
-    'Malaria No More · Zero Malaria, Change the Story, and the UK website': 'Malaria No More: Zero Malaria, Change the Story and the UK website',
-    'CreativStrategies · Website and integrations': 'CreativStrategies: website and integrations',
-    'Canal River Trust · React, Ruby, and Redux': 'Canal River Trust: React, Ruby and Redux',
+    'International Labour Organization · Livestreaming platform':
+      'International Labour Organization: a livestreaming platform',
+    'Malaria No More · Zero Malaria, Change the Story, and the UK website':
+      'Malaria No More: Zero Malaria, Change the Story and the UK website',
+    'CreativStrategies · Website and integrations':
+      'CreativStrategies: website and integrations',
+    'Canal River Trust · React, Ruby, and Redux':
+      'Canal River Trust: React, Ruby and Redux',
     'Discriminology · Report Cards': 'Discriminology: Report Cards',
     'Marzee · Astro and Sanity website': 'Marzee: the Astro and Sanity website',
-    'Constellr · React and a custom backend': 'Constellr: React and a custom backend',
+    'Constellr · React and a custom backend':
+      'Constellr: React and a custom backend',
   },
 
   contactTitle: 'Contact',
-  contactIntro: 'Tell me what you’re building, where you’re stuck, or what you’d like to explore.',
+  contactIntro:
+    'Tell me what you’re building, where you’re stuck, or what you’d like to explore.',
   email: 'Email',
+  copyEmail: 'copy',
+  copiedEmail: 'copied',
+  copyEmailLabel: 'Copy email address',
+  copiedAnnouncement: 'Email address copied to clipboard',
 
   signature: 'Built with love',
   // The heart takes the page's colour: white on dark, black on paper.

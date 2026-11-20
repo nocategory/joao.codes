@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { drawField, layoutField, makeStars, naturalHeight } from './plaintext-galaxy.js'
 import { plaintextCopy as copy } from './plaintext-copy.js'
 
@@ -8,6 +8,18 @@ const MARGIN_COLS = 2 // columns kept clear at the edges of the window
 const FRAME_MS = 40 // the disc turns slowly; 25 redraws a second is plenty
 
 const reducedQuery = '(prefers-reduced-motion: reduce)'
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
+
+// Pre-rendered static frame for SSR and no-JS fallback (matches 72ch measure at 17px/28px).
+const INITIAL_COLS = TEXT_COLS
+const INITIAL_ROWS = 32
+const INITIAL_STARS = makeStars()
+const INITIAL_ART = drawField(
+  layoutField(INITIAL_COLS, INITIAL_ROWS, 10.2, 14),
+  INITIAL_STARS,
+  0,
+  null,
+).join('\n')
 
 export default function PlainSky() {
   const figureRef = useRef(null)
@@ -15,12 +27,12 @@ export default function PlainSky() {
   const probeRef = useRef(null)
   const [grid, setGrid] = useState(null)
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const figure = figureRef.current
     const art = artRef.current
     const probe = probeRef.current
     const media = window.matchMedia(reducedQuery)
-    const stars = makeStars()
+    const stars = INITIAL_STARS
     const lens = { x: 0, y: 0, strength: 0, target: 0 }
     let field = null
     let text = ''
@@ -29,6 +41,7 @@ export default function PlainSky() {
     let frame = 0
     let visible = true
     let pointerMoved = false
+    let active = true
 
     function paint() {
       if (!field) return
@@ -40,6 +53,7 @@ export default function PlainSky() {
     }
 
     function measure() {
+      if (!active) return
       const cellW = probe.getBoundingClientRect().width / 20
       const line = parseFloat(getComputedStyle(figure).lineHeight)
       if (!cellW || !line) return
@@ -53,12 +67,20 @@ export default function PlainSky() {
       const rows = Math.max(12, Math.round(wanted / line) * 2)
       field = layoutField(cols, rows, cellW, line / 2)
       text = ''
-      setGrid(current => current && current.cols === cols && current.rows === rows && current.bleed === bleed ? current : { cols, rows, bleed })
+      setGrid(current =>
+        current && current.cols === cols && current.rows === rows && current.bleed === bleed
+          ? current
+          : { cols, rows, bleed },
+      )
       paint()
     }
 
     function running() {
-      return visible && !document.hidden && (!media.matches || Math.abs(lens.target - lens.strength) > 0.005 || pointerMoved)
+      return (
+        visible &&
+        !document.hidden &&
+        (!media.matches || Math.abs(lens.target - lens.strength) > 0.005 || pointerMoved)
+      )
     }
 
     function tick(now) {
@@ -80,7 +102,7 @@ export default function PlainSky() {
       if (running()) frame = requestAnimationFrame(tick)
     }
 
-    function onPointerMove(event) {
+    function handlePointerMove(event) {
       if (media.matches || event.pointerType === 'touch') return
       const box = art.getBoundingClientRect()
       lens.x = event.clientX - box.left
@@ -90,12 +112,12 @@ export default function PlainSky() {
       wake()
     }
 
-    function onPointerLeave() {
+    function handlePointerLeave() {
       lens.target = 0
       wake()
     }
 
-    function onMotionPreference(event) {
+    function handleMotionPreference(event) {
       if (event.matches) {
         lens.target = 0
         lens.strength = 0
@@ -112,11 +134,13 @@ export default function PlainSky() {
     const resize = new ResizeObserver(() => measure())
     intersection.observe(art)
     resize.observe(figure)
-    art.addEventListener('pointermove', onPointerMove)
-    art.addEventListener('pointerleave', onPointerLeave)
-    media.addEventListener('change', onMotionPreference)
+    window.addEventListener('resize', measure, { passive: true })
+    art.addEventListener('pointermove', handlePointerMove)
+    art.addEventListener('pointerleave', handlePointerLeave)
+    media.addEventListener('change', handleMotionPreference)
     document.addEventListener('visibilitychange', wake)
     document.fonts?.ready.then(() => {
+      if (!active) return
       measure()
       wake()
     })
@@ -124,23 +148,35 @@ export default function PlainSky() {
     wake()
 
     return () => {
+      active = false
       cancelAnimationFrame(frame)
       intersection.disconnect()
       resize.disconnect()
-      art.removeEventListener('pointermove', onPointerMove)
-      art.removeEventListener('pointerleave', onPointerLeave)
-      media.removeEventListener('change', onMotionPreference)
+      window.removeEventListener('resize', measure)
+      art.removeEventListener('pointermove', handlePointerMove)
+      art.removeEventListener('pointerleave', handlePointerLeave)
+      media.removeEventListener('change', handleMotionPreference)
       document.removeEventListener('visibilitychange', wake)
     }
   }, [])
 
-  const artStyle = grid ? { width: `${grid.cols}ch`, height: `calc(var(--plaintext-line) * ${grid.rows / 2})`, marginLeft: `-${grid.bleed}ch` } : undefined
+  const artStyle = grid
+    ? {
+        width: `${grid.cols}ch`,
+        height: `calc(var(--plaintext-line) * ${grid.rows / 2})`,
+        marginLeft: `-${grid.bleed}ch`,
+      }
+    : undefined
 
   return (
     <figure className="plaintext-sky" ref={figureRef}>
-      <span className="plaintext-probe" ref={probeRef} aria-hidden="true">{'0'.repeat(20)}</span>
+      <span className="plaintext-probe" ref={probeRef} aria-hidden="true">
+        {'0'.repeat(20)}
+      </span>
       <div className="plaintext-art-frame" role="img" aria-label={copy.galaxyLabel}>
-        <pre className="plaintext-art" ref={artRef} style={artStyle} aria-hidden="true" />
+        <pre className="plaintext-art" ref={artRef} style={artStyle} aria-hidden="true">
+          {INITIAL_ART}
+        </pre>
       </div>
     </figure>
   )

@@ -19,7 +19,8 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-html:has(.plaintext-page) {
+html:has(.plaintext-page),
+html[data-theme='light'] {
   background: #f7f5f0;
   color-scheme: light;
 }
@@ -43,16 +44,36 @@ html:has(.plaintext-page) {
   overflow-wrap: break-word;
 }
 
-/* Dark: the colours of the site's earlier design. */
-html:has(.plaintext-page.is-night) {
+/* Dark: driven immediately by data-theme (set pre-paint) or .is-night, preventing FOUC. */
+html[data-theme='dark'],
+html:not([data-theme]):has(.plaintext-page.is-night) {
   background: #060809;
   color-scheme: dark;
 }
 
-.plaintext-page.is-night {
+html[data-theme='dark'] .plaintext-page,
+html:not([data-theme]) .plaintext-page.is-night {
   --plaintext-paper: #060809;
   --plaintext-ink: #eeeae2;
   --plaintext-graphite: #a6aaa8;
+}
+
+/* No-JS fallback respects system light preference when pre-paint script has not run. */
+@media (prefers-color-scheme: light) {
+  html:not([data-theme]):has(.plaintext-page) {
+    background: #f7f5f0;
+    color-scheme: light;
+  }
+
+  html:not([data-theme]) .plaintext-page.is-night {
+    --plaintext-paper: #f7f5f0;
+    --plaintext-ink: #171512;
+    --plaintext-graphite: #5e5a53;
+  }
+
+  html:not([data-theme]) .plaintext-page.is-night .plaintext-shot-image img {
+    filter: grayscale(1) contrast(1.04);
+  }
 }
 
 .plaintext-body {
@@ -95,11 +116,24 @@ html:has(.plaintext-page.is-night) {
   text-underline-offset: 0.24em;
 }
 
+.plaintext-body a[href^='http']:not(.plaintext-shot-image)::after {
+  content: '\00a0↗';
+  display: inline-block;
+  font-size: 0.85em;
+  text-decoration: none;
+  opacity: 0.72;
+}
+
 .plaintext-body a:hover,
 .plaintext-spin:hover {
   background: var(--plaintext-ink);
   color: var(--plaintext-paper);
   text-decoration: none;
+}
+
+.plaintext-body a[href^='http']:not(.plaintext-shot-image):hover::after,
+.plaintext-body a[href^='http']:not(.plaintext-shot-image):focus-visible::after {
+  opacity: 1;
 }
 
 .plaintext-body :focus-visible,
@@ -138,6 +172,29 @@ html:has(.plaintext-page.is-night) {
   white-space: nowrap;
 }
 
+/* Top utility bar: man-page header on the left, theme switch on the right. */
+.plaintext-topbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0 2ch;
+  margin-bottom: var(--plaintext-line);
+  color: var(--plaintext-graphite);
+}
+
+.plaintext-topbar p {
+  margin: 0;
+}
+
+.plaintext-meta {
+  letter-spacing: 0.04em;
+}
+
+.plaintext-theme {
+  margin-left: auto;
+}
+
 /* The galaxy. Same font, same columns as the text; rows are half a line. */
 .plaintext-sky {
   position: relative;
@@ -152,20 +209,13 @@ html:has(.plaintext-page.is-night) {
 
 .plaintext-art {
   display: block;
-  height: calc(var(--plaintext-line) * 10);
+  height: calc(var(--plaintext-line) * 16);
   overflow: hidden;
   line-height: calc(var(--plaintext-line) / 2);
   white-space: pre;
   user-select: none;
   -webkit-user-select: none;
   cursor: crosshair;
-}
-
-.plaintext-theme {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: var(--plaintext-line);
-  color: var(--plaintext-graphite);
 }
 
 .plaintext-spin {
@@ -178,12 +228,15 @@ html:has(.plaintext-page.is-night) {
   cursor: pointer;
 }
 
-.plaintext-theme .plaintext-spin {
-  color: inherit;
+.plaintext-theme .plaintext-spin,
+.plaintext-copy {
+  color: var(--plaintext-graphite);
 }
 
 .plaintext-theme .plaintext-spin:hover,
-.plaintext-theme .plaintext-spin:focus-visible {
+.plaintext-theme .plaintext-spin:focus-visible,
+.plaintext-copy:hover,
+.plaintext-copy:focus-visible {
   color: var(--plaintext-paper);
 }
 
@@ -192,12 +245,17 @@ html:has(.plaintext-page.is-night) {
   font-weight: 600;
 }
 
+h1.plaintext-heading {
+  font-weight: 700;
+}
+
 .plaintext-heading > span {
   display: block;
 }
 
 .plaintext-underline {
   font-weight: 400;
+  color: var(--plaintext-graphite);
 }
 
 .plaintext-intro {
@@ -251,6 +309,7 @@ html:has(.plaintext-page.is-night) {
 
 .plaintext-role .plaintext-role-title {
   margin: 0;
+  font-style: italic;
 }
 
 .plaintext-role .plaintext-role-summary {
@@ -280,49 +339,15 @@ html:has(.plaintext-page.is-night) {
   color: var(--plaintext-graphite);
 }
 
-/* Screenshots two to a row, a caption under each.
-   Collapsed, the top half of the first row fades into the page; opening grows the box to its full height. */
-.plaintext-shots-clip {
-  position: relative;
-  overflow: hidden;
-  transition: height 0.6s cubic-bezier(0.2, 0, 0, 1);
-}
-
-.plaintext-shots-clip::after {
-  content: '';
-  position: absolute;
-  inset: auto 0 0;
-  height: 70%;
-  background: linear-gradient(to bottom, transparent, var(--plaintext-paper));
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.6s ease;
-}
-
-.plaintext-shots-clip.is-collapsed {
-  cursor: pointer;
-}
-
-.plaintext-shots-clip.is-collapsed::after {
-  opacity: 1;
-}
-
+/* Screenshots: full-width featured lead when count is odd, then pairs, so no card sits orphaned. */
 .plaintext-shots {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: calc(var(--plaintext-line) * 2) 2ch;
 }
 
-.plaintext-more {
-  margin-top: var(--plaintext-line);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .plaintext-shots-clip,
-  .plaintext-shots-clip::after,
-  .is-night .plaintext-shot-image img {
-    transition: none;
-  }
+.plaintext-shot.is-featured {
+  grid-column: 1 / -1;
 }
 
 .plaintext-shot p {
@@ -344,21 +369,30 @@ html:has(.plaintext-page.is-night) {
   display: block;
   width: 100%;
   height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
   border: 1px solid var(--plaintext-graphite);
+  background: var(--plaintext-paper);
+  filter: grayscale(1) contrast(1.04);
+  transition: filter 0.25s ease, border-color 0.2s ease;
 }
 
-.plaintext-shot-image:hover img {
+.plaintext-shot-image:hover img,
+.plaintext-shot-image:focus-visible img {
   border-color: var(--plaintext-ink);
+  filter: none;
 }
 
-/* On the dark page a mostly white screenshot glares, so each one is dimmed until pointed at. */
-.is-night .plaintext-shot-image img {
-  filter: brightness(0.8);
-  transition: filter 0.2s ease;
+/* On the dark page a bright screenshot glares; keep monochrome and slightly dimmed until pointed at. */
+html[data-theme='dark'] .plaintext-shot-image img,
+html:not([data-theme]) .plaintext-page.is-night .plaintext-shot-image img {
+  filter: grayscale(1) brightness(0.76) contrast(1.06);
 }
 
-.is-night .plaintext-shot-image:hover img,
-.is-night .plaintext-shot-image:focus-visible img {
+html[data-theme='dark'] .plaintext-shot-image:hover img,
+html[data-theme='dark'] .plaintext-shot-image:focus-visible img,
+html:not([data-theme]) .plaintext-page.is-night .plaintext-shot-image:hover img,
+html:not([data-theme]) .plaintext-page.is-night .plaintext-shot-image:focus-visible img {
   filter: none;
 }
 
@@ -373,6 +407,18 @@ html:has(.plaintext-page.is-night) {
 .plaintext-shot-what {
   font-weight: 400;
   color: var(--plaintext-graphite);
+}
+
+.plaintext-shot-what {
+  font-style: italic;
+}
+
+.plaintext-shot-detail {
+  color: var(--plaintext-ink);
+}
+
+.plaintext-shot-links {
+  margin-top: calc(var(--plaintext-line) / 4);
 }
 
 /* An indented two-column block, like the options list in a manual page. */
@@ -397,6 +443,16 @@ html:has(.plaintext-page.is-night) {
 
 .plaintext-footer p {
   margin-top: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plaintext-art {
+    cursor: default;
+  }
+
+  .plaintext-shot-image img {
+    transition: none;
+  }
 }
 
 @media (min-width: 1600px) {
@@ -432,6 +488,10 @@ html:has(.plaintext-page.is-night) {
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .plaintext-shot.is-featured {
+    grid-column: auto;
+  }
+
   .plaintext-contact {
     padding-left: 0;
   }
@@ -443,5 +503,93 @@ html:has(.plaintext-page.is-night) {
   .plaintext-page {
     --plaintext-size: 15px;
     --plaintext-line: 24px;
+  }
+}
+
+/* Printable CV layout: clean light ink on paper, no interactive chrome. */
+@media print {
+  @page {
+    margin: 1.5cm;
+  }
+
+  html,
+  html[data-theme='dark'],
+  html[data-theme='light'] {
+    background: #fff !important;
+    color-scheme: light !important;
+  }
+
+  .plaintext-page,
+  html[data-theme='dark'] .plaintext-page {
+    --plaintext-paper: #fff;
+    --plaintext-ink: #111;
+    --plaintext-graphite: #444;
+    --plaintext-size: 10.5pt;
+    --plaintext-line: 15pt;
+    min-height: auto;
+    background: #fff;
+    color: #111;
+  }
+
+  .plaintext-body {
+    padding: 0;
+  }
+
+  .plaintext-doc {
+    width: 100%;
+  }
+
+  .plaintext-skip,
+  .plaintext-theme,
+  .plaintext-copy,
+  .plaintext-sky,
+  .plaintext-contents {
+    display: none !important;
+  }
+
+  .plaintext-topbar {
+    margin-bottom: var(--plaintext-line);
+  }
+
+  .plaintext-intro {
+    margin-top: 0;
+  }
+
+  .plaintext-section {
+    margin-top: calc(var(--plaintext-line) * 2);
+  }
+
+  .plaintext-heading {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .plaintext-role,
+  .plaintext-shot {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .plaintext-shots {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--plaintext-line) 2ch;
+  }
+
+  .plaintext-shot.is-featured {
+    grid-column: auto;
+  }
+
+  .plaintext-shot-image img,
+  html[data-theme='dark'] .plaintext-shot-image img {
+    filter: none !important;
+    border-color: #bbb;
+  }
+
+  .plaintext-body a[href^='http']:not(.plaintext-shot-image)::after {
+    content: none;
+  }
+
+  .plaintext-footer {
+    margin-top: calc(var(--plaintext-line) * 2);
   }
 }

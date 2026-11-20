@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { contact, horizon, links, person, site } from '../../content.js'
 import { plaintextCopy as copy } from './plaintext-copy.js'
 import PlainProjects from './PlainProjects.jsx'
@@ -24,7 +24,13 @@ function range({ start, end }) {
 
 function Dates({ role }) {
   if (role.approximate) {
-    return <span><span aria-hidden="true">~</span><span className="plaintext-sr">{copy.approximate} </span>{role.start.slice(0, 4)} – {role.end.slice(0, 4)}</span>
+    return (
+      <span>
+        <span aria-hidden="true">~</span>
+        <span className="plaintext-sr">{copy.approximate} </span>
+        {role.start.slice(0, 4)} – {role.end.slice(0, 4)}
+      </span>
+    )
   }
   const periods = role.periods ? [...role.periods].reverse() : [role]
   return periods.map(period => <span key={period.start}>{range(period)}</span>)
@@ -33,7 +39,16 @@ function Dates({ role }) {
 // An address as people would type it, free to break after a slash on narrow screens.
 function Address({ href }) {
   const parts = href.replace(/^https:\/\/(www\.)?/, '').replace(/\/$/, '').split('/')
-  return parts.map((part, index) => <Fragment key={index}>{index > 0 && <>/<wbr /></>}{part}</Fragment>)
+  return parts.map((part, index) => (
+    <Fragment key={index}>
+      {index > 0 && (
+        <>
+          /<wbr />
+        </>
+      )}
+      {part}
+    </Fragment>
+  ))
 }
 
 // A setext heading: the text, then a line of = or - exactly as long.
@@ -42,108 +57,224 @@ function Heading({ as, id, children, mark }) {
   return (
     <Tag className="plaintext-heading" id={id}>
       <span>{children}</span>
-      <span className="plaintext-underline" aria-hidden="true">{mark.repeat(children.length)}</span>
+      <span className="plaintext-underline" aria-hidden="true">
+        {mark.repeat(children.length)}
+      </span>
     </Tag>
   )
 }
 
 // A plain-text button that switches between the live site's dark colours and paper.
 function ThemeSwitch({ theme, onToggle }) {
-  return <p className="plaintext-theme">
-    <button type="button" className="plaintext-spin" onClick={onToggle}>
-      <span aria-hidden="true">[ </span>{theme === 'dark' ? copy.toLight : copy.toDark}<span aria-hidden="true"> ]</span>
-    </button>
-  </p>
+  return (
+    <p className="plaintext-theme">
+      <button type="button" className="plaintext-spin" onClick={onToggle}>
+        <span aria-hidden="true">[ </span>
+        {theme === 'dark' ? copy.toLight : copy.toDark}
+        <span aria-hidden="true"> ]</span>
+      </button>
+    </p>
+  )
+}
+
+async function copyText(text) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text)
+    return
+  }
+  const area = document.createElement('textarea')
+  area.value = text
+  area.setAttribute('readonly', '')
+  area.style.position = 'fixed'
+  area.style.opacity = '0'
+  document.body.appendChild(area)
+  area.select()
+  document.execCommand('copy')
+  document.body.removeChild(area)
+}
+
+function CopyEmail({ email }) {
+  const [copied, setCopied] = useState(false)
+  const timerRef = useRef(0)
+
+  useEffect(() => () => window.clearTimeout(timerRef.current), [])
+
+  const handleCopy = async () => {
+    try {
+      await copyText(email)
+      setCopied(true)
+      window.clearTimeout(timerRef.current)
+      timerRef.current = window.setTimeout(() => setCopied(false), 2000)
+    } catch {
+      /* clipboard denied */
+    }
+  }
+
+  return (
+    <>
+      {' '}
+      <button
+        type="button"
+        className="plaintext-spin plaintext-copy"
+        onClick={handleCopy}
+        aria-label={copy.copyEmailLabel}
+      >
+        <span aria-hidden="true">[ </span>
+        {copied ? copy.copiedEmail : copy.copyEmail}
+        <span aria-hidden="true"> ]</span>
+      </button>
+      <span className="plaintext-sr" role="status" aria-live="polite">
+        {copied ? copy.copiedAnnouncement : ''}
+      </span>
+    </>
+  )
 }
 
 export default function PlainText() {
   const roles = [...horizon.experience].sort((a, b) => b.start.localeCompare(a.start))
-  const [theme, toggleTheme] = useTheme()
+  const [theme, handleToggleTheme] = useTheme()
   const dark = theme === 'dark'
 
   return (
     <div className={`plaintext-page${dark ? ' is-night' : ''}`}>
-      <a className="plaintext-skip" href="#plaintext-main">{copy.skip}</a>
+      <a className="plaintext-skip" href="#plaintext-main">
+        {copy.skip}
+      </a>
 
-      <div className="plaintext-body"><div className="plaintext-doc">
-        <ThemeSwitch theme={theme} onToggle={toggleTheme} />
-        <PlainSky />
+      <div className="plaintext-body">
+        <div className="plaintext-doc">
+          <div className="plaintext-topbar">
+            <p className="plaintext-meta">{copy.manual}</p>
+            <ThemeSwitch theme={theme} onToggle={handleToggleTheme} />
+          </div>
+          <PlainSky />
 
-        <main id="plaintext-main" tabIndex={-1}>
-          <header className="plaintext-intro">
-            <Heading as="h1" mark="=">{person.name}</Heading>
-            {copy.intro.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
-          </header>
-
-          <nav className="plaintext-contents" aria-labelledby="plaintext-contents-title">
-            <Heading as="h2" id="plaintext-contents-title" mark="-">{copy.contentsTitle}</Heading>
-            <ul>
-              {copy.contents.map(item => (
-                <li key={item.href}>
-                  <a href={item.href}>{item.label}</a>
-                  <span className="plaintext-contents-note">
-                    <span aria-hidden="true"> {'.'.repeat(LEADER_WIDTH - item.label.length - 2)} </span>
-                    <span className="plaintext-sr">: </span>
-                    {item.note}
-                  </span>
-                </li>
+          <main id="plaintext-main" tabIndex={-1}>
+            <header className="plaintext-intro">
+              <Heading as="h1" mark="=">
+                {person.name}
+              </Heading>
+              {copy.intro.map(paragraph => (
+                <p key={paragraph}>{paragraph}</p>
               ))}
-            </ul>
-          </nav>
+            </header>
 
-          <section id="about" className="plaintext-section" aria-labelledby="plaintext-about-title">
-            <Heading as="h2" id="plaintext-about-title" mark="-">{copy.aboutTitle}</Heading>
-            {copy.about.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
-          </section>
+            <nav className="plaintext-contents" aria-labelledby="plaintext-contents-title">
+              <Heading as="h2" id="plaintext-contents-title" mark="-">
+                {copy.contentsTitle}
+              </Heading>
+              <ul>
+                {copy.contents.map(item => (
+                  <li key={item.href}>
+                    <a href={item.href}>{item.label}</a>
+                    <span className="plaintext-contents-note">
+                      <span aria-hidden="true">
+                        {' '}
+                        {'.'.repeat(Math.max(1, LEADER_WIDTH - item.label.length - 2))}{' '}
+                      </span>
+                      <span className="plaintext-sr">: </span>
+                      {item.note}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </nav>
 
-          <section id="projects" className="plaintext-section" aria-labelledby="plaintext-projects-title">
-            <Heading as="h2" id="plaintext-projects-title" mark="-">{copy.projectsTitle}</Heading>
-            <PlainProjects />
-          </section>
+            <section id="about" className="plaintext-section" aria-labelledby="plaintext-about-title">
+              <Heading as="h2" id="plaintext-about-title" mark="-">
+                {copy.aboutTitle}
+              </Heading>
+              {copy.about.map(paragraph => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </section>
 
-          <section id="work" className="plaintext-section" aria-labelledby="plaintext-work-title">
-            <Heading as="h2" id="plaintext-work-title" mark="-">{copy.workTitle}</Heading>
-            <p>{copy.workIntro}</p>
-            {roles.map(role => (
-              <article key={role.id} className="plaintext-role" aria-labelledby={`plaintext-role-${role.id}`}>
-                <h3 id={`plaintext-role-${role.id}`}>{role.href ? <a href={role.href}>{role.company}</a> : role.company}</h3>
-                <p className="plaintext-role-dates"><Dates role={role} /></p>
-                <p className="plaintext-role-title">{role.role}</p>
-                <p className="plaintext-role-summary">{role.summary}</p>
-                {role.work.length > 0 && <>
-                  <p className="plaintext-role-label">{copy.projects}</p>
-                  <ul className="plaintext-role-work">
-                    {role.work.map(item => <li key={item}>{copy.workItems[item] || item.replace(' · ', ': ')}</li>)}
-                  </ul>
-                </>}
-                <p className="plaintext-role-tools">{copy.toolsLabel[role.id] || copy.tools} {role.tools.join(', ')}</p>
-              </article>
-            ))}
-          </section>
+            <section
+              id="projects"
+              className="plaintext-section"
+              aria-labelledby="plaintext-projects-title"
+            >
+              <Heading as="h2" id="plaintext-projects-title" mark="-">
+                {copy.projectsTitle}
+              </Heading>
+              <PlainProjects />
+            </section>
 
-          <section id="contact" className="plaintext-section" aria-labelledby="plaintext-contact-title">
-            <Heading as="h2" id="plaintext-contact-title" mark="-">{copy.contactTitle}</Heading>
-            <p>{copy.contactIntro}</p>
-            <dl className="plaintext-contact">
-              <div>
-                <dt>{copy.email}</dt>
-                <dd><a href={`mailto:${contact.email}`}>{contact.email}</a></dd>
-              </div>
-              {links.map(link => (
-                <div key={link.href}>
-                  <dt>{link.label}</dt>
-                  <dd><a href={link.href}><Address href={link.href} /></a></dd>
+            <section id="work" className="plaintext-section" aria-labelledby="plaintext-work-title">
+              <Heading as="h2" id="plaintext-work-title" mark="-">
+                {copy.workTitle}
+              </Heading>
+              <p>{copy.workIntro}</p>
+              {roles.map(role => (
+                <article
+                  key={role.id}
+                  className="plaintext-role"
+                  aria-labelledby={`plaintext-role-${role.id}`}
+                >
+                  <h3 id={`plaintext-role-${role.id}`}>
+                    {role.href ? <a href={role.href}>{role.company}</a> : role.company}
+                  </h3>
+                  <p className="plaintext-role-dates">
+                    <Dates role={role} />
+                  </p>
+                  <p className="plaintext-role-title">{role.role}</p>
+                  <p className="plaintext-role-summary">{role.summary}</p>
+                  {role.work.length > 0 && (
+                    <>
+                      <p className="plaintext-role-label">{copy.projects}</p>
+                      <ul className="plaintext-role-work">
+                        {role.work.map(item => (
+                          <li key={item}>{copy.workItems[item] || item.replace(' · ', ': ')}</li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                  <p className="plaintext-role-tools">
+                    {copy.toolsLabel[role.id] || copy.tools} {role.tools.join(', ')}
+                  </p>
+                </article>
+              ))}
+            </section>
+
+            <section
+              id="contact"
+              className="plaintext-section"
+              aria-labelledby="plaintext-contact-title"
+            >
+              <Heading as="h2" id="plaintext-contact-title" mark="-">
+                {copy.contactTitle}
+              </Heading>
+              <p>{copy.contactIntro}</p>
+              <dl className="plaintext-contact">
+                <div>
+                  <dt>{copy.email}</dt>
+                  <dd>
+                    <a href={`mailto:${contact.email}`}>{contact.email}</a>
+                    <CopyEmail email={contact.email} />
+                  </dd>
                 </div>
-              ))}
-            </dl>
-          </section>
-        </main>
+                {links.map(link => (
+                  <div key={link.href}>
+                    <dt>{link.label}</dt>
+                    <dd>
+                      <a href={link.href}>
+                        <Address href={link.href} />
+                      </a>
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          </main>
 
-        <footer className="plaintext-footer">
-          <p aria-hidden="true">-- </p>
-          <p>{site.copyright}. {copy.signature} {dark ? copy.heart.dark : copy.heart.light}</p>
-        </footer>
-      </div></div>
+          <footer className="plaintext-footer">
+            <p aria-hidden="true">-- </p>
+            <p>
+              {site.copyright}. {copy.signature} {dark ? copy.heart.dark : copy.heart.light}
+            </p>
+          </footer>
+        </div>
+      </div>
     </div>
   )
 }
